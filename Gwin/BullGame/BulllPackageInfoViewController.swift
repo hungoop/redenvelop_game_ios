@@ -81,6 +81,9 @@ class BulllPackageInfoViewController: BaseViewController {
 
     //
     backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
+    
+    //hide icon open userinfo
+    profileButton.isHidden = true;
     profileButton.addTarget(self, action: #selector(profilePressed(_:)), for: .touchUpInside)
   }
 

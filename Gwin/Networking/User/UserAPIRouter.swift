@@ -29,11 +29,12 @@ public enum UserAPIRouter: URLRequestConvertible {
   case uploadImg(String, String, String)
   case listImage(String, [String])
   case systemtime(String)
+  case appVersion(String)
 
   // 3
   var method: HTTPMethod {
     switch self {
-    case .login, .logout, .checkCellphoneNo, .accountExist, .register, .userInfo, .otherH5, .accountPrefix, .uploadImg, .listImage, .systemtime, .setOnline:
+    case .login, .logout, .checkCellphoneNo, .accountExist, .register, .userInfo, .otherH5, .accountPrefix, .uploadImg, .listImage, .systemtime, .setOnline, .appVersion:
       return .post
     default:
       return .get
@@ -69,6 +70,8 @@ public enum UserAPIRouter: URLRequestConvertible {
       return "/ImgList"
     case .systemtime:
       return "/systemtime"
+    case .appVersion:
+        return "/appversion"
     }
   }
 
@@ -101,6 +104,8 @@ public enum UserAPIRouter: URLRequestConvertible {
       return ["ticket" : ticket]
     case .systemtime(let ticket):
       return ["ticket" : ticket]
+    case .appVersion(let ticket):
+      return ["ticket" : ticket]
     }
   }
 
@@ -112,8 +117,7 @@ public enum UserAPIRouter: URLRequestConvertible {
     request.httpMethod = method.rawValue
     request.setValue(Constants.contentType, forHTTPHeaderField: "Content-Type")
     request.setValue(Constants.contentType, forHTTPHeaderField: "Accept")
-
-
+    
     request.timeoutInterval = TimeInterval(10 * 1000)
 
     return try JSONEncoding.default.encode(request, with: parameters)

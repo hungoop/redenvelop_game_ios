@@ -55,6 +55,11 @@ class PackageInfoViewController: BaseViewController {
     setupViews()
     fetchPackageInfo()
     backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
+    
+    
+    // hide button
+    profileButton.isHidden = true
+    envelopButton.isHidden = true
     profileButton.addTarget(self, action: #selector(profilePressed(_:)), for: .touchUpInside)
     envelopButton.addTarget(self, action: #selector(createEnvelopPressed(_:)), for: .touchUpInside)
     // Do any additional setup after loading the view.
