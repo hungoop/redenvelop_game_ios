@@ -25,14 +25,14 @@
     },
     {
       "icon": "game_5",
-      "name":"红包炸弹",
-      "key":"1",
+      "name":"红包牛牛",
+      "key":"2",
       "action": "envelop"
     },
     {
       "icon": "game_6",
-      "name":"红包牛牛",
-      "key":"2",
+      "name":"红包炸弹",
+      "key":"1",
       "action": "envelop"
 
     },

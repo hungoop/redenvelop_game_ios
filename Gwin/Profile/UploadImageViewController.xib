@@ -57,39 +57,39 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTm-Pg-u3u" userLabel="view_name_avatar">
-                    <rect key="frame" x="0.0" y="88" width="414" height="200"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="130"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-7U-0JC">
-                            <rect key="frame" x="179" y="30" width="56.5" height="26.5"/>
+                            <rect key="frame" x="179" y="10" width="56.5" height="26.5"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="G9Y-IC-tEC">
-                            <rect key="frame" x="162" y="86.5" width="90" height="90"/>
+                            <rect key="frame" x="172" y="46.5" width="70" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="90" id="Nwk-s7-3Ji"/>
-                                <constraint firstAttribute="width" constant="90" id="ag7-c6-KAc"/>
+                                <constraint firstAttribute="height" constant="70" id="Nwk-s7-3Ji"/>
+                                <constraint firstAttribute="width" constant="70" id="ag7-c6-KAc"/>
                             </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="G9Y-IC-tEC" firstAttribute="centerX" secondItem="OTm-Pg-u3u" secondAttribute="centerX" id="6Pt-a1-hXe"/>
-                        <constraint firstAttribute="height" constant="200" id="GKq-Ov-LCx"/>
-                        <constraint firstItem="G9Y-IC-tEC" firstAttribute="top" secondItem="1AU-7U-0JC" secondAttribute="bottom" constant="30" id="Rg2-oI-wyq"/>
+                        <constraint firstAttribute="height" constant="130" id="GKq-Ov-LCx"/>
+                        <constraint firstItem="G9Y-IC-tEC" firstAttribute="top" secondItem="1AU-7U-0JC" secondAttribute="bottom" constant="10" id="Rg2-oI-wyq"/>
                         <constraint firstItem="1AU-7U-0JC" firstAttribute="centerX" secondItem="OTm-Pg-u3u" secondAttribute="centerX" id="iSD-Hb-RSX"/>
-                        <constraint firstItem="1AU-7U-0JC" firstAttribute="top" secondItem="OTm-Pg-u3u" secondAttribute="top" constant="30" id="mUc-GY-uaG"/>
+                        <constraint firstItem="1AU-7U-0JC" firstAttribute="top" secondItem="OTm-Pg-u3u" secondAttribute="top" constant="10" id="mUc-GY-uaG"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gs3-yy-b5c" userLabel="avtar_def_holder">
-                    <rect key="frame" x="0.0" y="288" width="414" height="100"/>
+                    <rect key="frame" x="0.0" y="218" width="414" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="HTk-9p-TMV"/>
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggk-cq-elk" userLabel="view_footer_func">
-                    <rect key="frame" x="0.0" y="388" width="414" height="508"/>
+                    <rect key="frame" x="0.0" y="318" width="414" height="578"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-gA-yAs">
                             <rect key="frame" x="0.0" y="16" width="197" height="90"/>

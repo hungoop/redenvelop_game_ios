@@ -208,7 +208,7 @@ class HomeViewController: BaseViewController {
             stackView1.heightAnchor.constraint(equalToConstant: itemHeight)
             ])
         
-        let buttonSize = 70//view.frame.width / 6
+        let buttonSize = view.frame.width / 6
         var lobbyIndex = 0
         if lobbies.count <= 0 {
             return

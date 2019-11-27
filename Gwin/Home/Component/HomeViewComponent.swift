@@ -29,7 +29,7 @@ public enum AppText{
     
     enum Titles{
         static let wellcome: String = "登录注册"
-        static let home: String = "百果缘"
+        static let home: String = "百果娱乐"
     }
 }
 
