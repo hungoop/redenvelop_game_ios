@@ -39,6 +39,11 @@ class HomeViewController: BaseViewController {
         return view
     }()
     
+    private var desScriptionLabel: UILabel = {
+        var label = UILabel().forAutolayout()
+        return label
+    }()
+    
     private var messageLabel: ScrollLabel = {
         var label = ScrollLabel().forAutolayout()
         return label
@@ -85,7 +90,8 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
         setTitle(title: AppText.Titles.home)
         self.edgesForExtendedLayout = []
-        // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         loadLobbyData()
         setupViews()
         fetchPopularizeImage()
@@ -112,25 +118,38 @@ class HomeViewController: BaseViewController {
         view.addSubview(carouselView)
         view.addSubview(messageView)
         
+        carouselView.layer.cornerRadius = 20
+        carouselView.layer.masksToBounds = true
+        view.backgroundColor = UIColor(hexString:"e75f48")
+        
         NSLayoutConstraint.activate([
-            carouselView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            carouselView.topAnchor.constraint(equalTo: view.topAnchor),
-            carouselView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            carouselView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
+            carouselView.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+            carouselView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5),
             carouselView.heightAnchor.constraint(equalTo: carouselView.widthAnchor, multiplier: 3.0 / 5.0),
             
-            messageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            messageView.topAnchor.constraint(equalTo: carouselView.bottomAnchor),
-            messageView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            messageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
+            messageView.topAnchor.constraint(equalTo: carouselView.bottomAnchor, constant: 5),
+            messageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5),
             messageView.heightAnchor.constraint(equalToConstant: 30),
             ])
-        
         
         messageView.addSubview(messageLabel)
         messageView.addSubview(volumeImageView)
         messageView.addSubview(volumSeperateView)
+        messageView.addSubview(desScriptionLabel)
+        
+        desScriptionLabel.text = "公告"
+        desScriptionLabel.font = desScriptionLabel.font.withSize(14)
         
         NSLayoutConstraint.activate([
-            volumeImageView.leftAnchor.constraint(equalTo: messageView.leftAnchor),
+            desScriptionLabel.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 5),
+            desScriptionLabel.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 4),
+            desScriptionLabel.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
+            desScriptionLabel.widthAnchor.constraint(equalTo: desScriptionLabel.widthAnchor, constant: 50),
+            
+            //
+            volumeImageView.leftAnchor.constraint(equalTo: desScriptionLabel.rightAnchor),
             volumeImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 4),
             volumeImageView.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
             volumeImageView.widthAnchor.constraint(equalTo: volumeImageView.heightAnchor),
@@ -158,7 +177,7 @@ class HomeViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            scrollView.topAnchor.constraint(equalTo: messageView.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: messageView.bottomAnchor, constant: 5),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
