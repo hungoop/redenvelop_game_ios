@@ -53,23 +53,12 @@ class BullDetailViewController: BaseViewController {
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
     
     private lazy var profileButton: UIButton = {
-        /*
-        let button = UIButton(frame: CGRect(x: 0,y: 0,width: 35,height: 35))
-        button.imageEdgeInsets  = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        button.imageView?.contentMode = .scaleAspectFit
-        //button.setImage(UIImage(named: "boom_header_profile"), for: .normal)
-        //button.addTarget(self, action: #selector(profilePressed(_:)), for: .touchUpInside)
-        
-        //button.si
-        button.setTitle("123456789", for: .normal)
-        return button*/
-        
-        
-        let button = UIButton(frame: CGRect(x: 0,y: 0,width: 35,height: 35))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
         button.imageEdgeInsets  = UIEdgeInsets(top: 5, left: 50, bottom: 20, right: 10)
         button.titleEdgeInsets = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
         button.imageView?.contentMode = .scaleAspectFit //UIView.ContentMode.center//
         button.setImage(UIImage(named: "boom_header_profile"), for: .normal)
+        
         //button.addTarget(self, action: #selector(profilePressed(_:)), for: .touchUpInside)
         
         button.setTitle("0", for: .normal)
@@ -139,7 +128,7 @@ class BullDetailViewController: BaseViewController {
         
         // Do any additional setup after loading the view.
         setTitle(title: "牛牛红包")
-        profileButton.frame = CGRect(x: 0, y: 0, width: 35, height: 56)
+        profileButton.frame = CGRect(x: 0, y: 0, width: 90, height: 56)
         reportBetButton.frame = CGRect(x: 0, y: 0, width: 35, height: 56)
         
         let rightItem1 = UIBarButtonItem(customView: reportBetButton)
@@ -355,8 +344,6 @@ class BullDetailViewController: BaseViewController {
                 this.countDownGrab = Int((round.winningtime.timeIntervalSinceNow - round.currtime.timeIntervalSinceNow));
                 this.countDownRound = Int((round.nextopentime.timeIntervalSinceNow - round.currtime.timeIntervalSinceNow));
                 
-                
-                
                 //
                 this.bindRoundDataViews(round: round)
                 
@@ -364,6 +351,7 @@ class BullDetailViewController: BaseViewController {
                 this.fetchBanker(ticket: user.ticket,roomid: this.room.roomId, roundid: round.roundid)
                 this.fetchPackageHistory(roundid: round.roundid)
                 this.doCounDown()
+                
                 //
                 if round.status == BullRoundStatus.addNew.rawValue {
                     //add your package
@@ -412,6 +400,9 @@ class BullDetailViewController: BaseViewController {
                     if let index = this.getBullModel(roundid: round.roundid) {
                         let bull = this.datas[index]
                         bull.resultWagerInfoTimer()
+                        
+                        // update banker. result???
+                        
                     }else {
                         this.addNewBull(round: round)
                     }
@@ -518,6 +509,22 @@ class BullDetailViewController: BaseViewController {
             }
             
         }
+    }
+    
+    func fetchPacketInfo(){
+        guard let user = RedEnvelopComponent.shared.user else { return }
+        guard let r = round else {return}
+        
+        let onlyself = 1
+        BullAPIClient.info(ticket: user.ticket, roomid: room.roomId, roundid: r.roundid, onlyself: onlyself) { [weak self](package, model, error) in
+            guard let model = model else { return }
+            
+            if let index = self?.getBullModel(roundid: r.roundid) {
+                self?.datas[index].bullInfo = model
+                self?.reloadCell(at: index)
+            }
+        }
+        
     }
     
     
@@ -986,6 +993,11 @@ extension BullDetailViewController: BullModelDelegate {
             tableView.reloadRows(at: [indexPath], with: .none)
             tableView.endUpdates()
             tableView.scrollToBottom()
+            
+            if (round?.myBanker() ?? false){
+                fetchPacketInfo()
+            }
+            
         }
     }
 }

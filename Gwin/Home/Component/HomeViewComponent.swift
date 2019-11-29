@@ -26,6 +26,7 @@ public enum AppText{
     static let betTotalWin: String = "获利"
     static let bullName: String = "牛九"
     static let systemUserno: String = "免死"
+    static let bankerOwner: String = "本轮庄家"
     
     enum Titles{
         static let wellcome: String = "登录注册"

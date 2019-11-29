@@ -32,10 +32,10 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         button.titleEdgeInsets = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
         button.imageView?.contentMode = .scaleAspectFit //UIView.ContentMode.center//
         button.setImage(UIImage(named: "boom_header_profile"), for: .normal)
+        
         //button.addTarget(self, action: #selector(profilePressed(_:)), for: .touchUpInside)
         
-        //button.si
-        button.setTitle("123456789", for: .normal)
+        button.setTitle("0", for: .normal)
         button.setTitleColor(UIColor(hexString: "FBEAAC"), for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 10.0)
         return button
@@ -137,11 +137,13 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setTitle(title: "可发可抢")
+        //setTitle(title: "可发可抢")
+        setupNavigatorViews()
+        
         // Do any additional setup after loading the view.
         fetchOpenPackages()
         initWebsocket()
-        setupNavigatorViews()
+        
         setupViews()
         setupTableView()
         setupNotifiView()
@@ -170,8 +172,9 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
     }
     
     func setupNavigatorViews() {
+        self.setTitle(title: "可发可抢")
         
-        profileButton.frame = CGRect(x: 0, y: 0, width: 35, height: 56)
+        profileButton.frame = CGRect(x: 0, y: 0, width: 90, height: 56)
         reportBetButton.frame = CGRect(x: 0, y: 0, width: 35, height: 56)
         
         let rightItem1 = UIBarButtonItem(customView: profileButton)
@@ -180,7 +183,6 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         //self.navigationItem.rightBarButtonItems = [rightItem2]
         self.navigationItem.rightBarButtonItems = [rightItem2, rightItem1]
         
-        self.setTitle(title: "可发可抢")
     }
     
     func setupViews() {

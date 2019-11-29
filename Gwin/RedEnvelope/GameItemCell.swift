@@ -14,8 +14,8 @@ class GameItemCell: UITableViewCell {
     
     
     enum Constants{
-        static let signalSizeIphone: CGFloat = 40
-        static let signalSizeIpad: CGFloat = 80
+        static let signalSizeIphone: CGFloat = 30
+        static let signalSizeIpad: CGFloat = 70
         
         static let defaultMargin: CGFloat = 8
     }
@@ -25,6 +25,13 @@ class GameItemCell: UITableViewCell {
         imageView.image = UIImage(named: "room_bg_boom")
         return imageView
     }()
+    
+    private lazy var playGameImageView: UIImageView = {
+        let imageView = UIImageView().forAutolayout()
+        imageView.image = UIImage(named: "room_play_game_bomb")
+        return imageView
+    }()
+    
     private lazy var stakeLabel: UILabel = {
         let label = UILabel().forAutolayout()
         label.textColor = UIColor.white
@@ -49,7 +56,7 @@ class GameItemCell: UITableViewCell {
     private lazy var signalView: UIView = {
         let view = UIView().forAutolayout()
         //view.rounded(radius: Constants.signalSize / 2)
-        view.backgroundColor = .red
+        //view.backgroundColor = .red
         view.alpha = 0.05
         return view
     }()
@@ -81,16 +88,18 @@ class GameItemCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(subTitleLabel)
         contentView.addSubview(signalView)
+        contentView.addSubview(playGameImageView)
+        
         setupOpenRule()
         
         var btnRuleWith:CGFloat = 0;
         var topAnchor:CGFloat = 0;
         if(UIDevice.current.iPad){
             btnRuleWith = Constants.signalSizeIpad
-            topAnchor = 40
+            topAnchor = 20
         } else {
             btnRuleWith = Constants.signalSizeIphone
-            topAnchor = 10
+            topAnchor = 2
         }
         
         
@@ -111,17 +120,23 @@ class GameItemCell: UITableViewCell {
             signalView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.defaultMargin),
             
             
-            stakeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topAnchor),
+            stakeLabel.topAnchor.constraint(equalTo: roomImageView.topAnchor, constant: topAnchor),
             stakeLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             stakeLabel.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
             
             titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            titleLabel.topAnchor.constraint(equalTo: stakeLabel.bottomAnchor, constant: topAnchor / 2),
+            titleLabel.topAnchor.constraint(equalTo: stakeLabel.bottomAnchor, constant: topAnchor),
             titleLabel.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
             
             subTitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: topAnchor / 2),
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: topAnchor),
             subTitleLabel.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
+            
+            playGameImageView.bottomAnchor.constraint(equalTo: roomImageView.bottomAnchor, constant: -topAnchor),
+            playGameImageView.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
+            playGameImageView.widthAnchor.constraint(equalTo: signalView.heightAnchor, multiplier : 0.8),
+            playGameImageView.heightAnchor.constraint(equalTo: playGameImageView.widthAnchor, multiplier: 0.2)
+            
             
             ])
     }
@@ -134,6 +149,10 @@ class GameItemCell: UITableViewCell {
     
     func setImageBackground(imgName:String) {
         roomImageView.image = UIImage(named: imgName)
+    }
+    
+    func setImagePlayGame(imgName:String) {
+        playGameImageView.image = UIImage(named: imgName)
     }
     
     func setupOpenRule() {

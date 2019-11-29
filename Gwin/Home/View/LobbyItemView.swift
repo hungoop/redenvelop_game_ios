@@ -95,7 +95,7 @@ class LobbyItemView: UIView {
     func setupViews() {
         addSubview(stackView)
         addSubview(coverButton)
-        let itemHeight = UIScreen.main.bounds.width / 5
+        //let itemHeight = UIScreen.main.bounds.width / 7
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
@@ -113,6 +113,7 @@ class LobbyItemView: UIView {
         if axis == .vertical {
             
             if(row == -1){
+                let itemHeight = UIScreen.main.bounds.width / 7
                 stackView.addArrangedSubview(titleLabel)
                 NSLayoutConstraint.activate([
                     imageView.topAnchor.constraint(equalTo: stackView.topAnchor),
@@ -120,13 +121,16 @@ class LobbyItemView: UIView {
                     imageView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
                     imageView.heightAnchor.constraint(equalToConstant: itemHeight - 20 ),
                     
+                    titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10),
                     titleLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-                    titleLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
+                    //titleLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
                     titleLabel.rightAnchor.constraint(equalTo: stackView.rightAnchor),
                     
-                    imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor)
+                    //imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor)
                     ])
             } else{
+                let itemHeight = UIScreen.main.bounds.width / 5
+                
                 NSLayoutConstraint.activate([
                     imageView.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
                     imageView.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10),
@@ -138,6 +142,7 @@ class LobbyItemView: UIView {
                     ])
             }
         } else if axis == .horizontal {
+            let itemHeight = UIScreen.main.bounds.width / 4
             //stackView.addArrangedSubview(textStackView)
             //textStackView.addSubview(titleLabel)
             //textStackView.addSubview(subtitleLAbel)

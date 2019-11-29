@@ -69,5 +69,13 @@ class BullRoundModel: NSCopying {
 
     return self
   }
+    
+    func myBanker() -> Bool {
+        if banker == RedEnvelopComponent.shared.userno {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 

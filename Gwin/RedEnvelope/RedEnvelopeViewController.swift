@@ -96,9 +96,9 @@ extension RedEnvelopeViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //return 80
         if(UIDevice.current.iPad){
-            return 280
+            return 220
         } else {
-            return 120
+            return 100
         }
     }
     
@@ -113,6 +113,7 @@ extension RedEnvelopeViewController: UITableViewDelegate, UITableViewDataSource 
             cell.selectionStyle = .none
             cell.updateView(model: model)
             cell.setImageBackground(imgName: "room_bg_boom")
+            cell.setImagePlayGame(imgName: "room_play_game_bomb")
             cell.openRuleGame = {
                 self.jumpURL(optType: "common_problem", title: "常见问题")
             }

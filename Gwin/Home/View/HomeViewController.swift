@@ -126,7 +126,7 @@ class HomeViewController: BaseViewController {
             carouselView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
             carouselView.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
             carouselView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5),
-            carouselView.heightAnchor.constraint(equalTo: carouselView.widthAnchor, multiplier: 3.0 / 5.0),
+            carouselView.heightAnchor.constraint(equalTo: carouselView.widthAnchor, multiplier: 3.0 / 6.0),
             
             messageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
             messageView.topAnchor.constraint(equalTo: carouselView.bottomAnchor, constant: 5),
@@ -219,19 +219,21 @@ class HomeViewController: BaseViewController {
         firstSeperateView.backgroundColor = seperateColor
         containerStackView.addArrangedSubview(firstSeperateView)
         containerStackView.addArrangedSubview(stackView1)
-        let itemHeight = view.frame.width / 4
+        let itemHeight = view.frame.width / 5
         
         NSLayoutConstraint.activate([
-            stackView1.leftAnchor.constraint(equalTo: containerStackView.leftAnchor),
-            stackView1.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
+            stackView1.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 20),
+            stackView1.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: -20),
             stackView1.heightAnchor.constraint(equalToConstant: itemHeight)
             ])
         
-        let buttonSize = view.frame.width / 6
+        let buttonSize = view.frame.width / 7
         var lobbyIndex = 0
+        
         if lobbies.count <= 0 {
             return
         }
+        
         for _ in 0..<4 {
             let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .vertical, row: -1,output: self)
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -245,19 +247,23 @@ class HomeViewController: BaseViewController {
         }
         
         //layout 2 games boom and bull
-        let secondSeperateView = UIView().forAutolayout()
-        secondSeperateView.backgroundColor = seperateColor
+        //let secondSeperateView = UIView().forAutolayout()
+        //secondSeperateView.backgroundColor = seperateColor
         
-        let firstGametitleLabel = TitleStackView(prefix: "红包专场", title: "抢红包新玩法来袭").forAutolayout()
+        //let firstGametitleLabel = TitleStackView(prefix: "红包专场", title: "抢红包新玩法来袭").forAutolayout()
         let stackView2 = getStackView()
-        containerStackView.addArrangedSubview(secondSeperateView)
-        containerStackView.addArrangedSubview(firstGametitleLabel)
+        //containerStackView.addArrangedSubview(secondSeperateView)
+        //containerStackView.addArrangedSubview(firstGametitleLabel)
         containerStackView.addArrangedSubview(stackView2)
         
+        let btn_bb_itemHeight = view.frame.width / 3
+        
         NSLayoutConstraint.activate([
+            /*
             firstSeperateView.leftAnchor.constraint(equalTo: containerStackView.leftAnchor),
             firstSeperateView.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
             firstSeperateView.heightAnchor.constraint(equalToConstant: Constants.seperateHeight),
+            
             secondSeperateView.leftAnchor.constraint(equalTo: containerStackView.leftAnchor),
             secondSeperateView.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
             secondSeperateView.heightAnchor.constraint(equalToConstant: Constants.seperateHeight),
@@ -265,12 +271,15 @@ class HomeViewController: BaseViewController {
             firstGametitleLabel.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 10),
             firstGametitleLabel.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
             firstGametitleLabel.heightAnchor.constraint(equalToConstant: 35),
+            */
             
             stackView2.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 10),
             stackView2.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: -10),
-            stackView2.heightAnchor.constraint(equalToConstant: itemHeight),
+            stackView2.heightAnchor.constraint(equalToConstant: btn_bb_itemHeight),
             
-            firstGametitleLabel.bottomAnchor.constraint(equalTo: stackView2.topAnchor, constant: -10)
+            stackView1.bottomAnchor.constraint(equalTo: stackView2.topAnchor, constant: 0)
+            
+            //firstGametitleLabel.bottomAnchor.constraint(equalTo: stackView2.topAnchor, constant: -10)
             
             ])
         
@@ -323,7 +332,7 @@ class HomeViewController: BaseViewController {
         //let item3Width = view.frame.width / CGFloat(perItemRow) - 10
         
         for _ in 0..<perItemRow {
-            let button = LobbyItemView(model: lobbies[lobbyIndex], output: self)
+            let button = LobbyItemView(model: lobbies[lobbyIndex], row: 2, output: self)
             button.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
@@ -335,8 +344,6 @@ class HomeViewController: BaseViewController {
             lobbyIndex += 1
         }
         
-        
-        //
         //
         let stackView4 = getStackView()
         containerStackView.addArrangedSubview(stackView4)

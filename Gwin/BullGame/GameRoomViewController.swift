@@ -96,9 +96,9 @@ extension GameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(UIDevice.current.iPad){
-            return 280
+            return 220
         } else {
-            return 120
+            return 100
         }
     }
     
@@ -113,6 +113,7 @@ extension GameRoomViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.updateView(model: model)
             cell.setImageBackground(imgName: "room_bg_bull")
+            cell.setImagePlayGame(imgName: "room_play_game_bull")
             
             cell.openRuleGame = {
                 cell.openRuleGame = {
