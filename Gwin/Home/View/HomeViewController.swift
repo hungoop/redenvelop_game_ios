@@ -234,7 +234,7 @@ class HomeViewController: BaseViewController {
             return
         }
         
-        for _ in 0..<4 {
+        for _ in 0..<5 {
             let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .vertical, row: -1,output: self)
             button.translatesAutoresizingMaskIntoConstraints = false
             
@@ -521,6 +521,8 @@ extension HomeViewController: LobbyItemViewOuput {
         }
         
     }
+    
+    
 }
 
 

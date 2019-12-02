@@ -98,7 +98,7 @@ extension GameRoomViewController: UITableViewDelegate, UITableViewDataSource {
         if(UIDevice.current.iPad){
             return 220
         } else {
-            return 100
+            return 110
         }
     }
     

@@ -232,6 +232,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //    UIBarButtonItem.appearance().tintColor =  barColor
         //    UITabBar.appearance().backgroundColor =  barColor
         UINavigationBar.appearance().isTranslucent = false
+        
+        //UINavigationBar.appearance().heightAnchor.constraint(equalToConstant: 20)
     }
     
     func selectTabIndex(index: TabIndex) {

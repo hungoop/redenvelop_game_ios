@@ -1,5 +1,11 @@
 [
     {
+        "icon": "game_0",
+        "name":"我的",
+        "key":"4",
+        "action": "envelop"
+    },
+    {
       "icon": "game_1",
       "name":"充值",
       "key":"deposits",
