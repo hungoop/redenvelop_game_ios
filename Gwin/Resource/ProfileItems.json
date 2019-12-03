@@ -21,13 +21,6 @@
     "action": "webview"
   },
   {
-    "icon":"profile_item_4",
-    "title":"存取款",
-    "webTitle":"百果娱乐",
-    "key":"deposits",
-    "action": "webview"
-  },
-  {
     "icon":"profile_item_5",
     "title":"报表查询",
     "webTitle":"",

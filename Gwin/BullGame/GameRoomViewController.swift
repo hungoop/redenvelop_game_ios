@@ -53,7 +53,7 @@ class GameRoomViewController: BaseViewController {
             marqueView.topAnchor.constraint(equalTo: rollMsgView.topAnchor),
             marqueView.rightAnchor.constraint(equalTo: rollMsgView.rightAnchor),
             marqueView.bottomAnchor.constraint(equalTo: rollMsgView.bottomAnchor),
-            
+            marqueView.heightAnchor.constraint(equalTo: rollMsgView.heightAnchor)
             ])
     }
     

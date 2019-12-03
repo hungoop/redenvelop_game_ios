@@ -124,14 +124,15 @@ class HomeViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             carouselView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
-            carouselView.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+            carouselView.topAnchor.constraint(equalTo: view.topAnchor),
             carouselView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5),
-            carouselView.heightAnchor.constraint(equalTo: carouselView.widthAnchor, multiplier: 3.0 / 6.0),
+            carouselView.heightAnchor.constraint(equalTo: carouselView.widthAnchor, multiplier: 3.0 / 7.0),
             
             messageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
+            
             messageView.topAnchor.constraint(equalTo: carouselView.bottomAnchor, constant: 5),
             messageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5),
-            messageView.heightAnchor.constraint(equalToConstant: 30),
+            messageView.heightAnchor.constraint(equalToConstant: 25),
             ])
         
         messageView.addSubview(messageLabel)
@@ -144,25 +145,26 @@ class HomeViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             desScriptionLabel.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 5),
-            desScriptionLabel.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 4),
+            //desScriptionLabel.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0),
             desScriptionLabel.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
             desScriptionLabel.widthAnchor.constraint(equalTo: desScriptionLabel.widthAnchor, constant: 50),
             
             //
             volumeImageView.leftAnchor.constraint(equalTo: desScriptionLabel.rightAnchor),
-            volumeImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 4),
+            //volumeImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0),
             volumeImageView.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
-            volumeImageView.widthAnchor.constraint(equalTo: volumeImageView.heightAnchor),
+            volumeImageView.widthAnchor.constraint(equalTo: messageView.heightAnchor),
             //
             volumSeperateView.leftAnchor.constraint(equalTo: volumeImageView.rightAnchor),
             volumSeperateView.widthAnchor.constraint(equalToConstant: 1),
             volumSeperateView.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
-            volumSeperateView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 5),
+            //volumSeperateView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0),
             
             //
             messageLabel.leftAnchor.constraint(equalTo: volumeImageView.rightAnchor, constant: 5),
             messageLabel.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
             messageLabel.rightAnchor.constraint(equalTo: messageView.rightAnchor),
+            
             messageLabel.heightAnchor.constraint(equalTo: messageView.heightAnchor)
             ])
         //
@@ -170,7 +172,6 @@ class HomeViewController: BaseViewController {
     }
     
     func setupScrollView() {
-        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(containerStackView)
@@ -219,15 +220,16 @@ class HomeViewController: BaseViewController {
         firstSeperateView.backgroundColor = seperateColor
         containerStackView.addArrangedSubview(firstSeperateView)
         containerStackView.addArrangedSubview(stackView1)
-        let itemHeight = view.frame.width / 5
+        let itemHeight = view.frame.width / 7
         
         NSLayoutConstraint.activate([
-            stackView1.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 20),
-            stackView1.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: -20),
+            stackView1.topAnchor.constraint(equalTo: containerStackView.topAnchor),
+            stackView1.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 0),
+            stackView1.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: 0),
             stackView1.heightAnchor.constraint(equalToConstant: itemHeight)
             ])
         
-        let buttonSize = view.frame.width / 7
+        let buttonSize = view.frame.width / 6
         var lobbyIndex = 0
         
         if lobbies.count <= 0 {
@@ -237,12 +239,14 @@ class HomeViewController: BaseViewController {
         for _ in 0..<5 {
             let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .vertical, row: -1,output: self)
             button.translatesAutoresizingMaskIntoConstraints = false
+            stackView1.addArrangedSubview(button)
             
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalToConstant: CGFloat(buttonSize)),
-                //button.heightAnchor.constraint(equalToConstant: itemHeight),
+                button.centerYAnchor.constraint(equalTo: stackView1.centerYAnchor),
+                button.heightAnchor.constraint(equalToConstant: itemHeight),
                 ])
-            stackView1.addArrangedSubview(button)
+            
             lobbyIndex += 1
         }
         
@@ -288,11 +292,14 @@ class HomeViewController: BaseViewController {
         for _ in 0..<2 {
             let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .horizontal, output: self)
             button.translatesAutoresizingMaskIntoConstraints = false
+            stackView2.addArrangedSubview(button)
+            
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalToConstant: item2Width),
-                //button.heightAnchor.constraint(equalToConstant: itemHeight),
+                button.centerYAnchor.constraint(equalTo: stackView2.centerYAnchor),
+                button.heightAnchor.constraint(equalTo: stackView2.heightAnchor),
                 ])
-            stackView2.addArrangedSubview(button)
+            
             lobbyIndex += 1
         }
         
@@ -334,13 +341,13 @@ class HomeViewController: BaseViewController {
         for _ in 0..<perItemRow {
             let button = LobbyItemView(model: lobbies[lobbyIndex], row: 2, output: self)
             button.translatesAutoresizingMaskIntoConstraints = false
+            stackView3.addArrangedSubview(button)
             
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalToConstant: btnLotteryWidth),
-                //button.heightAnchor.constraint(equalToConstant: itemHeight),
                 ])
             
-            stackView3.addArrangedSubview(button)
+            
             lobbyIndex += 1
         }
         

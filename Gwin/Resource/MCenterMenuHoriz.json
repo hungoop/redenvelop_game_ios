@@ -1,0 +1,23 @@
+[
+    {
+        "icon":"horiz_menu_deposit",
+        "title":"存款",
+        "webTitle":"百果娱乐",
+        "key":"deposits",
+        "action": "webview"
+    },
+    {
+        "icon":"horiz_menu_withdraw",
+        "title":"取款",
+        "webTitle":"百果娱乐",
+        "key":"withdrawals",
+        "action": "webview"
+    },
+    {
+        "icon":"horiz_menu_transaction",
+        "title":"交易记录",
+        "webTitle":"交易记录",
+        "key":"trans_record",
+        "action": "webview"
+    }
+]

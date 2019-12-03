@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0ED308E4239517D9007BBDB2 /* MCenterMenuHoriz.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ED308E3239517D9007BBDB2 /* MCenterMenuHoriz.json */; };
+		0ED308E623951C12007BBDB2 /* MenuHorizItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED308E523951C12007BBDB2 /* MenuHorizItemView.swift */; };
 		93470A1D4586D5734927ED93 /* Pods_Gwin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAEBB42F20B4154F0C30418E /* Pods_Gwin.framework */; };
 		D100679D2309AA1F00114F6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D100679C2309AA1F00114F6E /* AppDelegate.swift */; };
 		D10067A22309AA1F00114F6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D10067A02309AA1F00114F6E /* Main.storyboard */; };
@@ -137,6 +139,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0ED308E3239517D9007BBDB2 /* MCenterMenuHoriz.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MCenterMenuHoriz.json; sourceTree = "<group>"; };
+		0ED308E523951C12007BBDB2 /* MenuHorizItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHorizItemView.swift; sourceTree = "<group>"; };
 		C32D98C07F93022F3241400A /* Pods-Gwin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gwin.debug.xcconfig"; path = "Target Support Files/Pods-Gwin/Pods-Gwin.debug.xcconfig"; sourceTree = "<group>"; };
 		CAEBB42F20B4154F0C30418E /* Pods_Gwin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gwin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D10067992309AA1E00114F6E /* Gwin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gwin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -583,6 +587,7 @@
 				D1D06FA0231E779B00BBEDAE /* bip.mp3 */,
 				D1E00B74230D950E00554CA4 /* LobbyJson.json */,
 				D1E00D0A230EEE4F00554CA4 /* ProfileItems.json */,
+				0ED308E3239517D9007BBDB2 /* MCenterMenuHoriz.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				D1E00D03230EC0A000554CA4 /* ProfileViewController.swift */,
 				D194BD93231BC18700AB59C3 /* UploadImageViewController.swift */,
 				D194BD94231BC18700AB59C3 /* UploadImageViewController.xib */,
+				0ED308E523951C12007BBDB2 /* MenuHorizItemView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -793,6 +799,7 @@
 				D10067A72309AA2500114F6E /* Assets.xcassets in Resources */,
 				D1D06FA2231E779B00BBEDAE /* bip.mp3 in Resources */,
 				D1E00DB82312DC8600554CA4 /* GrabUserViewCell.xib in Resources */,
+				0ED308E4239517D9007BBDB2 /* MCenterMenuHoriz.json in Resources */,
 				D194BD90231ABE5A00AB59C3 /* BetDetailiewCell.xib in Resources */,
 				D1EA0F06231827090096B7D1 /* BetBullViewController.xib in Resources */,
 				D1EA0F7823190D860096B7D1 /* BetCasinoViewController.xib in Resources */,
@@ -863,6 +870,7 @@
 				D1E00D7D230FEAFB00554CA4 /* BullPackageHistoryModel.swift in Sources */,
 				D194BD8B231AB9BD00AB59C3 /* BulllPackageInfoViewController.swift in Sources */,
 				D1E00D9E2311115200554CA4 /* CreateEnvelopViewController.swift in Sources */,
+				0ED308E623951C12007BBDB2 /* MenuHorizItemView.swift in Sources */,
 				D1E00DB12312CEA600554CA4 /* TitleStackView.swift in Sources */,
 				D194BD92231BB85300AB59C3 /* BullModel.swift in Sources */,
 				D175C4BC230BCD97001B8DC6 /* Router.swift in Sources */,

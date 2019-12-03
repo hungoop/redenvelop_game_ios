@@ -17,6 +17,14 @@ class ProfileViewController: BaseViewController {
         static let updateInfoInterval: TimeInterval = 30
     }
     
+    @IBAction func pressRefreshBalanceUser(_ sender: Any) {
+        print("---------pressRefreshBalanceUser------------")
+        fetchUserInfo(showLoading: true)
+    }
+    
+    
+    @IBOutlet weak var holderHorizonMenu: UIStackView!
+    
     
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var tableview: UITableView!
@@ -47,6 +55,7 @@ class ProfileViewController: BaseViewController {
     }()
     
     private var menuItems:[ProfileItemModel] = []
+    private var menuHorizItems:[ProfileItemModel] = []
     private var userInfo:UserInfo?
     //  private var timer: Timer?
     
@@ -66,20 +75,22 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
         setTitle(title: "我的")
+        initDataMenuHoriz()
         initData()
+        
         setupViews()
         setupOrderUnsettled()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupHorizMenu()
         hideBackButton()
         fetchUserInfo()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
     }
     
     func initData() {
@@ -94,7 +105,47 @@ class ProfileViewController: BaseViewController {
                 }
             } catch {
                 // handle error
-                print("Abcdef")
+                print("ProfileItems error")
+            }
+        }
+    }
+    
+    func initDataMenuHoriz() {
+        if let path = Bundle.main.path(forResource: "MCenterMenuHoriz", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonObj = try JSON(data: data).array
+                
+                jsonObj?.forEach{ json in
+                    let lobby = ProfileItemModel(json: json)
+                    menuHorizItems.append(lobby)
+                }
+            } catch {
+                // handle error
+                print("initDataMenuHoriz")
+            }
+        }
+    }
+    
+    func setupHorizMenu() {
+        holderHorizonMenu.removeAllArrangedSubviews()
+        let buttonSize = view.frame.width/3
+        
+        for i in 0..<3 {
+            let itemMenu = MenuHorizItemView(model: menuHorizItems[i])
+            itemMenu.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                itemMenu.widthAnchor.constraint(equalToConstant: CGFloat(buttonSize)),
+                //itemMenu.leftAnchor.constraint(equalTo: holderHorizonMenu.leftAnchor),
+                //itemMenu.heightAnchor.constraint(equalTo: holderHorizonMenu.heightAnchor),
+                //itemMenu.topAnchor.constraint(equalTo: holderHorizonMenu.topAnchor),
+                //itemMenu.bottomAnchor.constraint(equalTo: holderHorizonMenu.bottomAnchor)
+                ])
+            holderHorizonMenu.addArrangedSubview(itemMenu)
+            
+            itemMenu.menuItemHanler = { [weak self] (optType, title) in
+                self?.jumpURL(optType: optType, title: title)
             }
         }
     }
