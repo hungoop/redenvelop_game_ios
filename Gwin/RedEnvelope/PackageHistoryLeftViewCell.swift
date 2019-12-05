@@ -10,7 +10,7 @@ import UIKit
 
 class PackageHistoryLeftViewCell: UITableViewCell {
     enum Constants {
-        static let defaultInfoHeight: CGFloat = 150
+        static let defaultInfoHeight: CGFloat = 115
     }
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -32,17 +32,14 @@ class PackageHistoryLeftViewCell: UITableViewCell {
     @IBOutlet weak var middleHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomStackHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var top: NSLayoutConstraint!
+    //@IBOutlet weak var top: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         avatarImageView.rounded()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     func updateViews(model: PackageHistoryModel, isOpen: Bool, isKing: Bool = false, isBoomed: Bool = false, expired: Bool = false){
@@ -82,6 +79,7 @@ class PackageHistoryLeftViewCell: UITableViewCell {
         } else {
             backgroundImageView.image = UIImage(named: "package_left_bg")
         }
+        
         if isBoomed {
             statusImageView.isHidden = false
             statusImageView.image = UIImage(named: "grabuser_boom")
@@ -93,6 +91,7 @@ class PackageHistoryLeftViewCell: UITableViewCell {
                 statusImageView.isHidden = true
             }
         }
+        
         if expired{
             expiredLabel.text = "查看红包"
         }else{
@@ -150,6 +149,7 @@ class PackageHistoryLeftViewCell: UITableViewCell {
             label.backgroundColor = AppColors.betBgColor
             label.textColor = .white
             label.rounded(radius: 2, borderColor: .clear, borderwidth: 0)
+            
             wagerStackView.addSubview(label)
             NSLayoutConstraint.activate([
                 label.heightAnchor.constraint(equalToConstant: 18),
@@ -172,8 +172,8 @@ class PackageHistoryLeftViewCell: UITableViewCell {
             label.backgroundColor = AppColors.betResultBgColor
             label.textColor = .white
             label.rounded(radius: 2, borderColor: .clear, borderwidth: 0)
-            resultWagerInfoStackView.addSubview(label)
             
+            resultWagerInfoStackView.addSubview(label)
             NSLayoutConstraint.activate([
                 label.heightAnchor.constraint(equalToConstant: 18),
                 label.centerXAnchor.constraint(equalTo: resultWagerInfoStackView.centerXAnchor),
@@ -214,10 +214,10 @@ class PackageHistoryLeftViewCell: UITableViewCell {
         if bull.canbet || bull.round.status == BullRoundStatus.betClose.rawValue {
             middleHeightConstraint.constant = 0
             bullInfoView.isHidden = true
-            top.constant = 0
+            //top.constant = 0
         }else {
             middleHeightConstraint.constant = Constants.defaultInfoHeight
-            top.constant = Constants.defaultInfoHeight
+            //top.constant = Constants.defaultInfoHeight
             
             bullInfoView.isHidden = false
         }

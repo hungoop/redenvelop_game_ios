@@ -12,7 +12,6 @@ import WebKit
 class ScrollLabel: UIView {
     
     private lazy var webview: WKWebView = {
-        //let webview = UIWebView().forAutolayout()
         let webview = WKWebView().forAutolayout()
         webview.backgroundColor = .white
         webview.scrollView.isScrollEnabled = false
@@ -32,7 +31,6 @@ class ScrollLabel: UIView {
     func setupViews() {
         addSubview(webview)
         
-        
         NSLayoutConstraint.activate([
             webview.leftAnchor.constraint(equalTo: leftAnchor),
             webview.rightAnchor.constraint(equalTo: rightAnchor),
@@ -43,7 +41,7 @@ class ScrollLabel: UIView {
     }
     
     func updateContent(message: String?) {
-        let marquee = "<html><body><font size=\"10\" face=\"sans-serif\"> <marquee>\(message ?? "")</marquee></font></body></html>"
+        let marquee = "<html><body><font size=\"\(CONST_GUI.FONT_SIZE_ROLL_MESS)\" face=\"sans-serif\"> <marquee>\(message ?? "")</marquee></font></body></html>"
         webview.loadHTMLString(marquee, baseURL: nil)
     }
 }

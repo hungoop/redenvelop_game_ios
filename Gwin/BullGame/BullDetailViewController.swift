@@ -131,7 +131,6 @@ class BullDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         setTitle(title: "牛牛红包")
         profileButton.frame = CGRect(x: 0, y: 0, width: 90, height: 56)
         reportBetButton.frame = CGRect(x: 0, y: 0, width: 35, height: 56)
@@ -480,12 +479,10 @@ class BullDetailViewController: BaseViewController {
         rollMsgMarqueeView.scrollView.bounces = false
         rollMsgMarqueeView.scrollView.isScrollEnabled = false
         BullAPIClient.getbullRollMessage(ticket: user.ticket) {[weak self] (rollmsg) in
-            let marquee = "<html><body><font size=\"10\" face=\"sans-serif\"> <marquee>\(rollmsg ?? "")</marquee></font></body></html>"
+            let marquee = "<html><body><font size=\"\(CONST_GUI.FONT_SIZE_ROLL_MESS)\" face=\"sans-serif\"> <marquee>\(rollmsg ?? "")</marquee></font></body></html>"
             self?.rollMsgMarqueeView.loadHTMLString(marquee, baseURL: nil)
-            
         }
     }
-    
     
     func fetchwagerodds() {
         guard let user = RedEnvelopComponent.shared.user else { return }
@@ -496,6 +493,7 @@ class BullDetailViewController: BaseViewController {
         }
         
     }
+    
     @objc func fetchUserInfo(showLoading: Bool = false) {
         guard let user = RedEnvelopComponent.shared.user else { return }
         if showLoading {
@@ -799,8 +797,6 @@ extension BullDetailViewController {
         
     }
     
-    
-    
     fileprivate func fetchOpenPackages() {
         if let userno = RedEnvelopComponent.shared.userno {
             openPackages = LocalDataManager.shared.fetchPackages(userno: userno, game: RoomType.bull)
@@ -897,8 +893,9 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
     //    return CGFloat(150 + bull.countWagerInfo() * 20)
     //  }
     
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -949,8 +946,6 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
                         //          updateNotifyView()
                     }
                 }
-                //
-                
                 
                 let infoVC = BulllPackageInfoViewController(bull: bull, grabedModel: grabbed, delegate: this)
                 this.present(infoVC, animated: true, completion: nil)
@@ -958,9 +953,8 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             vc.didViewPackageInfo = { [weak self] in
                 guard let this = self else { return }
+                
                 //        let wagertime = model.wagertime.toDate().timeIntervalSinceNow
-                
-                
                 //        let currentDate = Date(timeIntervalSinceNow: RedEnvelopComponent.shared.systemTimeInterval)
                 //        let wagerDate = Date(timeIntervalSinceNow: wagertime)
                 //        print("systimeTime : \(currentDate.toString()) -- wager: \(wagerDate.toString())")

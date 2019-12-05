@@ -24,7 +24,6 @@ class RedEnvelopeViewController: BaseViewController {
         self.tabBarController?.tabBar.isHidden = false
         
         setTitle(title: "扫雷")
-        // Do any additional setup after loading the view.
         setupViews()
         fetchRoomList()
     }
@@ -42,7 +41,6 @@ class RedEnvelopeViewController: BaseViewController {
     func setupViews() {
         tableView.register(GameItemCell.self, forCellReuseIdentifier: "envelopRoomCell")
         
-        
         rollMsgView.addSubview(marqueView)
         marqueView.updateContent(message: RedEnvelopComponent.shared.rollMsg)
         NSLayoutConstraint.activate([
@@ -55,7 +53,6 @@ class RedEnvelopeViewController: BaseViewController {
     }
     
     func fetchRoomList() {
-        
         guard let `user` = RedEnvelopComponent.shared.user else { return }
         
         RedEnvelopAPIClient.getRoomList(ticket: user.ticket, roomtype: RoomType.boom) {[weak self] (rooms, msg) in
@@ -94,7 +91,7 @@ extension RedEnvelopeViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //return 80
+        
         if(UIDevice.current.iPad){
             return 220
         } else {
@@ -107,7 +104,6 @@ extension RedEnvelopeViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "envelopRoomCell", for: indexPath) as? GameItemCell {
             let model = rooms[indexPath.row]
             cell.selectionStyle = .none
@@ -115,7 +111,7 @@ extension RedEnvelopeViewController: UITableViewDelegate, UITableViewDataSource 
             cell.setImageBackground(imgName: "room_bg_boom")
             cell.setImagePlayGame(imgName: "room_play_game_bomb")
             cell.openRuleGame = {
-                self.jumpURL(optType: "common_problem", title: "常见问题")
+                self.jumpURL(optType: "rule_1", title: "扫雷规则")
             }
             return cell
         }

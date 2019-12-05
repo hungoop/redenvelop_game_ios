@@ -16,14 +16,12 @@ class WellcomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         setTitle(title: AppText.Titles.wellcome)
         hideBackButton()
         setupViews()
         
         getAppVresion()
     }
-    
     
     func checkAndAutoLogin() {
         if UserDefaultManager.sharedInstance().autoLogin() {
@@ -42,9 +40,7 @@ class WellcomeViewController: BaseViewController {
                     }
                 }
             }
-            
         }
-        
     }
     
     func getAppVresion() {
@@ -58,7 +54,6 @@ class WellcomeViewController: BaseViewController {
             
             if(self.isUpdateNewversion()){
                 //update new
-                
                 let appURLDownload = "itms-services://?action=download-manifest&url=\(urlDownload)"
                 self.showAppUpdateAlert(force: true, appURL: appURLDownload)
             } else{

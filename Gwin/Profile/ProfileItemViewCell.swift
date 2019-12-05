@@ -157,7 +157,6 @@ class ProfileItemViewCell: UITableViewCell {
             versionButton.heightAnchor.constraint(equalToConstant: 30),
             versionButton.widthAnchor.constraint(equalToConstant: 60),
             
-            //versionLabel.rightAnchor.constraint(equalTo: versionButton.leftAnchor, constant: -Constants.buttonRightMargin),
             versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             ])
     }
@@ -178,8 +177,6 @@ class ProfileItemViewCell: UITableViewCell {
                 versionLabel.widthAnchor.constraint(equalToConstant: 60)
                 ])
         }
-        
-        
     }
     
     func updateContent(data: ProfileItemModel, qrcode: String? = nil, isUpdate: Bool? = false) {
@@ -196,10 +193,6 @@ class ProfileItemViewCell: UITableViewCell {
             copyButton.isHidden = true
             qrcodeLabel.isHidden = true
         } else if data.key == ProfileItemAction.version.rawValue {
-             //actionButton.setImage(nil, for: .normal)
-             //let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-             //actionButton.setTitle(appVersion, for: .normal)
-            
             if (isUpdate ?? false){
                 versionButton.isHidden = false
             } else {
@@ -246,14 +239,7 @@ class ProfileItemViewCell: UITableViewCell {
             copyButton.isHidden = true
             qrcodeLabel.isHidden = true
         }
-        /*
-        let isQRCodeItem  = (data.key == ProfileItemAction.qrcode.rawValue)
-        copyButton.isHidden = !isQRCodeItem
-        qrcodeLabel.isHidden = !isQRCodeItem
-        actionButton.isHidden = isQRCodeItem || data.action == ProfileItemAction.logout.rawValue
-        qrcodeLabel.text = qrcode
         
-        */
     }
     
     @objc func actionButtonPressed(_ sender: UIButton) {

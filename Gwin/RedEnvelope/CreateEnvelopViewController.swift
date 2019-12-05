@@ -40,7 +40,7 @@ class CreateEnvelopViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle(title: "扫雷红包")
-        // Do any additional setup after loading the view.
+        
         //addProfileButton()
         setupViews()
     }
@@ -60,16 +60,6 @@ class CreateEnvelopViewController: BaseViewController {
         packageAmountTextfield.delegate = self
         
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func validateAmounInput(amount: Int) -> Bool {
         let inrange = amount >= room.stake1 && amount <= room.stake2

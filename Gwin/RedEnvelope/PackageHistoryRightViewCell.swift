@@ -133,8 +133,6 @@ class PackageHistoryRightViewCell: UITableViewCell {
 
     expiredLabel.text = "\(model.roundid)"
 
-  
-
   }
 }
 

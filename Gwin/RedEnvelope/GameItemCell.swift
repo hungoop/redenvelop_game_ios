@@ -9,9 +9,7 @@
 import UIKit
 
 class GameItemCell: UITableViewCell {
-    
     var openRuleGame : ()->Void = {}
-    
     
     enum Constants{
         static let signalSizeIphone: CGFloat = 30
@@ -78,8 +76,6 @@ class GameItemCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     func setupViews() {

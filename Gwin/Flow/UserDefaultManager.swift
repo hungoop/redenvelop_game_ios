@@ -18,8 +18,6 @@ enum SaveManagerKeys: String {
 }
 
 class UserDefaultManager {
-
-
   // MARK: Singleton
 
   private static let instance = UserDefaultManager()

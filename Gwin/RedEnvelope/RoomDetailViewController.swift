@@ -17,12 +17,11 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         fetchUserInfo()
     }
     
-    
     enum Constants {
-        static let bottomImages: [String] = ["boom_bottom_image_1","boom_bottom_image_2","boom_bottom_image_3","boom_bottom_image_4"]
+        static let bottomImages: [String] = ["boom_bottom_image_1", "boom_bottom_image_2", "boom_bottom_image_3", "boom_bottom_image_4"]
         static let bottomTitles: [String] = ["发扫雷包","发福利包","充值","提现"]
         static let notifySize: CGFloat = 35
-        static let defaultInfoHeight: CGFloat = 150
+        static let defaultInfoHeight: CGFloat = 115
         
     }
     
@@ -137,10 +136,8 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        //setTitle(title: "可发可抢")
-        setupNavigatorViews()
         
-        // Do any additional setup after loading the view.
+        setupNavigatorViews()
         fetchOpenPackages()
         initWebsocket()
         
@@ -560,8 +557,6 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
-
 // MARK: - WebSocketDelegate
 extension RoomDetailViewController: WebSocketDelegate {
     func websocketDidConnect(socket: WebSocketClient) {
@@ -666,8 +661,6 @@ extension RoomDetailViewController {
         notifyLabel.text = "\(newPackages.count)"
         notifyView.isHidden = newPackages.count <= 0
         
-        print("updateNotifyView \(availablePackages.count) -- \(newPackages.count)")
-        //    }
     }
     
     fileprivate func updateViewedStatus() {

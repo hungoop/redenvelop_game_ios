@@ -10,7 +10,6 @@ import UIKit
 //import Kingfisher
 
 class CarouselView: UIView {
-    
     var dataSource: [String]
     var scrollView: UIScrollView!
     

@@ -139,6 +139,8 @@ class BullAPIClient {
       var msg: String? = nil
       var bullInfo: BullPackageModel? = nil
       var package: BullPackageHistoryModel?
+        
+        print("\(responseData)")
 
       if responseData.result.value != nil {
         let jsonResponse = JSON(responseData.result.value!)

@@ -17,11 +17,9 @@ class LotteryViewController: BaseViewController {
         return webview
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle(title: "快乐彩票")
-        // Do any additional setup after loading the view.
         setupViews()
         fetchLoteryURL()
     }

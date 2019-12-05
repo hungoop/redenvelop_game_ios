@@ -171,7 +171,7 @@ class UserAPIClient {
             if((responseData.result.value) != nil) {
                 let jsonResponse = JSON(responseData.result.value!)
                 let code = jsonResponse["code"].intValue
-                let msg = jsonResponse["msg"].stringValue
+                //let msg = jsonResponse["msg"].stringValue
                 var prefix: String? = nil
                 
                 if code == 1 {

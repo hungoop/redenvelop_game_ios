@@ -74,12 +74,7 @@ class TitleStackView: UIView {
         stackView.addArrangedSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            //prefixLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
-            //prefixLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             prefixLabel.widthAnchor.constraint(equalToConstant: 70),
-            
-            //titleLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
-            //titleLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             ])
         
         let img:UIImage = UIImage(named: "bg_title_lobby")!

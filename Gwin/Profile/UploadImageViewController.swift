@@ -61,7 +61,6 @@ class UploadImageViewController: BaseViewController {
         setupViews()
         updateViews()
         
-        
         //avatarDefHolder.addSubview(containerStackView)
         avatarDefHolder.translatesAutoresizingMaskIntoConstraints = false
         avatarDefHolder.axis = .horizontal
@@ -224,8 +223,6 @@ class UploadImageViewController: BaseViewController {
     @IBAction func exitPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
     
 }
 

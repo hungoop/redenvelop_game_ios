@@ -60,6 +60,7 @@ class BullModel {
         round.status = status.rawValue
         
     }
+    
     func wagerInfoTimer() {
         if wagerTimer == nil{
             
@@ -184,6 +185,25 @@ class BullModel {
         //    return false
         return !expire
     }
+    
+    /*
+     private boolean getOnlySelf(){
+     Log.d(TAG, " isOpen: " + envelopInfo.isOpen() + "  " + envelopInfo.getOpenResult().name() + " " + envelopInfo.isExpire());
+     
+     //envelopInfo.makeExpire();
+     //Log.d(TAG, "isExpire: " + envelopInfo.isExpire());
+     
+     if(!envelopInfo.isExpire()){
+     return  true;
+     } else if(envelopInfo.isOpen()){
+     return false;
+     } else if(envelopInfo.getOpenResult() == EnvelopInfo.OPEN.GRAB ||
+     envelopInfo.getOpenResult() == EnvelopInfo.OPEN.PLAYER_GRABED){
+     return  true;
+     } else {
+     return false;
+     }
+     }*/
     
     func getRoundId() -> Int64 {
         if let package = historyPackage {

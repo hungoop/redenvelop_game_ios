@@ -23,7 +23,6 @@ class GameRoomViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         setTitle(title: "牛牛")
         setupViews()
         fetchBullRoom()
@@ -42,8 +41,6 @@ class GameRoomViewController: BaseViewController {
     }
     
     func setupViews() {
-        
-        
         tableView.register(GameItemCell.self, forCellReuseIdentifier: "envelopRoomCell")
         
         rollMsgView.addSubview(marqueView)
@@ -91,7 +88,7 @@ extension GameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -107,7 +104,6 @@ extension GameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "envelopRoomCell", for: indexPath) as? GameItemCell {
             let model = rooms[indexPath.row]
             cell.selectionStyle = .none
@@ -117,7 +113,7 @@ extension GameRoomViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.openRuleGame = {
                 cell.openRuleGame = {
-                    self.jumpURL(optType: "common_problem", title: "常见问题")
+                    self.jumpURL(optType: "rule_2", title: "牛牛规则")
                 }
             }
             return cell
@@ -127,7 +123,6 @@ extension GameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let model  = rooms[indexPath.row]
         
         if model.roomPwd.count > 0 {
@@ -163,7 +158,6 @@ extension GameRoomViewController {
     }
     
     fileprivate func doLogin(room: RoomModel) {
-        
         guard let user = RedEnvelopComponent.shared.user else { return }
         guard let userno = RedEnvelopComponent.shared.userno else { return }
         if processing == true {
@@ -173,6 +167,8 @@ extension GameRoomViewController {
         processing = true
         RedEnvelopAPIClient.roomLogin(ticket: user.ticket, roomId: room.roomId, roomPwd: room.roomPwd) { [weak self](success, message) in
             self?.processing = false
+            
+            print("login room success: \(success) - message: \(message ?? "NO MESS")")
             if success {
                 let vc = BullDetailViewController(userno: userno , room: room)
                 vc.hidesBottomBarWhenPushed = true

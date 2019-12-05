@@ -71,9 +71,7 @@ class BetBullViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     
-    
     func setupViews() {
-        
         backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
         //
         tableView.register(UINib(nibName: "WagerOddViewCell", bundle: nil), forCellReuseIdentifier: "WagerOddViewCell")
