@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 import CoreData
 import SwiftyJSON
 
@@ -28,7 +29,11 @@ class BullDetailViewController: BaseViewController {
     @IBOutlet weak var countdountBetLabel: UILabel!
     
     @IBOutlet weak var countdountGrabLabel: UILabel!
-    @IBOutlet weak var rollMsgMarqueeView: UIWebView!
+    //@IBOutlet weak var rollMsgMarqueeView: UIWebView!
+    
+    @IBOutlet weak var rollMsgMarqueeView: WKWebView!
+    
+    
     @IBOutlet weak var countdownRoundLabel: UILabel!
     
     @IBOutlet weak var roundHistoryStackView: UIView!
@@ -454,7 +459,7 @@ class BullDetailViewController: BaseViewController {
                         this.datas.insert(contentsOf: reverHistory, at: 0)
                         this.tableView.reloadData()
                     }
-                }else {
+                } else {
                     this.datas = reverHistory
                     this.tableView.reloadData()
                     this.tableView.scrollToBottom()
@@ -475,7 +480,7 @@ class BullDetailViewController: BaseViewController {
         rollMsgMarqueeView.scrollView.bounces = false
         rollMsgMarqueeView.scrollView.isScrollEnabled = false
         BullAPIClient.getbullRollMessage(ticket: user.ticket) {[weak self] (rollmsg) in
-            let marquee = "<html><body><font size=\"2\" face=\"sans-serif\"> <marquee>\(rollmsg ?? "")</marquee></font></body></html>"
+            let marquee = "<html><body><font size=\"10\" face=\"sans-serif\"> <marquee>\(rollmsg ?? "")</marquee></font></body></html>"
             self?.rollMsgMarqueeView.loadHTMLString(marquee, baseURL: nil)
             
         }

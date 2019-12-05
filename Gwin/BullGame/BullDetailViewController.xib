@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
+        <deployment version="4352" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,7 +28,7 @@
                 <outlet property="marqueView" destination="pjO-Re-o56" id="Hue-Li-Y5B"/>
                 <outlet property="plusButton" destination="myh-nm-N36" id="YcQ-Sa-olz"/>
                 <outlet property="purchaseDetailLabel" destination="edv-Mp-sVP" id="8Ff-F8-3IF"/>
-                <outlet property="rollMsgMarqueeView" destination="J3q-XF-BgN" id="YHk-J8-doH"/>
+                <outlet property="rollMsgMarqueeView" destination="fqx-AT-Wih" id="9fM-vg-N4F"/>
                 <outlet property="roundHistoryStackView" destination="Hmz-bi-PLo" id="Wz1-eV-F8U"/>
                 <outlet property="subgameStackView" destination="FOb-fB-1ze" id="3cR-7U-CtM"/>
                 <outlet property="tableView" destination="VFH-XH-fFa" id="JXX-Xf-Z60"/>
@@ -190,10 +190,17 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAP-dX-Rz2">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                             <subviews>
-                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3q-XF-BgN">
-                                    <rect key="frame" x="0.0" y="0.0" width="384" height="30"/>
+                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqx-AT-Wih">
+                                    <rect key="frame" x="10" y="0.0" width="374" height="30"/>
                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </webView>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="ifz-Bi-I2P"/>
+                                    </constraints>
+                                    <wkWebViewConfiguration key="configuration">
+                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                        <wkPreferences key="preferences"/>
+                                    </wkWebViewConfiguration>
+                                </wkWebView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myh-nm-N36">
                                     <rect key="frame" x="384" y="0.0" width="30" height="30"/>
                                     <constraints>
@@ -215,15 +222,14 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="myh-nm-N36" firstAttribute="top" secondItem="jAP-dX-Rz2" secondAttribute="top" id="06k-pp-zLK"/>
-                                <constraint firstItem="myh-nm-N36" firstAttribute="leading" secondItem="J3q-XF-BgN" secondAttribute="trailing" id="5SC-1f-cSj"/>
+                                <constraint firstItem="fqx-AT-Wih" firstAttribute="centerY" secondItem="jAP-dX-Rz2" secondAttribute="centerY" id="2EB-1e-ant"/>
                                 <constraint firstItem="9ei-PE-cIl" firstAttribute="leading" secondItem="jAP-dX-Rz2" secondAttribute="leading" id="86U-RX-lmg"/>
+                                <constraint firstItem="fqx-AT-Wih" firstAttribute="leading" secondItem="jAP-dX-Rz2" secondAttribute="leading" constant="10" id="F7F-6K-3xV"/>
                                 <constraint firstAttribute="height" constant="30" id="I7J-pZ-IcG"/>
                                 <constraint firstAttribute="trailing" secondItem="myh-nm-N36" secondAttribute="trailing" id="JbW-W5-EwA"/>
                                 <constraint firstAttribute="top" secondItem="9ei-PE-cIl" secondAttribute="top" id="LCO-jZ-2zk"/>
-                                <constraint firstItem="J3q-XF-BgN" firstAttribute="leading" secondItem="jAP-dX-Rz2" secondAttribute="leading" id="Mat-Eg-H0A"/>
-                                <constraint firstAttribute="bottom" secondItem="J3q-XF-BgN" secondAttribute="bottom" id="SYB-FC-Hnb"/>
                                 <constraint firstAttribute="bottom" secondItem="myh-nm-N36" secondAttribute="bottom" id="aGd-iy-Xzy"/>
-                                <constraint firstItem="J3q-XF-BgN" firstAttribute="top" secondItem="jAP-dX-Rz2" secondAttribute="top" id="fzb-gj-Ir2"/>
+                                <constraint firstItem="fqx-AT-Wih" firstAttribute="trailing" secondItem="myh-nm-N36" secondAttribute="leading" id="gdz-84-cpl"/>
                                 <constraint firstAttribute="trailing" secondItem="9ei-PE-cIl" secondAttribute="trailing" id="m6v-MD-Q11"/>
                             </constraints>
                         </view>

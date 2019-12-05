@@ -24,8 +24,31 @@ public protocol HomeViewControllerInput: AnyObject {
 
 class HomeViewController: BaseViewController {
     
-    enum Constants {
-        static let seperateHeight: CGFloat = 1
+    enum CFG {
+        static let seperateHeight: CGFloat = 2
+        static let marginTopBotton:CGFloat = 5
+        static let marginLeftRight:CGFloat = 5
+        
+        static let marginBottom_lot:CGFloat = 0
+    }
+    
+    private func setMarginStackView(sView:UIView, top:CGFloat, left:CGFloat, bottom:CGFloat, right:CGFloat) {
+        if #available(iOS 11.0, *) {
+            sView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: top,
+                                                                     leading: left,
+                                                                     bottom: bottom,
+                                                                     trailing: right)
+        } else {
+            sView.layoutMargins = UIEdgeInsets(top: top,
+                                               left: left,
+                                               bottom: bottom,
+                                               right: right);
+        }
+        
+        if (sView is UIStackView){
+            (sView as! UIStackView).isLayoutMarginsRelativeArrangement = true
+        }
+        
     }
     
     weak var output: HomeViewOutput?
@@ -62,6 +85,14 @@ class HomeViewController: BaseViewController {
         return view
     }()
     
+    //() -> UIStackView
+    private func seperateLineView() -> UIView {
+        let view = UIView().forAutolayout()
+        //view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(hexString: "#f6f6f6")
+        return view
+    }
+    
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,9 +113,12 @@ class HomeViewController: BaseViewController {
         view.distribution = .fill
         return view
     }()
+    
     private var popupVc: MessagePopupController?
     
     private var lobbies: [LobbyItemModel] = []
+    
+    private var lstLottery: [LobbyItemModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,13 +126,18 @@ class HomeViewController: BaseViewController {
         self.edgesForExtendedLayout = []
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        loadLobbyData()
         setupViews()
+        
+        loadLobbyData()
+        bindDataToView()
+        
+        fetchListGameLottery()
+        
         fetchPopularizeImage()
         fetchRollMessage()
         fetchPopupMessage()
         fetchUserStatus()
-        bindDataToView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,26 +184,22 @@ class HomeViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             desScriptionLabel.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 5),
-            //desScriptionLabel.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0),
             desScriptionLabel.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
-            desScriptionLabel.widthAnchor.constraint(equalTo: desScriptionLabel.widthAnchor, constant: 50),
+            desScriptionLabel.widthAnchor.constraint(equalTo: messageView.heightAnchor, constant: 10),
             
             //
             volumeImageView.leftAnchor.constraint(equalTo: desScriptionLabel.rightAnchor),
-            //volumeImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0),
             volumeImageView.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
             volumeImageView.widthAnchor.constraint(equalTo: messageView.heightAnchor),
             //
             volumSeperateView.leftAnchor.constraint(equalTo: volumeImageView.rightAnchor),
             volumSeperateView.widthAnchor.constraint(equalToConstant: 1),
             volumSeperateView.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
-            //volumSeperateView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0),
             
             //
             messageLabel.leftAnchor.constraint(equalTo: volumeImageView.rightAnchor, constant: 5),
             messageLabel.centerYAnchor.constraint(equalTo: messageView.centerYAnchor),
             messageLabel.rightAnchor.constraint(equalTo: messageView.rightAnchor),
-            
             messageLabel.heightAnchor.constraint(equalTo: messageView.heightAnchor)
             ])
         //
@@ -182,19 +217,15 @@ class HomeViewController: BaseViewController {
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            containerStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            containerStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            
             contentView.heightAnchor.constraint(equalTo: containerStackView.heightAnchor)
             ])
     }
+    
     func loadLobbyData() {
         if let path = Bundle.main.path(forResource: "LobbyJson", ofType: "json") {
             do {
@@ -210,22 +241,18 @@ class HomeViewController: BaseViewController {
                 print("Abcdef")
             }
         }
-        
     }
     
     func bindDataToView() {
         let stackView1 = getStackView()
-        let seperateColor = UIColor(hexString: "#f6f6f6")
-        let firstSeperateView = UIView().forAutolayout()
-        firstSeperateView.backgroundColor = seperateColor
-        containerStackView.addArrangedSubview(firstSeperateView)
+        let firstSeperateView = seperateLineView()
+        
         containerStackView.addArrangedSubview(stackView1)
-        let itemHeight = view.frame.width / 7
+        containerStackView.addArrangedSubview(firstSeperateView)
+        let itemHeight = view.frame.width / (UIDevice.current.iPad ? 10 : 7)
         
         NSLayoutConstraint.activate([
             stackView1.topAnchor.constraint(equalTo: containerStackView.topAnchor),
-            stackView1.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 0),
-            stackView1.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: 0),
             stackView1.heightAnchor.constraint(equalToConstant: itemHeight)
             ])
         
@@ -237,57 +264,34 @@ class HomeViewController: BaseViewController {
         }
         
         for _ in 0..<5 {
-            let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .vertical, row: -1,output: self)
+            let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .vertical, typeIcon: -1, output: self)
             button.translatesAutoresizingMaskIntoConstraints = false
             stackView1.addArrangedSubview(button)
             
             NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: CGFloat(buttonSize)),
                 button.centerYAnchor.constraint(equalTo: stackView1.centerYAnchor),
+                button.widthAnchor.constraint(equalToConstant: CGFloat(buttonSize)),
                 button.heightAnchor.constraint(equalToConstant: itemHeight),
                 ])
             
             lobbyIndex += 1
         }
         
-        //layout 2 games boom and bull
-        //let secondSeperateView = UIView().forAutolayout()
-        //secondSeperateView.backgroundColor = seperateColor
-        
-        //let firstGametitleLabel = TitleStackView(prefix: "红包专场", title: "抢红包新玩法来袭").forAutolayout()
         let stackView2 = getStackView()
-        //containerStackView.addArrangedSubview(secondSeperateView)
-        //containerStackView.addArrangedSubview(firstGametitleLabel)
         containerStackView.addArrangedSubview(stackView2)
         
         let btn_bb_itemHeight = view.frame.width / 3
         
         NSLayoutConstraint.activate([
-            /*
-            firstSeperateView.leftAnchor.constraint(equalTo: containerStackView.leftAnchor),
-            firstSeperateView.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
-            firstSeperateView.heightAnchor.constraint(equalToConstant: Constants.seperateHeight),
+            firstSeperateView.heightAnchor.constraint(equalToConstant: CFG.seperateHeight),
+            firstSeperateView.topAnchor.constraint(equalTo: stackView1.bottomAnchor, constant: 0),
             
-            secondSeperateView.leftAnchor.constraint(equalTo: containerStackView.leftAnchor),
-            secondSeperateView.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
-            secondSeperateView.heightAnchor.constraint(equalToConstant: Constants.seperateHeight),
-            
-            firstGametitleLabel.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 10),
-            firstGametitleLabel.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
-            firstGametitleLabel.heightAnchor.constraint(equalToConstant: 35),
-            */
-            
-            stackView2.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 10),
-            stackView2.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: -10),
             stackView2.heightAnchor.constraint(equalToConstant: btn_bb_itemHeight),
-            
-            stackView1.bottomAnchor.constraint(equalTo: stackView2.topAnchor, constant: 0)
-            
-            //firstGametitleLabel.bottomAnchor.constraint(equalTo: stackView2.topAnchor, constant: -10)
-            
             ])
         
-        let item2Width = view.frame.width / 2
+        setMarginStackView(sView: stackView2, top: CFG.marginTopBotton, left: CFG.marginLeftRight, bottom: CFG.marginTopBotton, right: CFG.marginLeftRight)
+        
+        let item2Width = view.frame.width / 2 - CFG.marginLeftRight
         
         for _ in 0..<2 {
             let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .horizontal, output: self)
@@ -296,130 +300,29 @@ class HomeViewController: BaseViewController {
             
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalToConstant: item2Width),
-                button.centerYAnchor.constraint(equalTo: stackView2.centerYAnchor),
-                button.heightAnchor.constraint(equalTo: stackView2.heightAnchor),
                 ])
             
             lobbyIndex += 1
         }
         
         //
-        let lastSeperateView = UIView().forAutolayout()
-        lastSeperateView.backgroundColor = seperateColor
-        let lasttitleLabel = TitleStackView(prefix: "快乐彩票", title: " 20分钟一期 , 实时结算").forAutolayout()
+        let lastSeperateView = seperateLineView()
+        let stackView_title_lot = getStackView()
+        let lasttitleLabel = TitleStackView(prefix: "快乐彩票", title: "").forAutolayout()
         
-        
-        let stackView3 = getStackView()
         containerStackView.addArrangedSubview(lastSeperateView)
-        containerStackView.addArrangedSubview(lasttitleLabel)
-        containerStackView.addArrangedSubview(stackView3)
-        
-        
-        let marginRight:CGFloat = 0;
-        let marginLeft:CGFloat = -10;
+        containerStackView.addArrangedSubview(stackView_title_lot)
+        stackView_title_lot.addArrangedSubview(lasttitleLabel)
         
         NSLayoutConstraint.activate([
-            lastSeperateView.leftAnchor.constraint(equalTo: containerStackView.leftAnchor),
-            lastSeperateView.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
-            lastSeperateView.heightAnchor.constraint(equalToConstant: Constants.seperateHeight),
+            lastSeperateView.heightAnchor.constraint(equalToConstant: CFG.seperateHeight),
             
-            lasttitleLabel.topAnchor.constraint(equalTo: stackView2.bottomAnchor, constant: 10),
-            lasttitleLabel.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: 10),
-            lasttitleLabel.rightAnchor.constraint(equalTo: containerStackView.rightAnchor),
+            stackView_title_lot.topAnchor.constraint(equalTo: lastSeperateView.bottomAnchor),
+            
             lasttitleLabel.heightAnchor.constraint(equalToConstant: 35),
-            
-            stackView3.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: marginRight),
-            stackView3.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: marginLeft)
             ])
+        setMarginStackView(sView: stackView_title_lot, top: CFG.marginTopBotton, left: CFG.marginLeftRight, bottom: CFG.marginTopBotton, right: CFG.marginLeftRight)
         
-        let perItemRow:Int = 2;
-        
-        let btnLotteryWidth = view.frame.width / CGFloat(perItemRow) - 10
-        
-        //let item3Width = view.frame.width / CGFloat(perItemRow) - 10
-        
-        for _ in 0..<perItemRow {
-            let button = LobbyItemView(model: lobbies[lobbyIndex], row: 2, output: self)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            stackView3.addArrangedSubview(button)
-            
-            NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: btnLotteryWidth),
-                ])
-            
-            
-            lobbyIndex += 1
-        }
-        
-        //
-        let stackView4 = getStackView()
-        containerStackView.addArrangedSubview(stackView4)
-        NSLayoutConstraint.activate([
-            stackView4.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: marginRight),
-            stackView4.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: marginLeft)
-            ])
-        
-        //let item4Width = view.frame.width / CGFloat(perItemRow)
-        
-        for _ in 0..<perItemRow {
-            let button = LobbyItemView(model: lobbies[lobbyIndex], row: 2, output: self)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: btnLotteryWidth)
-                ])
-            
-            stackView4.addArrangedSubview(button)
-            lobbyIndex += 1
-        }
-        
-        
-        //
-        //
-        let stackView5 = getStackView()
-        containerStackView.addArrangedSubview(stackView5)
-        NSLayoutConstraint.activate([
-            stackView5.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: marginRight),
-            stackView5.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: marginLeft)
-            ])
-        
-        //let item5Width = view.frame.width / CGFloat(perItemRow)
-        
-        for _ in 0..<perItemRow {
-            let button = LobbyItemView(model: lobbies[lobbyIndex], row: 3, output: self)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: btnLotteryWidth)
-                ])
-            
-            stackView5.addArrangedSubview(button)
-            lobbyIndex += 1
-        }
-        
-        //
-        //
-        let stackView6 = getStackView()
-        containerStackView.addArrangedSubview(stackView6)
-        NSLayoutConstraint.activate([
-            stackView6.leftAnchor.constraint(equalTo: containerStackView.leftAnchor, constant: marginRight),
-            stackView6.rightAnchor.constraint(equalTo: containerStackView.rightAnchor, constant: marginLeft)
-            ])
-        
-        //let item6Width = view.frame.width / CGFloat(perItemRow)
-        
-        for _ in 0..<perItemRow {
-            let button = LobbyItemView(model: lobbies[lobbyIndex], row: 4, output: self)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: btnLotteryWidth)
-                ])
-            
-            stackView6.addArrangedSubview(button)
-            lobbyIndex += 1
-        }
- 
     }
     
     private func getStackView() -> UIStackView {
@@ -429,6 +332,7 @@ class HomeViewController: BaseViewController {
         //view.distribution = .fill
         
         view.distribution =  UIStackView.Distribution.equalSpacing//.fill
+        
         return view
     }
     
@@ -457,9 +361,6 @@ class HomeViewController: BaseViewController {
             this.messageLabel.updateContent(message: rollMsg)
         }
         
-        UserAPIClient.otherH5(ticket: user.ticket, optype: Optype.recommended_app) { (abc, xyz) in
-            
-        }
     }
     
     func fetchPopupMessage() {
@@ -486,6 +387,62 @@ class HomeViewController: BaseViewController {
             appDelegate.startFetchUserStatus()
         }
     }
+    
+    func fetchListGameLottery() {
+        guard let user = RedEnvelopComponent.shared.user else {return}
+        
+        RedEnvelopAPIClient.listGameLottery(ticket: user.ticket) {[weak self] (gameModels, errormessage) in
+            guard let this = self else {return}
+            for i in 0..<gameModels.count {
+                this.lstLottery.append(gameModels[i])
+            }
+            
+            this.bindLstLotteryToView()
+        }
+        
+    }
+    
+    func bindLstLotteryToView() {
+        var lobbyIndex = 0
+        if lstLottery.count <= 0 {
+            return
+        }
+        
+        while (lobbyIndex < lstLottery.count){
+            //----------Item lottery--------------
+            let stackView3 = getStackView()
+            containerStackView.addArrangedSubview(stackView3)
+            
+            let perItemRow:Int = 2;
+            let btnLotteryWidth = view.frame.width / CGFloat(perItemRow) - CFG.marginLeftRight * CGFloat(perItemRow)
+            let itemHeight_lottery = UIScreen.main.bounds.width / 6//itemHeight
+            
+            NSLayoutConstraint.activate([
+                //stackView3.topAnchor.constraint(equalTo: stackView_title_lot.bottomAnchor),
+                stackView3.heightAnchor.constraint(equalToConstant: itemHeight_lottery)
+                ])
+            
+            setMarginStackView(sView: stackView3, top: CFG.marginTopBotton, left: CFG.marginLeftRight, bottom: CFG.marginBottom_lot, right: CFG.marginLeftRight)
+            
+            for _ in (0..<perItemRow) {
+                let button = LobbyItemView(model: lstLottery[lobbyIndex], axis: .horizontal, typeIcon: 2, output: self)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                stackView3.addArrangedSubview(button)
+                
+                NSLayoutConstraint.activate([
+                    button.widthAnchor.constraint(equalToConstant: btnLotteryWidth),
+                    ])
+                
+                lobbyIndex += 1
+                
+                if (lobbyIndex >= lstLottery.count) {
+                    break;
+                }
+            }
+        }
+        
+    }
+    
 }
 
 extension HomeViewController: HomeViewInput {

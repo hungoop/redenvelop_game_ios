@@ -34,13 +34,7 @@ class ScrollLabel: UIView {
         
         
         NSLayoutConstraint.activate([
-            //webview.heightAnchor.constraint(equalToConstant: 20),
             webview.leftAnchor.constraint(equalTo: leftAnchor),
-            //webview.centerYAnchor.constraint(equalTo: centerYAnchor),
-            //webview.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
-            
-            webview.heightAnchor.constraint(equalTo: heightAnchor),
             webview.rightAnchor.constraint(equalTo: rightAnchor),
             webview.topAnchor.constraint(equalTo: topAnchor),
             webview.bottomAnchor.constraint(equalTo: bottomAnchor),

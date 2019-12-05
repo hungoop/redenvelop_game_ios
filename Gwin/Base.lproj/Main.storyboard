@@ -519,11 +519,6 @@
                     <navigationItem key="navigationItem" id="4bn-7Q-BhX">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="refresh" id="NGq-O6-8cV">
                             <color key="tintColor" red="0.99895602459999999" green="0.90145379299999995" blue="0.6360183358" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
-                                    <color key="value" red="0.99895602459999999" green="0.90145379299999995" blue="0.6360183358" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="pressRefreshBalanceUser:" destination="VIq-BP-YV2" id="5Gm-Tm-uoe"/>
                             </connections>

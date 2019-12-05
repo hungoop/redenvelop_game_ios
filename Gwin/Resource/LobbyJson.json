@@ -41,60 +41,6 @@
       "key":"1",
       "action": "envelop"
 
-    },
-    {
-      "icon": "game_7",
-      "name":"重庆时时彩",
-      "key":"6",
-      "action": "lottery"
-
-    },
-    {
-      "icon": "game_8",
-      "name":"北京PK10",
-      "key":"11",
-      "action": "lottery"
-
-    },
-    {
-      "icon": "game_9",
-      "name":"幸运飞艇",
-      "key":"21",
-      "action": "lottery"
-
-    },
-    {
-      "icon": "game_10",
-      "name":"PC蛋蛋",
-      "key":"31",
-      "action": "lottery"
-
-    },
-    {
-      "icon": "game_11",
-      "name":"EPS赛马\n180",
-      "key":"34",
-      "action": "lottery"
-    },
-    {
-      "icon": "game_12",
-      "name":"EPS赛马\n300",
-      "key":"35",
-      "action": "lottery"
-
-    },
-    {
-      "icon": "game_13",
-      "name":"超级快\n5_3min",
-      "key":"36",
-      "action": "lottery"
-
-    },
-    {
-      "icon": "game_14",
-      "name":"超级快\n5_5min",
-      "key":"37",
-      "action": "lottery"
     }
     
 ]

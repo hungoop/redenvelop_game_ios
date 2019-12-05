@@ -132,19 +132,15 @@ class ProfileViewController: BaseViewController {
         let buttonSize = view.frame.width/3
         
         for i in 0..<3 {
-            let itemMenu = MenuHorizItemView(model: menuHorizItems[i])
-            itemMenu.translatesAutoresizingMaskIntoConstraints = false
+            let itemHorizMenu = MenuHorizItemView(model: menuHorizItems[i])
+            itemHorizMenu.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                itemMenu.widthAnchor.constraint(equalToConstant: CGFloat(buttonSize)),
-                //itemMenu.leftAnchor.constraint(equalTo: holderHorizonMenu.leftAnchor),
-                //itemMenu.heightAnchor.constraint(equalTo: holderHorizonMenu.heightAnchor),
-                //itemMenu.topAnchor.constraint(equalTo: holderHorizonMenu.topAnchor),
-                //itemMenu.bottomAnchor.constraint(equalTo: holderHorizonMenu.bottomAnchor)
+                itemHorizMenu.widthAnchor.constraint(equalToConstant: CGFloat(buttonSize)),
                 ])
-            holderHorizonMenu.addArrangedSubview(itemMenu)
+            holderHorizonMenu.addArrangedSubview(itemHorizMenu)
             
-            itemMenu.menuItemHanler = { [weak self] (optType, title) in
+            itemHorizMenu.menuItemHanler = { [weak self] (optType, title) in
                 self?.jumpURL(optType: optType, title: title)
             }
         }

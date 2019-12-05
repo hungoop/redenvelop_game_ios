@@ -157,18 +157,29 @@ class ProfileItemViewCell: UITableViewCell {
             versionButton.heightAnchor.constraint(equalToConstant: 30),
             versionButton.widthAnchor.constraint(equalToConstant: 60),
             
-            versionLabel.rightAnchor.constraint(equalTo: versionButton.leftAnchor, constant: -Constants.buttonRightMargin),
+            //versionLabel.rightAnchor.constraint(equalTo: versionButton.leftAnchor, constant: -Constants.buttonRightMargin),
             versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             ])
     }
     
-    private func updateContrainVersion() {
-        NSLayoutConstraint.activate([
-            versionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.buttonRightMargin),
-            versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            versionLabel.heightAnchor.constraint(equalToConstant: 30),
-            versionLabel.widthAnchor.constraint(equalToConstant: 60)
-        ])
+    private func updateContrainVersion(isHideBtn:Bool) {
+        if (isHideBtn) {
+            NSLayoutConstraint.activate([
+                versionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+                versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+                versionLabel.heightAnchor.constraint(equalToConstant: 30),
+                versionLabel.widthAnchor.constraint(equalToConstant: 60)
+                ])
+        } else{
+            NSLayoutConstraint.activate([
+                versionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.buttonRightMargin),
+                versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+                versionLabel.heightAnchor.constraint(equalToConstant: 30),
+                versionLabel.widthAnchor.constraint(equalToConstant: 60)
+                ])
+        }
+        
+        
     }
     
     func updateContent(data: ProfileItemModel, qrcode: String? = nil, isUpdate: Bool? = false) {
@@ -191,14 +202,12 @@ class ProfileItemViewCell: UITableViewCell {
             
             if (isUpdate ?? false){
                 versionButton.isHidden = false
-                
             } else {
                 versionButton.isHidden = true
-                updateContrainVersion()
             }
             
             versionLabel.isHidden = false
-            
+            updateContrainVersion(isHideBtn: versionButton.isHidden)
             actionButton.isHidden = true
             copyButton.isHidden = true
             qrcodeLabel.isHidden = true

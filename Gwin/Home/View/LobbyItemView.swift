@@ -16,12 +16,26 @@ class LobbyItemModel {
     var key: String
     var action: String
     
-    init(dictionary: JSON) {
-        icon = dictionary["icon"].stringValue
-        name = dictionary["name"].stringValue
-        key = dictionary["key"].stringValue
-        action = dictionary["action"].stringValue
-        
+    init(dictionary: JSON, isLot:Bool = false) {
+        if(isLot){
+            let ishot = dictionary["ishot"].boolValue
+            let gameno = dictionary["gameno"].intValue
+            
+            key = "\(gameno)"
+            name = dictionary["gamename"].stringValue
+            action = "lottery"
+            
+            if(ishot){
+                icon = "icon_lottery_hot"
+            } else {
+                icon = "icon_lottery_nomal"
+            }
+        } else{
+            icon = dictionary["icon"].stringValue
+            name = dictionary["name"].stringValue
+            key = dictionary["key"].stringValue
+            action = dictionary["action"].stringValue
+        }
     }
 }
 
@@ -77,12 +91,12 @@ class LobbyItemView: UIView {
     private let model: LobbyItemModel!
     private var output: LobbyItemViewOuput
     private var axis: NSLayoutConstraint.Axis
-    private var row: Int
-    init(model: LobbyItemModel, axis: NSLayoutConstraint.Axis = .vertical, row: Int = 1, output: LobbyItemViewOuput) {
+    private var typeIcon: Int
+    init(model: LobbyItemModel, axis: NSLayoutConstraint.Axis = .vertical, typeIcon: Int = 1, output: LobbyItemViewOuput) {
         self.model = model
         self.output = output
         self.axis = axis
-        self.row = row
+        self.typeIcon = typeIcon
         super.init(frame: .zero)
         setupViews()
         updateView()
@@ -99,9 +113,7 @@ class LobbyItemView: UIView {
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leftAnchor.constraint(equalTo: leftAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
             
             coverButton.topAnchor.constraint(equalTo: topAnchor),
             coverButton.leftAnchor.constraint(equalTo: leftAnchor),
@@ -111,85 +123,41 @@ class LobbyItemView: UIView {
         
         stackView.addArrangedSubview(imageView)
         if axis == .vertical {
+            stackView.addArrangedSubview(titleLabel)
             
-            if(row == -1){
-                let itemHeight = UIScreen.main.bounds.width / 7
-                stackView.addArrangedSubview(titleLabel)
-                NSLayoutConstraint.activate([
-                    imageView.topAnchor.constraint(equalTo: stackView.topAnchor),
-                    imageView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-                    imageView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-                    imageView.heightAnchor.constraint(equalToConstant: itemHeight - 20 ),
-                    
-                    titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10),
-                    titleLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-                    //titleLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-                    titleLabel.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-                    
-                    //imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor)
-                    ])
-            } else{
-                let itemHeight = UIScreen.main.bounds.width / 5
+            NSLayoutConstraint.activate([
+                titleLabel.widthAnchor.constraint(equalTo: coverButton.widthAnchor),
+                titleLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1.0 / 3.0),
+                titleLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
                 
-                NSLayoutConstraint.activate([
-                    imageView.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
-                    imageView.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10),
-                    imageView.rightAnchor.constraint(equalTo: stackView.rightAnchor, constant: -10),
-                    imageView.heightAnchor.constraint(equalToConstant: itemHeight - 20 ),
-                    
-                    //imageView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: -10)
-                    
-                    ])
-            }
-        } else if axis == .horizontal {
-            let itemHeight = UIScreen.main.bounds.width / 4
-            //stackView.addArrangedSubview(textStackView)
-            //textStackView.addSubview(titleLabel)
-            //textStackView.addSubview(subtitleLAbel)
-            
+                imageView.widthAnchor.constraint(equalTo: coverButton.widthAnchor),
+                imageView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 2.0 / 3.0),
+                imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor),
+                
+                ])
+           
+        } else if axis == .horizontal {//icon lottery && icon play game
             imageView.contentMode = UIView.ContentMode.scaleToFill
             
             NSLayoutConstraint.activate([
-                imageView.topAnchor.constraint(equalTo: stackView.topAnchor),
-                imageView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-                imageView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-                //imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
-                imageView.heightAnchor.constraint(equalToConstant: itemHeight),
-                /*
-                textStackView.leftAnchor.constraint(equalTo: imageView.rightAnchor),
-                textStackView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-                textStackView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
-                
-                titleLabel.centerYAnchor.constraint(equalTo: textStackView.centerYAnchor, constant: -12),
-                titleLabel.leftAnchor.constraint(equalTo: textStackView.leftAnchor),
-                
-                subtitleLAbel.heightAnchor.constraint(equalToConstant: 25),
-                subtitleLAbel.centerYAnchor.constraint(equalTo: textStackView.centerYAnchor, constant: 12),
-                subtitleLAbel.leftAnchor.constraint(equalTo: textStackView.leftAnchor),
-                */
+                imageView.widthAnchor.constraint(equalTo: coverButton.widthAnchor),
+                imageView.heightAnchor.constraint(equalTo: coverButton.heightAnchor),
                 ])
+            
         }
     }
     
     func updateView() {
-        /*
         imageView.image = UIImage(named: model.icon)
         
-        if axis == .horizontal {
-            titleLabel.text = model.name
-            subtitleLAbel.text = "开放中"
-        }*/
-        
-        
-        imageView.image = UIImage(named: model.icon)
-        
-        if(row == -1) {
+        if(typeIcon == -1) {
             titleLabel.text = model.name
         }
-       
-        //if axis == .horizontal {
-        //    subtitleLAbel.text = "开放中"
-        //}
+        
+        if(typeIcon == 2){
+            coverButton.setTitle("\(model.name)", for: .normal)
+            coverButton.setTitleColor(UIColor.darkGray, for: .normal)
+        }
     }
     
     @objc func lobbyItemPressed(_ sender: UIButton) {

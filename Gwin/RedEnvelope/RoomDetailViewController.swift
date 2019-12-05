@@ -91,9 +91,9 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         return view
     }()
     
-    private lazy var bottomTitleLabel: ScrollLabel = {
+    private lazy var scrollMessageLabel: ScrollLabel = {
         let title = ScrollLabel().forAutolayout()
-        title.updateContent(message: "红包炸雷100")
+        title.updateContent(message: "--test--")
         return title
     }()
     
@@ -149,6 +149,7 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         setupNotifiView()
         setupBottomView()
         fetchUserInfo()
+        fetchRollMessage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -250,7 +251,7 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         secondSeperateView.backgroundColor = .groupTableViewBackground
         
         let labelStackView = getHorizontalStackView()
-        labelStackView.addArrangedSubview(bottomTitleLabel)
+        labelStackView.addArrangedSubview(scrollMessageLabel)
         labelStackView.addArrangedSubview(plusButton)
         bottomView.addArrangedSubview(firstSeperateView)
         bottomView.addArrangedSubview(labelStackView)
@@ -269,7 +270,6 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalToConstant: buttonSize),
                 button.heightAnchor.constraint(equalToConstant: buttonSize),
-                
                 ])
         }
         
@@ -280,7 +280,6 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
             plusButton.widthAnchor.constraint(equalToConstant: 30),
             plusButton.heightAnchor.constraint(equalToConstant: 30),
             plusButton.rightAnchor.constraint(equalTo: labelStackView.leftAnchor, constant: -10),
-            
             ])
     }
     
@@ -357,6 +356,18 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         } else if tag == 3 {
             openWebview(optType: "withdrawals")
         }
+    }
+    
+    
+    func fetchRollMessage() {
+        guard let user = RedEnvelopComponent.shared.user else { return }
+        
+        NoticeAPIClient.getRollMsg(ticket: user.ticket, msgType: 1) { [weak self] (rollMsg, msg) in
+            guard let this = self else { return  }
+            RedEnvelopComponent.shared.rollMsg = rollMsg
+            this.scrollMessageLabel.updateContent(message: rollMsg)
+        }
+        
     }
 }
 
