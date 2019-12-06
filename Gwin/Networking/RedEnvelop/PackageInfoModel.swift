@@ -30,19 +30,24 @@ class PackageInfoModel {
         remainamount = json["remainamount"].floatValue                 // number,
         remainsize = json["remainsize"].intValue               // int,
         wagertime = json["wagertime"].stringValue                 // string,
-        let grabuserJson = json["grabuser"].arrayValue
+        //let grabuserJson = json["grabuser"].arrayValue
         grabuser = []
-        for userjson in grabuserJson {
-            let user = GrabUserModel(json: userjson)
-            grabuser.append(user)
-        }
         
         
-        if let myUser = RedEnvelopComponent.shared.userno {
-            grabuser = grabuser.sorted { (uName1:GrabUserModel, uName2:GrabUserModel) -> Bool in
-                return uName1.userno == myUser
+        if let grabusersJson = json["grabuser"].array {
+            for userjson in grabusersJson {
+                let user = GrabUserModel(json: userjson)
+                grabuser.append(user)
+            }
+            
+            //sort myUser to fisrt
+            if let myUser = RedEnvelopComponent.shared.userno {
+                grabuser = grabuser.sorted { (uName1:GrabUserModel, uName2:GrabUserModel) -> Bool in
+                    return uName1.userno == myUser
+                }
             }
         }
+        
     }
     
     func getStatus(userno: String) -> Bool {

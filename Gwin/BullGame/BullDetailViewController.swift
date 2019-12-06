@@ -372,11 +372,11 @@ class BullDetailViewController: BaseViewController {
                             this.reloadCell(at: index)
                             this.tableView.scrollToBottom()
                         }
-                    }else {
+                    } else {
                         this.addNewBull(round: round)
                     }
                     
-                }else if round.status == 1 {
+                }else if round.status ==  BullRoundStatus.betStart.rawValue {
                     //get wagerinfo
                     print("result 1 ------")
                     //          this.wagerInfoTimer(roundid: round.roundid)
@@ -388,7 +388,7 @@ class BullDetailViewController: BaseViewController {
                     }
                     
                     
-                } else if round.status == 0 {
+                } else if round.status == BullRoundStatus.betClose.rawValue {
                     //remove your package
                     //          this.cancelWagerTimer()
                     if let index = this.getBullModel(roundid: round.roundid) {
@@ -397,7 +397,7 @@ class BullDetailViewController: BaseViewController {
                         this.reloadCell(at: index)
                     }
                     
-                } else if round.status == 3 {
+                } else if round.status == BullRoundStatus.betResult.rawValue {
                     //get wagerInfo
                     print("result 3 ------")
                     //          this.resultWagerInfoTimer()
