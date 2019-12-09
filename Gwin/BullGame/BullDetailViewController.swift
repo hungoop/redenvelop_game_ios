@@ -98,7 +98,7 @@ class BullDetailViewController: BaseViewController {
         bigCountLabel.textAlignment = .center
         bigCountLabel.textColor =  UIColor.gray
         
-        bigCountLabel.font = UIFont.systemFont(ofSize: 100.0)
+        bigCountLabel.font = UIFont.systemFont(ofSize: CONST_GUI.FONT_BIG_COUNTDOWN)
         return bigCountLabel;
     }()
     
@@ -159,9 +159,7 @@ class BullDetailViewController: BaseViewController {
         view.addSubview(bigCountDownControl)
         
         NSLayoutConstraint.activate([
-            //bigCountDownControl.topAnchor.constraint(equalTo: tableView.topAnchor),
             bigCountDownControl.bottomAnchor.constraint(equalTo: view.centerYAnchor),
-            
             bigCountDownControl.leftAnchor.constraint(equalTo: view.leftAnchor),
             bigCountDownControl.rightAnchor.constraint(equalTo: view.rightAnchor)
             ])
@@ -479,7 +477,7 @@ class BullDetailViewController: BaseViewController {
         rollMsgMarqueeView.scrollView.bounces = false
         rollMsgMarqueeView.scrollView.isScrollEnabled = false
         BullAPIClient.getbullRollMessage(ticket: user.ticket) {[weak self] (rollmsg) in
-            let marquee = "<html><body><font size=\"\(CONST_GUI.FONT_SIZE_ROLL_MESS)\" face=\"sans-serif\"> <marquee>\(rollmsg ?? "")</marquee></font></body></html>"
+            let marquee = "<html><body><font size=\"\(CONST_GUI.fontSizeRollMessage())\" face=\"sans-serif\"> <marquee>\(rollmsg ?? "")</marquee></font></body></html>"
             self?.rollMsgMarqueeView.loadHTMLString(marquee, baseURL: nil)
         }
     }

@@ -31,13 +31,13 @@ class GrabUserViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func updateViews(model: GrabUserModel, packageid: Int64 = 0, outofStock: Bool = false) {
+    func updateViews(model: GrabUserModel, packageid: Int64 = 0, outofStock: Bool = false, packageExpire: Bool = false) {
         wagerTimeLabel.text = model.wagertime
         amountLabel.text = "\(model.packetamount.toFormatedString())"
         
         if let myName = RedEnvelopComponent.shared.userno {
             if model.userno != myName {
-                if model.isExpire() || outofStock {
+                if packageExpire || outofStock {
                     amountLabel.text = String(format: "%@", model.packetamount.toFormatedString())
                 }else{
                     amountLabel.text = "*.**"

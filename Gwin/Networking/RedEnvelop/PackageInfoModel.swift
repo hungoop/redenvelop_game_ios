@@ -81,7 +81,7 @@ class PackageInfoModel {
     func isExpire()-> Bool {
         let wagerInteval = wagertime.toDate().timeIntervalSinceNow
         let current  = RedEnvelopComponent.shared.systemtime?.timeIntervalSinceNow ?? 0
-        print("current \(current) --- \(wagerInteval)")
+        //print("current \(current) --- \(wagerInteval)")
         return  current - wagerInteval > 5 * 60 //5 mins
     }
     

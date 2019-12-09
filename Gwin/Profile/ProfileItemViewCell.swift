@@ -48,7 +48,7 @@ class ProfileItemViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let view = UILabel().forAutolayout()
         view.text = "abc"
-        view.font = UIDevice.current.iPad ?  UIFont.systemFont(ofSize: 20) : UIFont.systemFont(ofSize: 14)
+        view.font = UIFont.systemFont(ofSize:  CONST_GUI.fontSizeMemberCenter_avg())
         return view
     }()
     
@@ -68,14 +68,14 @@ class ProfileItemViewCell: UITableViewCell {
         button.addBorder(color:UIColor(hexString: "e75f48"), width: 1)
         button.setTitle("复制", for: .normal)
         button.setTitleColor(UIColor(hexString: "e75f48"), for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         button.addTarget(self, action: #selector(copyPressed(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var qrcodeLabel: UILabel = {
         let label = UILabel().forAutolayout()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg(), weight: .medium)
         label.textColor = UIColor(hexString: "e75f48")
         label.text = "QRCODE"
         label.textAlignment = .right
@@ -88,14 +88,14 @@ class ProfileItemViewCell: UITableViewCell {
         button.addBorder(color:UIColor(hexString: "e75f48"), width: 1)
         button.setTitle("新版本", for: .normal)
         button.setTitleColor(UIColor(hexString: "e75f48"), for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         button.addTarget(self, action: #selector(copyPressed(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var versionLabel: UILabel = {
         let label = UILabel().forAutolayout()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg(), weight: .medium)
         label.textColor = UIColor(hexString: "e75f48")
         label.text = "VERSION"
         label.textAlignment = .right
@@ -117,8 +117,6 @@ class ProfileItemViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     private func setupViews() {
@@ -142,20 +140,20 @@ class ProfileItemViewCell: UITableViewCell {
             
             actionButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.buttonRightMargin),
             actionButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            actionButton.heightAnchor.constraint(equalToConstant: 30),
+            actionButton.heightAnchor.constraint(equalToConstant: CONST_GUI.heightActionMemberCenter()),
             
             copyButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.buttonRightMargin),
             copyButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            copyButton.heightAnchor.constraint(equalToConstant: 30),
-            copyButton.widthAnchor.constraint(equalToConstant: 60),
+            copyButton.heightAnchor.constraint(equalToConstant: CONST_GUI.heightActionMemberCenter()),
+            copyButton.widthAnchor.constraint(equalToConstant: CONST_GUI.heightInfoMemberCenter()),
             
             qrcodeLabel.rightAnchor.constraint(equalTo: copyButton.leftAnchor, constant: -Constants.buttonRightMargin),
             qrcodeLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             versionButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.buttonRightMargin),
             versionButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            versionButton.heightAnchor.constraint(equalToConstant: 30),
-            versionButton.widthAnchor.constraint(equalToConstant: 60),
+            versionButton.heightAnchor.constraint(equalToConstant: CONST_GUI.heightActionMemberCenter()),
+            versionButton.widthAnchor.constraint(equalToConstant: CONST_GUI.heightInfoMemberCenter()),
             
             versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             ])
@@ -166,15 +164,15 @@ class ProfileItemViewCell: UITableViewCell {
             NSLayoutConstraint.activate([
                 versionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
                 versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-                versionLabel.heightAnchor.constraint(equalToConstant: 30),
-                versionLabel.widthAnchor.constraint(equalToConstant: 60)
+                versionLabel.heightAnchor.constraint(equalToConstant: CONST_GUI.heightActionMemberCenter()),
+                versionLabel.widthAnchor.constraint(equalToConstant: CONST_GUI.heightInfoMemberCenter())
                 ])
         } else{
             NSLayoutConstraint.activate([
                 versionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.buttonRightMargin),
                 versionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-                versionLabel.heightAnchor.constraint(equalToConstant: 30),
-                versionLabel.widthAnchor.constraint(equalToConstant: 60)
+                versionLabel.heightAnchor.constraint(equalToConstant: CONST_GUI.heightActionMemberCenter()),
+                versionLabel.widthAnchor.constraint(equalToConstant: CONST_GUI.heightInfoMemberCenter())
                 ])
         }
     }

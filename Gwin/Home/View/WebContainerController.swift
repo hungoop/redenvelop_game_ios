@@ -83,7 +83,6 @@ class WebContainerController: BaseViewController {
         headerView.addSubview(titleLabel)
         titleLabel.text = viewTitle
         NSLayoutConstraint.activate([
-            
             backButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             backButton.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 5),
             backButton.heightAnchor.constraint(equalToConstant: 30),
@@ -97,15 +96,13 @@ class WebContainerController: BaseViewController {
         view.addSubview(webView)
         
         NSLayoutConstraint.activate([
-            
-            
             webView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             webView.leftAnchor.constraint(equalTo: view.leftAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             webView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
             ])
-        // Do any additional setup after loading the view.
+        
         if let url = URL(string: urlPath) {
             webView.load(URLRequest(url: url))
         }
@@ -119,9 +116,6 @@ class WebContainerController: BaseViewController {
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
     
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E0653EF239A32E5009A091D /* GrabBullPackageViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0653EE239A32E5009A091D /* GrabBullPackageViewController~ipad.xib */; };
+		0E0653F1239A35F2009A091D /* GrabEnvelopViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0653F0239A35F2009A091D /* GrabEnvelopViewController~ipad.xib */; };
 		0E51D7472399598800D053A6 /* CONST_GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E51D7462399598800D053A6 /* CONST_GUI.swift */; };
 		0ED308E4239517D9007BBDB2 /* MCenterMenuHoriz.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ED308E3239517D9007BBDB2 /* MCenterMenuHoriz.json */; };
 		0ED308E623951C12007BBDB2 /* MenuHorizItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED308E523951C12007BBDB2 /* MenuHorizItemView.swift */; };
@@ -140,6 +142,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0653EE239A32E5009A091D /* GrabBullPackageViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "GrabBullPackageViewController~ipad.xib"; sourceTree = "<group>"; };
+		0E0653F0239A35F2009A091D /* GrabEnvelopViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "GrabEnvelopViewController~ipad.xib"; sourceTree = "<group>"; };
 		0E51D7462399598800D053A6 /* CONST_GUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONST_GUI.swift; sourceTree = "<group>"; };
 		0ED308E3239517D9007BBDB2 /* MCenterMenuHoriz.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MCenterMenuHoriz.json; sourceTree = "<group>"; };
 		0ED308E523951C12007BBDB2 /* MenuHorizItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHorizItemView.swift; sourceTree = "<group>"; };
@@ -638,6 +642,7 @@
 				D1E00DA52311302E00554CA4 /* CreateEnvelopType2ViewController.xib */,
 				D1E00DA823116F4700554CA4 /* GrabEnvelopViewController.swift */,
 				D1E00DA923116F4700554CA4 /* GrabEnvelopViewController.xib */,
+				0E0653F0239A35F2009A091D /* GrabEnvelopViewController~ipad.xib */,
 				D1E00DB22312D26400554CA4 /* UITextFieldPadding.swift */,
 			);
 			path = RedEnvelope;
@@ -695,6 +700,7 @@
 				D1EA0FA22319375E0096B7D1 /* BetOtherViewCell.xib */,
 				D194BD83231A4D2D00AB59C3 /* GrabBullPackageViewController.swift */,
 				D194BD84231A4D2D00AB59C3 /* GrabBullPackageViewController.xib */,
+				0E0653EE239A32E5009A091D /* GrabBullPackageViewController~ipad.xib */,
 				D194BD89231AB9BD00AB59C3 /* BulllPackageInfoViewController.swift */,
 				D194BD8A231AB9BD00AB59C3 /* BulllPackageInfoViewController.xib */,
 				D194BD8D231ABE5A00AB59C3 /* BetDetailiewCell.swift */,
@@ -782,6 +788,7 @@
 				D1EA0EBC2317B0E70096B7D1 /* GrabBankerViewController.xib in Resources */,
 				D1E00DA72311302E00554CA4 /* CreateEnvelopType2ViewController.xib in Resources */,
 				D1E00DA3231119AC00554CA4 /* PackageInfoViewController.xib in Resources */,
+				0E0653EF239A32E5009A091D /* GrabBullPackageViewController~ipad.xib in Resources */,
 				D1D06F1F231D1FCA00BBEDAE /* BankerViewController.xib in Resources */,
 				D194BD96231BC18700AB59C3 /* UploadImageViewController.xib in Resources */,
 				D1D06F23231D247500BBEDAE /* BankerViewCell.xib in Resources */,
@@ -794,6 +801,7 @@
 				D1E00D8923102A6700554CA4 /* LaunchViewController.xib in Resources */,
 				D1EA0F0A2318373F0096B7D1 /* WagerOddViewCell.xib in Resources */,
 				D1E00D9B23110A8C00554CA4 /* PackageHistoryRightViewCell.xib in Resources */,
+				0E0653F1239A35F2009A091D /* GrabEnvelopViewController~ipad.xib in Resources */,
 				D194BD8C231AB9BD00AB59C3 /* BulllPackageInfoViewController.xib in Resources */,
 				D10067AA2309AA2500114F6E /* LaunchScreen.storyboard in Resources */,
 				D1EA0FA42319375E0096B7D1 /* BetOtherViewCell.xib in Resources */,

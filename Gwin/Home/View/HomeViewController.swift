@@ -24,14 +24,6 @@ public protocol HomeViewControllerInput: AnyObject {
 
 class HomeViewController: BaseViewController {
     
-    enum CFG {
-        static let seperateHeight: CGFloat = 2
-        static let marginTopBotton:CGFloat = 5
-        static let marginLeftRight:CGFloat = 5
-        
-        static let marginBottom_lot:CGFloat = 0
-    }
-    
     private func setMarginStackView(sView:UIView, top:CGFloat, left:CGFloat, bottom:CGFloat, right:CGFloat) {
         if #available(iOS 11.0, *) {
             sView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: top,
@@ -85,7 +77,6 @@ class HomeViewController: BaseViewController {
         return view
     }()
     
-    //() -> UIStackView
     private func seperateLineView() -> UIView {
         let view = UIView().forAutolayout()
         //view.translatesAutoresizingMaskIntoConstraints = false
@@ -280,18 +271,18 @@ class HomeViewController: BaseViewController {
         let stackView2 = getStackView()
         containerStackView.addArrangedSubview(stackView2)
         
-        let btn_bb_itemHeight = view.frame.width / 3
+        let btn_bb_itemHeight = view.frame.width / (UIDevice.current.iPad ? 4 : 3)
         
         NSLayoutConstraint.activate([
-            firstSeperateView.heightAnchor.constraint(equalToConstant: CFG.seperateHeight),
+            firstSeperateView.heightAnchor.constraint(equalToConstant: CONST_GUI.heightSeperateLobby()),
             firstSeperateView.topAnchor.constraint(equalTo: stackView1.bottomAnchor, constant: 0),
             
             stackView2.heightAnchor.constraint(equalToConstant: btn_bb_itemHeight),
             ])
         
-        setMarginStackView(sView: stackView2, top: CFG.marginTopBotton, left: CFG.marginLeftRight, bottom: CFG.marginTopBotton, right: CFG.marginLeftRight)
+        setMarginStackView(sView: stackView2, top: CONST_GUI.marginTopBottonLobby(), left: CONST_GUI.marginLeftRightLobby(), bottom: CONST_GUI.marginTopBottonLobby(), right: CONST_GUI.marginLeftRightLobby())
         
-        let item2Width = view.frame.width / 2 - CFG.marginLeftRight
+        let item2Width = view.frame.width / 2 - CONST_GUI.marginLeftRightLobby()
         
         for _ in 0..<2 {
             let button = LobbyItemView(model: lobbies[lobbyIndex], axis: .horizontal, output: self)
@@ -315,13 +306,13 @@ class HomeViewController: BaseViewController {
         stackView_title_lot.addArrangedSubview(lasttitleLabel)
         
         NSLayoutConstraint.activate([
-            lastSeperateView.heightAnchor.constraint(equalToConstant: CFG.seperateHeight),
+            lastSeperateView.heightAnchor.constraint(equalToConstant: CONST_GUI.heightSeperateLobby()),
             
             stackView_title_lot.topAnchor.constraint(equalTo: lastSeperateView.bottomAnchor),
             
-            lasttitleLabel.heightAnchor.constraint(equalToConstant: 35),
+            lasttitleLabel.heightAnchor.constraint(equalToConstant: CONST_GUI.heightTitleLobby()),
             ])
-        setMarginStackView(sView: stackView_title_lot, top: CFG.marginTopBotton, left: CFG.marginLeftRight, bottom: CFG.marginTopBotton, right: CFG.marginLeftRight)
+        setMarginStackView(sView: stackView_title_lot, top: CONST_GUI.marginTopBottonLobby(), left: CONST_GUI.marginLeftRightLobby(), bottom: CONST_GUI.marginTopBottonLobby(), right: CONST_GUI.marginLeftRightLobby())
         
     }
     
@@ -414,7 +405,7 @@ class HomeViewController: BaseViewController {
             containerStackView.addArrangedSubview(stackView3)
             
             let perItemRow:Int = 2;
-            let btnLotteryWidth = view.frame.width / CGFloat(perItemRow) - CFG.marginLeftRight * CGFloat(perItemRow)
+            let btnLotteryWidth = view.frame.width / CGFloat(perItemRow) - CONST_GUI.marginLeftRightLobby() * CGFloat(perItemRow)
             let itemHeight_lottery = UIScreen.main.bounds.width / 6//itemHeight
             
             NSLayoutConstraint.activate([
@@ -422,7 +413,7 @@ class HomeViewController: BaseViewController {
                 stackView3.heightAnchor.constraint(equalToConstant: itemHeight_lottery)
                 ])
             
-            setMarginStackView(sView: stackView3, top: CFG.marginTopBotton, left: CFG.marginLeftRight, bottom: CFG.marginBottom_lot, right: CFG.marginLeftRight)
+            setMarginStackView(sView: stackView3, top: CONST_GUI.marginTopBottonLobby(), left: CONST_GUI.marginLeftRightLobby(), bottom: CONST_GUI.marginLeftRightLobby(), right: CONST_GUI.marginLeftRightLobby())
             
             for _ in (0..<perItemRow) {
                 let button = LobbyItemView(model: lstLottery[lobbyIndex], axis: .horizontal, typeIcon: 2, output: self)

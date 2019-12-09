@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class MenuHorizItemView: UIView {
     
-    private lazy var stackView: UIView = {
+    private lazy var holderView: UIView = {
         let view = UIView().forAutolayout()
         //view.axis = NSLayoutConstraint.Axis.horizontal
         //view.distribution = UIStackView.Distribution.fill
@@ -40,22 +40,17 @@ class MenuHorizItemView: UIView {
     
     private var imageView:UIImageView = {
         let view = UIImageView().forAutolayout()
-        //view.contentMode = UIView.ContentMode.scaleToFill //.scaleAspectFit
-        
         view.contentMode = UIView.ContentMode.scaleAspectFit
         return view
     }()
     
     private var titleLabel: UILabel = {
         let view = UILabel().forAutolayout()
-        //view.textAlignment = .center
         view.numberOfLines = 0
-        view.font = UIFont.systemFont(ofSize: UIDevice.current.screenType == .iPhones_5_5s_5c_SE ? 12 : 14)
+        view.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         return view
     }()
     
-    
-
     var menuItemHanler: (_ optType:String, _ title:String)->Void = {_,_ in }
     private let model: ProfileItemModel!
     
@@ -71,14 +66,14 @@ class MenuHorizItemView: UIView {
     }
     
     func setupViews() {
-        addSubview(stackView)
+        addSubview(holderView)
         addSubview(coverButton)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leftAnchor.constraint(equalTo: leftAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
+            holderView.topAnchor.constraint(equalTo: topAnchor),
+            holderView.leftAnchor.constraint(equalTo: leftAnchor),
+            holderView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            holderView.rightAnchor.constraint(equalTo: rightAnchor),
             
             coverButton.topAnchor.constraint(equalTo: topAnchor),
             coverButton.leftAnchor.constraint(equalTo: leftAnchor),
@@ -86,36 +81,27 @@ class MenuHorizItemView: UIView {
             coverButton.rightAnchor.constraint(equalTo: rightAnchor),
             ])
         
-        stackView.addSubview(imageView)
-        stackView.addSubview(titleLabel)
-        stackView.addSubview(separateView)
-        
-        //stackView.addArrangedSubview(imageView)
-        //stackView.addArrangedSubview(titleLabel)
-        
-        //let itemHeight = 40
+        holderView.addSubview(imageView)
+        holderView.addSubview(titleLabel)
+        holderView.addSubview(separateView)
         
         imageView.contentMode = UIView.ContentMode.scaleToFill
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: stackView.topAnchor),
-            //imageView.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10),
+            imageView.topAnchor.constraint(equalTo: holderView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: holderView.bottomAnchor),
+            imageView.widthAnchor.constraint(equalTo: holderView.heightAnchor),
             
-            imageView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-            //imageView.heightAnchor.constraint(equalToConstant: CGFloat(itemHeight)),
-            //imageView.widthAnchor.constraint(equalToConstant: CGFloat(itemHeight)),
-            imageView.widthAnchor.constraint(equalTo: stackView.heightAnchor),
-            
-            titleLabel.leftAnchor.constraint(equalTo: stackView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-            titleLabel.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: holderView.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: holderView.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: holderView.bottomAnchor),
+            titleLabel.rightAnchor.constraint(equalTo: holderView.rightAnchor),
             
             imageView.rightAnchor.constraint(equalTo: titleLabel.leftAnchor, constant: -10),
             
-            separateView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-            separateView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
-            separateView.heightAnchor.constraint(equalTo: stackView.heightAnchor, constant: -10),
+            separateView.rightAnchor.constraint(equalTo: holderView.rightAnchor),
+            separateView.centerYAnchor.constraint(equalTo: holderView.centerYAnchor),
+            separateView.heightAnchor.constraint(equalTo: holderView.heightAnchor, constant: -10),
             separateView.widthAnchor.constraint(equalToConstant: CGFloat(1)),
             ])
         
@@ -127,9 +113,6 @@ class MenuHorizItemView: UIView {
     }
     
     @objc func horizMenuItemPressed(_ sender: UIButton) {
-        // clouse dispacher
-        print("------\(model.key)-------")
-        
         menuItemHanler(model.key, model.webTitle!)
     }
     

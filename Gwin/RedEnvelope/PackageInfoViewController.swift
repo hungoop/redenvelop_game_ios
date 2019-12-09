@@ -203,7 +203,7 @@ extension PackageInfoViewController: UITableViewDelegate, UITableViewDataSource 
             guard let package = self.model else { return UITableViewCell() }
             
             let model = package.grabuser[indexPath.row]
-            cell.updateViews(model: model, packageid: packageid, outofStock: package.outOfStock())
+            cell.updateViews(model: model, packageid: packageid, outofStock: package.outOfStock(), packageExpire: package.isExpire())
             
             
             return cell

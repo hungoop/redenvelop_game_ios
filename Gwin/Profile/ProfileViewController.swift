@@ -11,17 +11,9 @@ import SwiftyJSON
 
 class ProfileViewController: BaseViewController {
     
-    enum Constants {
-        static let cellHeight: CGFloat = 40
-        static let iPadCellHeight: CGFloat = 50
-        static let updateInfoInterval: TimeInterval = 30
-    }
-    
     @IBAction func pressRefreshBalanceUser(_ sender: Any) {
-        print("---------pressRefreshBalanceUser------------")
         fetchUserInfo(showLoading: true)
     }
-    
     
     @IBOutlet weak var holderHorizonMenu: UIStackView!
     
@@ -48,7 +40,10 @@ class ProfileViewController: BaseViewController {
     @IBOutlet weak var accountNameLabel: UILabel!
     @IBOutlet weak var acoutnameTitleLabel: UILabel!
     
+    
+    @IBOutlet weak var heightHorizMenu: NSLayoutConstraint!
     @IBOutlet weak var infoHeightConstraint: NSLayoutConstraint!
+    
     private lazy var refreshControl:UIRefreshControl = {
         let view = UIRefreshControl()
         return view
@@ -57,7 +52,6 @@ class ProfileViewController: BaseViewController {
     private var menuItems:[ProfileItemModel] = []
     private var menuHorizItems:[ProfileItemModel] = []
     private var userInfo:UserInfo?
-    //  private var timer: Timer?
     
     
     @objc func orderUnsettledTapped(_ sender: UITapGestureRecognizer) {
@@ -129,6 +123,7 @@ class ProfileViewController: BaseViewController {
     
     func setupHorizMenu() {
         holderHorizonMenu.removeAllArrangedSubviews()
+        heightHorizMenu.constant = CONST_GUI.heightCellMemberCenter()
         let buttonSize = view.frame.width/3
         
         for i in 0..<3 {
@@ -202,17 +197,7 @@ class ProfileViewController: BaseViewController {
     }
     
     func setupViews() {
-        
-        var fontSize: CGFloat = 13
-        if UIDevice.current.iPad {
-            fontSize = 20
-        } else if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
-            fontSize = 11
-        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
-            fontSize = 12
-        } else {
-            fontSize = 13
-        }
+        let fontSize: CGFloat = CONST_GUI.fontSizeMemberCenter_avg()
         
         let font = UIFont.systemFont(ofSize: fontSize)
         allowCreditLabel.font = font
@@ -223,9 +208,9 @@ class ProfileViewController: BaseViewController {
         accountnoTitleLabel.font = font
         accountNameLabel.font = font
         acoutnameTitleLabel.font = font
+        
         //
-        //
-        infoHeightConstraint.constant = UIDevice.current.iPad ? 100 : 80
+        infoHeightConstraint.constant = CONST_GUI.heightInfoMemberCenter()
         
         avatarImageView.contentMode = .scaleAspectFit
         uploadAvatarButton.addTarget(self, action: #selector(avatarPressed(_:)), for: .touchUpInside)
@@ -278,9 +263,6 @@ class ProfileViewController: BaseViewController {
             guard let `this` = self else { return }
             this.hideLoadingView()
             if let jumpurl = url {
-                //let webview = WebContainerController(url: jumpurl, title: title)
-                //this.present(webview, animated: true, completion: nil)
-                
                 guard let url = URL(string: jumpurl) else { return }
                 
                 if #available(iOS 10.0, *) {
@@ -326,13 +308,8 @@ class ProfileViewController: BaseViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if UIDevice.current.iPad {
-            return Constants.iPadCellHeight
-        }
-        
-        return Constants.cellHeight
+        return CONST_GUI.heightCellMemberCenter()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -346,12 +323,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             if item.action ==  ProfileItemAction.qrcode.rawValue {
                 cell.didCopyQRCode = { [weak self] in
                     UIPasteboard.general.string = self?.userInfo?.refercode
-                    //self?.jumpURL(optType: "recommended_app", title: "快乐彩票")
                 }
             } else if item.action ==  ProfileItemAction.version.rawValue {
                 cell.didUpdateNewVersion = { [weak self] in
                     UIPasteboard.general.string = self?.userInfo?.refercode
-                    //self?.jumpURL(optType: ProfileItemAction.version.rawValue, title: "快乐彩票")
                     
                     self?.jumpURLToBorser(optType: "recommended_app", title: "快乐彩票")
                 }

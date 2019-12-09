@@ -67,8 +67,6 @@ class LobbyItemView: UIView {
     
     private var imageView:UIImageView = {
         let view = UIImageView().forAutolayout()
-        //view.contentMode = UIView.ContentMode.scaleToFill //.scaleAspectFit
-        
         view.contentMode = UIView.ContentMode.scaleAspectFit
         return view
     }()
@@ -77,14 +75,14 @@ class LobbyItemView: UIView {
         let view = UILabel().forAutolayout()
         view.textAlignment = .center
         view.numberOfLines = 0
-        view.font = UIFont.systemFont(ofSize: UIDevice.current.screenType == .iPhones_5_5s_5c_SE ? 12 : 14)
+        view.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         return view
     }()
     
     private var subtitleLAbel: UILabel = {
         let label = UILabel().forAutolayout()
         label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: UIDevice.current.screenType == .iPhones_5_5s_5c_SE ? 12 : 14)
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         return label
     }()
     
@@ -157,6 +155,7 @@ class LobbyItemView: UIView {
         if(typeIcon == 2){
             coverButton.setTitle("\(model.name)", for: .normal)
             coverButton.setTitleColor(UIColor.darkGray, for: .normal)
+            coverButton.titleLabel?.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeButtonLobby())
         }
     }
     

@@ -11,13 +11,6 @@ import UIKit
 class GameItemCell: UITableViewCell {
     var openRuleGame : ()->Void = {}
     
-    enum Constants{
-        static let signalSizeIphone: CGFloat = 30
-        static let signalSizeIpad: CGFloat = 70
-        
-        static let defaultMargin: CGFloat = 8
-    }
-    
     private lazy var roomImageView: UIImageView = {
         let imageView = UIImageView().forAutolayout()
         imageView.image = UIImage(named: "room_bg_boom")
@@ -34,6 +27,7 @@ class GameItemCell: UITableViewCell {
         let label = UILabel().forAutolayout()
         label.textColor = UIColor.white
         label.textAlignment = NSTextAlignment.right
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         return label
     }()
     
@@ -41,6 +35,7 @@ class GameItemCell: UITableViewCell {
         let label = UILabel().forAutolayout()
         label.textColor = UIColor.white
         label.textAlignment = NSTextAlignment.right
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         return label
     }()
     
@@ -48,13 +43,12 @@ class GameItemCell: UITableViewCell {
         let label = UILabel().forAutolayout()
         label.textColor = UIColor.lightGray
         label.textAlignment = NSTextAlignment.right
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         return label
     }()
     
-    private lazy var signalView: UIView = {
+    private lazy var playBtnView: UIView = {
         let view = UIView().forAutolayout()
-        //view.rounded(radius: Constants.signalSize / 2)
-        //view.backgroundColor = .red
         view.alpha = 0.05
         return view
     }()
@@ -64,14 +58,12 @@ class GameItemCell: UITableViewCell {
         setupViews()
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -83,54 +75,37 @@ class GameItemCell: UITableViewCell {
         contentView.addSubview(stakeLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subTitleLabel)
-        contentView.addSubview(signalView)
+        contentView.addSubview(playBtnView)
         contentView.addSubview(playGameImageView)
         
         setupOpenRule()
         
-        var btnRuleWith:CGFloat = 0;
-        var topAnchor:CGFloat = 0;
-        if(UIDevice.current.iPad){
-            btnRuleWith = Constants.signalSizeIpad
-            topAnchor = 20
-        } else {
-            btnRuleWith = Constants.signalSizeIphone
-            topAnchor = 2
-        }
-        
-        
         NSLayoutConstraint.activate([
-            roomImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.defaultMargin),
-            roomImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: Constants.defaultMargin),
-            roomImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -Constants.defaultMargin),
-            roomImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.defaultMargin),
+            roomImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CONST_GUI.defaultMarginRoom()),
+            roomImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: CONST_GUI.defaultMarginRoom()),
+            roomImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -CONST_GUI.defaultMarginRoom()),
+            roomImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CONST_GUI.defaultMarginRoom()),
             
-            //roomImageView.widthAnchor.constraint(equalTo: roomImageView.heightAnchor),
-            //roomImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            playBtnView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0),
+            playBtnView.widthAnchor.constraint(equalToConstant: CONST_GUI.widthButtonRuleRoom()),
+            playBtnView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CONST_GUI.defaultMarginRoom()),
+            playBtnView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CONST_GUI.defaultMarginRoom()),
             
-            //signalView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            signalView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0),
-            signalView.widthAnchor.constraint(equalToConstant: btnRuleWith),
-            
-            signalView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.defaultMargin),
-            signalView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.defaultMargin),
-            
-            
-            stakeLabel.topAnchor.constraint(equalTo: roomImageView.topAnchor, constant: topAnchor),
+            stakeLabel.topAnchor.constraint(equalTo: roomImageView.topAnchor, constant: CONST_GUI.spaceElementRoom()),
             stakeLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            stakeLabel.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
+            stakeLabel.rightAnchor.constraint(equalTo: playBtnView.leftAnchor, constant: -10),
             
             titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            titleLabel.topAnchor.constraint(equalTo: stakeLabel.bottomAnchor, constant: topAnchor),
-            titleLabel.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
+            titleLabel.topAnchor.constraint(equalTo: stakeLabel.bottomAnchor, constant: CONST_GUI.spaceElementRoom()),
+            titleLabel.rightAnchor.constraint(equalTo: playBtnView.leftAnchor, constant: -10),
             
             subTitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: topAnchor),
-            subTitleLabel.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: CONST_GUI.spaceElementRoom()),
+            subTitleLabel.rightAnchor.constraint(equalTo: playBtnView.leftAnchor, constant: -10),
             
-            playGameImageView.bottomAnchor.constraint(equalTo: roomImageView.bottomAnchor, constant: -topAnchor),
-            playGameImageView.rightAnchor.constraint(equalTo: signalView.leftAnchor, constant: -10),
-            playGameImageView.widthAnchor.constraint(equalTo: signalView.heightAnchor, multiplier : 0.8),
+            playGameImageView.bottomAnchor.constraint(equalTo: roomImageView.bottomAnchor, constant: -CONST_GUI.spaceElementRoom()),
+            playGameImageView.rightAnchor.constraint(equalTo: playBtnView.leftAnchor, constant: -10),
+            playGameImageView.widthAnchor.constraint(equalTo: playBtnView.heightAnchor, multiplier : 0.8),
             playGameImageView.heightAnchor.constraint(equalTo: playGameImageView.widthAnchor, multiplier: 0.2)
             
             
@@ -153,12 +128,11 @@ class GameItemCell: UITableViewCell {
     
     func setupOpenRule() {
         let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.signalViewTapped(_:)))
-        signalView.isUserInteractionEnabled = true
-        signalView.addGestureRecognizer(labelTap)
+        playBtnView.isUserInteractionEnabled = true
+        playBtnView.addGestureRecognizer(labelTap)
     }
     
     @objc func signalViewTapped(_ sender: UITapGestureRecognizer) {
-        print("open rule game on room icon")
         openRuleGame()
     }
     

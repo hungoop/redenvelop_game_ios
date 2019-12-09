@@ -10,20 +10,16 @@ import Foundation
 import UIKit
 
 class TitleStackView: UIView {
-    enum CFG {
-        static let marginTopBotton:CGFloat = 0
-        static let marginLeftRight:CGFloat = 10
-    }
     
     private lazy var prefixLabel: UILabel = {
         let label = UILabel().forAutolayout()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg(), weight: .medium)
         return label
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel().forAutolayout()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: CONST_GUI.fontSizeMemberCenter_avg())
         label.textColor = .gray
         label.textAlignment = .left
         return label
@@ -57,15 +53,15 @@ class TitleStackView: UIView {
         stackView.boundInside(view: self)
         
         if #available(iOS 11.0, *) {
-            stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: CFG.marginTopBotton,
-                                                                         leading: CFG.marginLeftRight,
-                                                                         bottom: CFG.marginTopBotton,
-                                                                         trailing: CFG.marginLeftRight)
+            stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: CONST_GUI.marginBottomTitleLobby(),
+                                                                         leading: CONST_GUI.marginLeftRightTitleLobby(),
+                                                                         bottom: CONST_GUI.marginBottomTitleLobby(),
+                                                                         trailing: CONST_GUI.marginLeftRightTitleLobby())
         } else {
-            stackView.layoutMargins = UIEdgeInsets(top: CFG.marginTopBotton,
-                                                   left: CFG.marginLeftRight,
-                                                   bottom: CFG.marginTopBotton,
-                                                   right: CFG.marginLeftRight);
+            stackView.layoutMargins = UIEdgeInsets(top: CONST_GUI.marginBottomTitleLobby(),
+                                                   left: CONST_GUI.marginLeftRightTitleLobby(),
+                                                   bottom: CONST_GUI.marginBottomTitleLobby(),
+                                                   right: CONST_GUI.marginLeftRightTitleLobby());
         }
         stackView.isLayoutMarginsRelativeArrangement = true
         
@@ -74,7 +70,7 @@ class TitleStackView: UIView {
         stackView.addArrangedSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            prefixLabel.widthAnchor.constraint(equalToConstant: 70),
+            prefixLabel.widthAnchor.constraint(equalToConstant: 150),
             ])
         
         let img:UIImage = UIImage(named: "bg_title_lobby")!

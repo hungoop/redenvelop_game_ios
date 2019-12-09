@@ -168,13 +168,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         }
-        
-        
     }
     
-    
     // MARK: - Utils
-    
     public func setHomeAsRootViewControlelr() {
         if let window = self.window {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -250,7 +246,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             timer = nil
         }
         
-        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(getUerOnline), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(getUerOnline), userInfo: nil, repeats: true)
     }
     
     func stopFetchUserStatus() {
@@ -263,21 +259,71 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc func getUerOnline() {
         guard let user = RedEnvelopComponent.shared.user else { return }
         
+        //print("getUerOnline. timeInterval: \(timer?.timeInterval).  tolerance: \(timer?.tolerance)")
+        
         UserAPIClient.setOnline(ticket: user.ticket, guid: user.guid) { [weak self] (onlineStatus, errorMessage) in
             if let status =  onlineStatus {
+                
+                if(status != .normal){
+                    
+                    var mess:String = "[ERROR 001] 无法链接服务器，请重新检查"
+                    switch (status) {
+                    case .logout:
+                        mess = "帐号在线已失效，请重新登入"
+                        break
+                    case .loginOtherPlace:
+                        mess = "帐号已在别处登录，在线失效"
+                        break
+                    case .kickout:
+                        mess = "帐号被系统踢出"
+                        break
+                    case .normal:
+                        // no handle
+                        break
+                        
+                    }
+                    
+                    self?.showConfirmLogoutAlert(force: true, message: mess)
+                }
+                
+                /*
                 if status == .loginOtherPlace {
                     UserAPIClient.logout(ticket: user.ticket, guid: user.guid, completion: {  [weak self](success, msg) in
                         if success {
                             self?.setWellcomeAsRootViewController()
                         }
                     })
-                }
+                }*/
             }
         }
     }
     
     
-    
+    @objc fileprivate func showConfirmLogoutAlert(force: Bool, message: String) {
+        let alertController = UIAlertController(title: "",
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        if !force {
+            let cancelButton = UIAlertAction(title: "取消", style: .default)
+            alertController.addAction(cancelButton)
+        }
+        
+        let oKButton = UIAlertAction(title: "确认", style: .default) { [weak self](action:UIAlertAction) in
+            guard let user = RedEnvelopComponent.shared.user else { return }
+            
+            UserAPIClient.logout(ticket: user.ticket, guid: user.guid, completion: {  [weak self](success, msg) in
+                if success {
+                    self?.setWellcomeAsRootViewController()
+                }
+            })
+        }
+        
+        alertController.addAction(oKButton)
+        
+        //self.present(alertController, animated: true, completion: nil)
+        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+    }
     
 }
 

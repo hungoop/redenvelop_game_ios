@@ -110,8 +110,15 @@ class BulllPackageInfoViewController: BaseViewController {
         
         wagerTimeLabel.isHidden = bull.isOnleyself()
         rounidLabel.isHidden = bull.isOnleyself()
-        //let resultText = "\(package.packettag)"
-        let resultText = package.grabuser[0].packettag
+        
+        var resultText:String = ""
+        if(package.grabuser.count > 0){
+            resultText = package.grabuser[0].packettag
+        } else {
+            resultText = "\(package.packettag)"
+        }
+        
+        
         onlySelfLabel.text =  bull.isOnleyself() ? "发了一个牛牛红包，金额随机 \n \(resultText)" : nil
         
         print("====\(bull.isOnleyself())======== 发了一个牛牛红包，金额随机 \n \(resultText) =================")
@@ -141,7 +148,15 @@ class BulllPackageInfoViewController: BaseViewController {
             this.grabedModel = model
             if onlyself == 1 {
                 if model.grabuser.count == 0 {
-                    this.updateViews(userno: model.userno, amount:String(format: "%@-%@", model.stake.toFormatedString(), model.packettag))
+                    var amout:String = "";
+                    
+                    if(model.packettag == ""){
+                        amout = String(format: "%@", model.stake.toFormatedString())
+                    } else {
+                        amout = String(format: "%@-%@", model.stake.toFormatedString(), model.packettag)
+                    }
+                    
+                    this.updateViews(userno: model.userno, amount:amout)
                 } else {
                     let user = model.grabuser[0]
                     this.updateViews(userno: user.userno, amount: String(format: "%@%@",  user.packetamount.toFormatedString(), AppText.currency))
