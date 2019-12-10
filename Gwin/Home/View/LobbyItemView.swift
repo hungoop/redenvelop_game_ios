@@ -128,10 +128,12 @@ class LobbyItemView: UIView {
                 titleLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1.0 / 3.0),
                 titleLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
                 
+                
                 imageView.widthAnchor.constraint(equalTo: coverButton.widthAnchor),
                 imageView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 2.0 / 3.0),
                 imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor),
                 
+                imageView.leftAnchor.constraint(equalTo: coverButton.leftAnchor)
                 ])
            
         } else if axis == .horizontal {//icon lottery && icon play game
@@ -140,6 +142,7 @@ class LobbyItemView: UIView {
             NSLayoutConstraint.activate([
                 imageView.widthAnchor.constraint(equalTo: coverButton.widthAnchor),
                 imageView.heightAnchor.constraint(equalTo: coverButton.heightAnchor),
+                imageView.leftAnchor.constraint(equalTo: coverButton.leftAnchor)
                 ])
             
         }

@@ -62,7 +62,9 @@ class GrabUserViewCell: UITableViewCell {
             usernoLabel.text = model.userno
         }
         
-        kingImageView.isHidden = !(LocalDataManager.shared.isKing(userno: model.userno, packageid: packageid) || model.king)
+        //kingImageView.isHidden = !(LocalDataManager.shared.isKing(userno: model.userno, packageid: packageid) || model.king)
+        
+        kingImageView.isHidden = !model.king
         
         if model.userno == Constant.systemUserno {
             avatarImageView.image = UIImage(named: "grabuser_system")

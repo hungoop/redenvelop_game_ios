@@ -11,18 +11,6 @@ import UIKit
 
 class GrabBullPackageViewController: BaseViewController {
     
-    enum Constants {
-        
-        enum Packetstatus{
-            static let  NO_VALUE: Int  = 0
-            static let  GRAB: Int  = 1
-            static let  NO_BET: Int  = 2
-            static let  PLAYER_GRABED: Int  = 21
-            static let  BANKER_GRABED: Int  = 22
-            static let  RESULT: Int  = 3
-        }
-    }
-    
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var packageTagLabel: UILabel!
@@ -89,23 +77,25 @@ class GrabBullPackageViewController: BaseViewController {
             guard let this = self else {return}
             if let `status` = status{
                 this.status = status
-                if status == Constants.Packetstatus.NO_VALUE {
+                if status == Packetstatus.NO_VALUE {
                     this.grabButton.isHidden = true
                     this.nextButton.isHidden = true
-                } else if status == Constants.Packetstatus.GRAB {
+                } else if status == Packetstatus.GRAB {
                     this.nextButton.isHidden = true
-                } else if status == Constants.Packetstatus.NO_BET {
+                } else if status == Packetstatus.NO_BET {
                     this.grabButton.isHidden = true
                     this.nextButton.isHidden = true
                     this.messageLabel.text = "当前红包暂未结算 "
                     
-                } else if status == Constants.Packetstatus.RESULT {
+                } else if status == Packetstatus.RESULT {
                     this.grabButton.isHidden = true
-                }else if status == Constants.Packetstatus.PLAYER_GRABED {
+                }else if status == Packetstatus.PLAYER_GRABED {
                     this.grabButton.isHidden = true
-                }else if status == Constants.Packetstatus.BANKER_GRABED {
+                }else if status == Packetstatus.BANKER_GRABED {
                     this.grabButton.isHidden = true
                 }
+                
+                self!.bull.openResult = status
             }
             
         }

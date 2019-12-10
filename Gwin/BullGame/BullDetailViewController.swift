@@ -119,18 +119,20 @@ class BullDetailViewController: BaseViewController {
     private var currentViewController: BaseViewController?
     
     init(userno: String, room: RoomModel) {
+        print("init: \(userno) - \(room)")
         self.room = room
         self.userno = userno
         super.init(nibName: "BullDetailViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
+        print("init: error======")
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("viewDidLoad : \(userno) - \(room)")
         setTitle(title: "牛牛红包")
         profileButton.frame = CGRect(x: 0, y: 0, width: 90, height: 56)
         reportBetButton.frame = CGRect(x: 0, y: 0, width: 35, height: 56)
@@ -893,7 +895,7 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -906,7 +908,7 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        print("cellForRowAt 1 count \(datas.count)")
         let bull = datas[indexPath.row]
         let isGrab = bull.isGrabed(openPackages)
         
@@ -916,6 +918,7 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
+        print("cellForRowAt 2 count \(datas.count)")
         return UITableViewCell()
     }
     
@@ -929,8 +932,10 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
         let isGrab = bull.isGrabed(openPackages)
         
         if isGrab{
-            let infoVC = BulllPackageInfoViewController(bull: bull)
-            present(infoVC, animated: true, completion: nil)
+            fetchPackageStatus(bull: bull)
+            
+            //let infoVC = BulllPackageInfoViewController(bull: bull)
+            //present(infoVC, animated: true, completion: nil)
         }else{
             let vc = GrabBullPackageViewController(bull: bull)
             vc.modalPresentationStyle = .overCurrentContext
@@ -964,6 +969,30 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
             present(vc, animated: true, completion: nil)
         }
     }
+    
+    func fetchPackageStatus(bull: BullModel) {
+        guard let user = RedEnvelopComponent.shared.user else { return }
+        
+        /*
+         static let  NO_VALUE: Int  = 0
+         static let  GRAB: Int  = 1
+         static let  NO_BET: Int  = 2
+         static let  PLAYER_GRABED: Int  = 21
+         static let  BANKER_GRABED: Int  = 22
+         static let  RESULT: Int  = 3
+         */
+        
+        BullAPIClient.packetstatus(ticket: user.ticket, roomid: bull.roomid , roundid: bull.getRoundId()) {[weak self](status, error) in
+            guard let this = self else {return}
+            if let `status` = status{
+                bull.openResult = status
+            }
+            
+            let infoVC = BulllPackageInfoViewController(bull: bull)
+            this.present(infoVC, animated: true, completion: nil)
+        }
+    }
+    
 }
 
 extension BullDetailViewController: BullModelDelegate {

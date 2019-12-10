@@ -10,6 +10,7 @@
 		0E0653EF239A32E5009A091D /* GrabBullPackageViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0653EE239A32E5009A091D /* GrabBullPackageViewController~ipad.xib */; };
 		0E0653F1239A35F2009A091D /* GrabEnvelopViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0653F0239A35F2009A091D /* GrabEnvelopViewController~ipad.xib */; };
 		0E51D7472399598800D053A6 /* CONST_GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E51D7462399598800D053A6 /* CONST_GUI.swift */; };
+		0E85261B239FA2C100B5E070 /* PackageHistoryLeftViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1E00D9523110A7100554CA4 /* PackageHistoryLeftViewCell.xib */; };
 		0ED308E4239517D9007BBDB2 /* MCenterMenuHoriz.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ED308E3239517D9007BBDB2 /* MCenterMenuHoriz.json */; };
 		0ED308E623951C12007BBDB2 /* MenuHorizItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED308E523951C12007BBDB2 /* MenuHorizItemView.swift */; };
 		93470A1D4586D5734927ED93 /* Pods_Gwin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAEBB42F20B4154F0C30418E /* Pods_Gwin.framework */; };
@@ -99,7 +100,6 @@
 		D1E00D8F2310447E00554CA4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E00D8E2310447E00554CA4 /* BaseViewController.swift */; };
 		D1E00D912310EBC100554CA4 /* RoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E00D902310EBC100554CA4 /* RoomDetailViewController.swift */; };
 		D1E00D9623110A7100554CA4 /* PackageHistoryLeftViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E00D9423110A7100554CA4 /* PackageHistoryLeftViewCell.swift */; };
-		D1E00D9723110A7100554CA4 /* PackageHistoryLeftViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1E00D9523110A7100554CA4 /* PackageHistoryLeftViewCell.xib */; };
 		D1E00D9A23110A8C00554CA4 /* PackageHistoryRightViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E00D9823110A8C00554CA4 /* PackageHistoryRightViewCell.swift */; };
 		D1E00D9B23110A8C00554CA4 /* PackageHistoryRightViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1E00D9923110A8C00554CA4 /* PackageHistoryRightViewCell.xib */; };
 		D1E00D9E2311115200554CA4 /* CreateEnvelopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E00D9C2311115200554CA4 /* CreateEnvelopViewController.swift */; };
@@ -814,8 +814,8 @@
 				D194BD90231ABE5A00AB59C3 /* BetDetailiewCell.xib in Resources */,
 				D1EA0F06231827090096B7D1 /* BetBullViewController.xib in Resources */,
 				D1EA0F7823190D860096B7D1 /* BetCasinoViewController.xib in Resources */,
-				D1E00D9723110A7100554CA4 /* PackageHistoryLeftViewCell.xib in Resources */,
 				D10067A22309AA1F00114F6E /* Main.storyboard in Resources */,
+				0E85261B239FA2C100B5E070 /* PackageHistoryLeftViewCell.xib in Resources */,
 				D175C4EF230C35CE001B8DC6 /* RegisterViewController.xib in Resources */,
 				D1E00DAB23116F4700554CA4 /* GrabEnvelopViewController.xib in Resources */,
 			);
@@ -1114,7 +1114,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9UP8UYRZBJ;
 				INFOPLIST_FILE = Gwin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1134,7 +1134,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9UP8UYRZBJ;
 				INFOPLIST_FILE = Gwin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

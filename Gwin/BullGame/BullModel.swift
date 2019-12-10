@@ -9,6 +9,15 @@
 import Foundation
 import CoreData
 
+public enum Packetstatus{
+    static let  NO_VALUE: Int  = 0
+    static let  GRAB: Int  = 1
+    static let  NO_BET: Int  = 2
+    static let  PLAYER_GRABED: Int  = 21
+    static let  BANKER_GRABED: Int  = 22
+    static let  RESULT: Int  = 3
+}
+
 public enum BullRoundStatus: Int {
     case addNew = 2
     case betStart = 1
@@ -30,6 +39,8 @@ class BullModel {
     var resultWagerInfo: [BullWagerInfoModel] = []
     var bullInfo: BullPackageModel?
     
+    var openResult: Int
+    var isOpen: Bool
     var expire: Bool
     var roomid: Int
     var canbet: Bool
@@ -44,6 +55,9 @@ class BullModel {
         self.historyPackage = historyPackage
         self.roomid = roomid
         self.delegate = delegate
+        
+        self.isOpen = false
+        openResult = 0
     }
     
     deinit {
@@ -58,7 +72,6 @@ class BullModel {
         }
         
         round.status = status.rawValue
-        
     }
     
     func wagerInfoTimer() {
@@ -85,11 +98,8 @@ class BullModel {
     @objc func fetchWagerInfo(_ timer: Timer? = nil) {
         guard let user = RedEnvelopComponent.shared.user else { return }
         
-        
         BullAPIClient.wagerinfo(ticket: user.ticket, roomid: roomid, roundid: round.roundid, idno: getLastIdno()) { [weak self](infos, error) in
             guard let this = self else {return}
-            print("result result 1 --- \(infos.count)")
-            
             if infos.count == 0 { return }
             
             if this.addNewWager(wagers: infos) {
@@ -101,18 +111,15 @@ class BullModel {
     @objc func fetchResultWagerInfo(_ timer: Timer? = nil) {
         guard let user = RedEnvelopComponent.shared.user else { return }
         
-        
         BullAPIClient.wagerinfo(ticket: user.ticket, roomid: roomid, roundid: round.roundid, idno: 0) { [weak self](infos, error) in
             guard let this = self else {return}
             print("result result 3 ---1 \(infos.map{$0.winning})")
             let winingWagers = infos.filter{$0.winning != 0}
-            print("result result 3 ---2 \(winingWagers.count)")
             
             if winingWagers.count == 0 { return }
             
             if this.addResultWager(wagers: winingWagers) {
                 this.delegate?.didGetResultWagerInfo(roundid:this.round.roundid,wagerInfos: this.resultWagerInfo)
-                
             }
         }
     }
@@ -122,6 +129,7 @@ class BullModel {
         
         for obj in grabeds {
             if rounid == obj.value(forKey: "packageid") as? Int64 {
+                self.isOpen = true
                 return true
             }
         }
@@ -183,7 +191,20 @@ class BullModel {
         //    }
         //
         //    return false
-        return !expire
+        
+        if(openResult == Packetstatus.GRAB){
+            return true
+        } else {
+            return false
+        }
+        
+        /*
+        if !expire {
+            return true
+        } else if (isOpen) {
+            return false
+        }
+        return !expire*/
     }
     
     /*

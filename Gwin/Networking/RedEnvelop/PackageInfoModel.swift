@@ -46,6 +46,8 @@ class PackageInfoModel {
                     return uName1.userno == myUser
                 }
             }
+            
+            findKing();
         }
         
     }
@@ -90,6 +92,23 @@ class PackageInfoModel {
     }
     
     func findKing(packageid: Int64) {
+        var index = -1
+        var max:Float = 0
+        for i in 0 ..< grabuser.count {
+            let model = grabuser[i]
+            if model.packetamount > max {
+                max = model.packetamount
+                index = i
+            }
+        }
+        
+        
+        if index != -1{
+            grabuser[index].king = true
+        }
+    }
+    
+    func findKing() {
         var index = -1
         var max:Float = 0
         for i in 0 ..< grabuser.count {

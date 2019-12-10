@@ -93,7 +93,7 @@ class PackageInfoViewController: BaseViewController {
             this.model = info
             if let `info` = info {
                 
-                info.findKing(packageid: this.packageid)
+                //info.findKing(packageid: this.packageid)
                 if info.packettag.count > 0{
                     this.amounLabel.text = "\(info.packetamount)-\(info.packettag)"
                 }else {

@@ -31,6 +31,7 @@ class HomeViewController: BaseViewController {
                                                                      bottom: bottom,
                                                                      trailing: right)
         } else {
+            
             sView.layoutMargins = UIEdgeInsets(top: top,
                                                left: left,
                                                bottom: bottom,

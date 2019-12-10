@@ -137,9 +137,9 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        
         setupNavigatorViews()
         fetchOpenPackages()
-        initWebsocket()
         
         setupViews()
         setupTableView()
@@ -147,10 +147,14 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
         setupBottomView()
         fetchUserInfo()
         fetchRollMessage()
+        
+        initWebsocket()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         guard let user = RedEnvelopComponent.shared.user else { return }
         
         UserAPIClient.systemtime(ticket: user.ticket) { (systemtime) in
@@ -502,6 +506,7 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return histories.count
     }
     
+    /* steven close
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let preIndex = indexPath.row - 1
@@ -513,7 +518,7 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-    }
+    }*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let model = histories[indexPath.row]
@@ -522,22 +527,28 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
         let isKing = isBiggest(packageid: model.packetid)
         let isExpired = isPackageExpeire(wagertime: model.wagertime)
         
+        print("table 111 count \(model.packetid)")
         
         if userno != model.userno {
             if let cell =  tableView.dequeueReusableCell(withIdentifier: "PackageHistoryLeftViewCell", for: indexPath) as? PackageHistoryLeftViewCell {
                 cell.selectionStyle = .none
                 cell.updateViews(model: model, isOpen:isOpen, isKing: isKing, isBoomed: isBoom, expired: isExpired)
-                
+                print("L table222 count \(model.packetid)")
                 return cell
             }
+            
+            
         } else {
             if let cell =  tableView.dequeueReusableCell(withIdentifier: "PackageHistoryRightViewCell", for: indexPath) as? PackageHistoryRightViewCell {
                 cell.selectionStyle = .none
                 cell.updateViews(model: model, isOpen: isOpen, isKing: isKing, isBoomed:isBoom, expired: isExpired)
+                print("R table333 count \(model.packetid)")
                 return cell
             }
+            
         }
         
+        print("table444 count \(model.packetid)")
         return UITableViewCell()
     }
     
