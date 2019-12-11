@@ -55,6 +55,10 @@ class BulllPackageInfoViewController: BaseViewController {
     private var betdetails:[IndexPath:[BullBetDetailModel]] = [:]
     private var delegate: BulllPackageInfoDelegate?
     
+    
+    @IBOutlet weak var topHeaderContraint: NSLayoutConstraint!
+    
+    
     init(bull: BullModel, grabedModel: BullPackageModel? = nil, delegate: BulllPackageInfoDelegate? = nil){
         self.bull =  bull
         self.grabedModel = grabedModel
@@ -71,6 +75,15 @@ class BulllPackageInfoViewController: BaseViewController {
         super.viewDidLoad()
         setupViews()
         fetchInfo()
+        updateContraint()
+    }
+    
+    func updateContraint() {
+        if #available(iOS 11, *) {
+            //let guide = view.safeAreaLayoutGuide
+        } else {
+            topHeaderContraint.constant = CONST_GUI.HEADER_STANDARD_SPACING
+        }
     }
     
     func setupViews() {

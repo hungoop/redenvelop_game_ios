@@ -14,7 +14,6 @@
             <connections>
                 <outlet property="avatarDefHolder" destination="gs3-yy-b5c" id="ujW-mG-qJa"/>
                 <outlet property="avatarImageView" destination="G9Y-IC-tEC" id="IBP-Fb-doJ"/>
-                <outlet property="backButton" destination="8j7-KB-uqu" id="qNA-PB-w5M"/>
                 <outlet property="cameraButton" destination="UIa-vf-ECu" id="2Q5-Yl-fea"/>
                 <outlet property="confirmButton" destination="xkC-Zn-GDJ" id="YMj-ou-6oC"/>
                 <outlet property="contraintAvatartDefHolder" destination="HTk-9p-TMV" id="Im9-q5-jcj"/>
@@ -29,35 +28,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPl-Hk-eEQ">
-                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人资料图片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYT-oP-P7c">
-                            <rect key="frame" x="155" y="12" width="104" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.98431372549999996" green="0.91764705879999997" blue="0.67450980390000004" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8j7-KB-uqu">
-                            <rect key="frame" x="10" y="4.5" width="35" height="35"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="35" id="ood-cC-n1b"/>
-                                <constraint firstAttribute="height" constant="35" id="yu4-HY-L5h"/>
-                            </constraints>
-                            <state key="normal" image="back_button"/>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.84422427420000001" green="0.40203452109999999" blue="0.3215354681" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstItem="eYT-oP-P7c" firstAttribute="centerY" secondItem="uPl-Hk-eEQ" secondAttribute="centerY" id="0iC-wS-bge"/>
-                        <constraint firstItem="eYT-oP-P7c" firstAttribute="centerX" secondItem="uPl-Hk-eEQ" secondAttribute="centerX" id="Jmk-ly-3CV"/>
-                        <constraint firstItem="8j7-KB-uqu" firstAttribute="centerY" secondItem="uPl-Hk-eEQ" secondAttribute="centerY" id="k6t-j1-5Sn"/>
-                        <constraint firstAttribute="height" constant="44" id="urx-Ek-rfy"/>
-                        <constraint firstItem="8j7-KB-uqu" firstAttribute="leading" secondItem="uPl-Hk-eEQ" secondAttribute="leading" constant="10" id="z25-AU-H7C"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTm-Pg-u3u" userLabel="view_name_avatar">
-                    <rect key="frame" x="0.0" y="88" width="414" height="130"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="130"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-7U-0JC">
                             <rect key="frame" x="179" y="10" width="56.5" height="26.5"/>
@@ -83,13 +55,13 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gs3-yy-b5c" userLabel="avtar_def_holder">
-                    <rect key="frame" x="0.0" y="218" width="414" height="100"/>
+                    <rect key="frame" x="0.0" y="174" width="414" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="HTk-9p-TMV"/>
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggk-cq-elk" userLabel="view_footer_func">
-                    <rect key="frame" x="0.0" y="318" width="414" height="578"/>
+                    <rect key="frame" x="0.0" y="274" width="414" height="622"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-gA-yAs">
                             <rect key="frame" x="0.0" y="16" width="197" height="90"/>
@@ -167,9 +139,6 @@
                             <state key="normal" title="取消">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
-                            <connections>
-                                <action selector="exitPressed:" destination="-1" eventType="touchUpInside" id="M1h-3J-A48"/>
-                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -195,24 +164,20 @@
             <constraints>
                 <constraint firstItem="gs3-yy-b5c" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1YL-3z-zhP"/>
                 <constraint firstItem="Ggk-cq-elk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="32i-dz-oHb"/>
-                <constraint firstItem="uPl-Hk-eEQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6bR-mW-unx"/>
-                <constraint firstItem="OTm-Pg-u3u" firstAttribute="top" secondItem="uPl-Hk-eEQ" secondAttribute="bottom" id="B1G-Qu-biu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OTm-Pg-u3u" secondAttribute="trailing" id="JQZ-8g-bKC"/>
-                <constraint firstItem="uPl-Hk-eEQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="W2P-w2-ptc"/>
                 <constraint firstItem="Ggk-cq-elk" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="YFq-zF-GrI"/>
                 <constraint firstItem="gs3-yy-b5c" firstAttribute="top" secondItem="OTm-Pg-u3u" secondAttribute="bottom" id="i4a-g4-8bb"/>
                 <constraint firstItem="Ggk-cq-elk" firstAttribute="top" secondItem="gs3-yy-b5c" secondAttribute="bottom" id="jyC-d3-vG6"/>
+                <constraint firstItem="OTm-Pg-u3u" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="oWE-v0-zt6"/>
                 <constraint firstItem="OTm-Pg-u3u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pRl-zi-1tj"/>
                 <constraint firstAttribute="bottom" secondItem="Ggk-cq-elk" secondAttribute="bottom" id="qMf-aS-IGX"/>
                 <constraint firstItem="gs3-yy-b5c" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="sKt-xd-0IS"/>
-                <constraint firstItem="uPl-Hk-eEQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="wzx-Sy-E4f"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="99.776785714285708"/>
         </view>
     </objects>
     <resources>
-        <image name="back_button" width="40" height="40"/>
         <image name="default_avatar" width="91.5" height="91.5"/>
         <image name="upload_camera" width="90" height="90"/>
         <image name="upload_galary" width="90" height="90"/>

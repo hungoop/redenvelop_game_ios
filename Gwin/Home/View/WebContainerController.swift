@@ -72,7 +72,7 @@ class WebContainerController: BaseViewController {
             
         } else {
             NSLayoutConstraint.activate([
-                headerView.topAnchor.constraint(equalTo: view.topAnchor),
+                headerView.topAnchor.constraint(equalTo: view.topAnchor, constant: CONST_GUI.HEADER_STANDARD_SPACING),
                 headerView.leftAnchor.constraint(equalTo: view.leftAnchor),
                 headerView.rightAnchor.constraint(equalTo: view.rightAnchor),
                 headerView.heightAnchor.constraint(equalToConstant: 44),

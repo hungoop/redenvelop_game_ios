@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backButton" destination="sCL-Hc-hXq" id="q7P-dh-Q5a"/>
                 <outlet property="bankqtyTextfield" destination="SHe-S5-EBN" id="dD5-m7-jp8"/>
+                <outlet property="headerTopContraint" destination="sD3-Ot-l9M" id="Snt-If-9XO"/>
                 <outlet property="okButton" destination="5yR-nb-ueM" id="0kX-ZO-GLj"/>
                 <outlet property="tableHeightConstraint" destination="UJr-QO-GkX" id="KOI-gp-uby"/>
                 <outlet property="tableView" destination="vl5-4W-7Lq" id="hQZ-Bb-jhf"/>

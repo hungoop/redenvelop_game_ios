@@ -12,7 +12,38 @@ import WebKit
 
 class CONST_GUI {
     //static let FONT_SIZE_ROLL_MESS = UIDevice.current.iPad ? "2" : "12"
+    static let HEADER_STANDARD_SPACING:CGFloat = 16
     static let FONT_BIG_COUNTDOWN:CGFloat = UIDevice.current.iPad ? 250.0 : 150.0
+    
+    static func marginLRAvatarDef() -> CGFloat {
+        var height: CGFloat = 6
+        if UIDevice.current.iPad {
+            height = 30
+        } else if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            height = 4
+        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            height = 5
+        } else {
+            height = 6
+        }
+        
+        return height;
+    }
+    
+    static func heightAvatarDef() -> CGFloat {
+        var height: CGFloat = 100
+        if UIDevice.current.iPad {
+            height = 120
+        } else if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            height = 70
+        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            height = 80
+        } else {
+            height = 90
+        }
+        
+        return height;
+    }
     
     static func heightTitleLobby() -> CGFloat {
         var height: CGFloat = 35

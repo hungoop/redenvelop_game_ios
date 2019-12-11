@@ -25,6 +25,10 @@ class PackageInfoViewController: BaseViewController {
     @IBOutlet weak var wagerTimeLabel: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var headerTopContraint: NSLayoutConstraint!
+    
+    
     private lazy var refreshControl:UIRefreshControl = {
         let view = UIRefreshControl()
         return view
@@ -52,6 +56,7 @@ class PackageInfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle(title: "红包详情")
+        updateContraint()
         setupViews()
         fetchPackageInfo()
         backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
@@ -62,6 +67,14 @@ class PackageInfoViewController: BaseViewController {
         profileButton.addTarget(self, action: #selector(profilePressed(_:)), for: .touchUpInside)
         envelopButton.addTarget(self, action: #selector(createEnvelopPressed(_:)), for: .touchUpInside)
 
+    }
+    
+    func updateContraint() {
+        if #available(iOS 11, *) {
+            //let guide = view.safeAreaLayoutGuide
+        } else {
+            headerTopContraint.constant = CONST_GUI.HEADER_STANDARD_SPACING
+        }
     }
     
     func setupViews() {

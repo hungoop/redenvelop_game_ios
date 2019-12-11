@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backButton" destination="mSn-qL-i7T" id="f4S-ws-5l9"/>
                 <outlet property="betButton" destination="3Mr-L8-K1V" id="OVn-TV-Z9H"/>
+                <outlet property="headerTopContraint" destination="axK-9E-4nD" id="yWn-Ud-72b"/>
                 <outlet property="inputLabel" destination="B65-Ld-o5e" id="HR2-GG-Cbl"/>
                 <outlet property="leftTabButton" destination="C82-2o-JYd" id="xSQ-Jn-Png"/>
                 <outlet property="rightTabButton" destination="ypE-nK-hC2" id="f6Z-CV-pYg"/>

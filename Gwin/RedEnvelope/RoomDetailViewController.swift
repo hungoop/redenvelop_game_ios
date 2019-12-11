@@ -508,17 +508,26 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     /* steven close
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         let preIndex = indexPath.row - 1
         let preIndexPath = IndexPath(row: preIndex, section: indexPath.section)
+        print("preIndexPath: \(preIndexPath)  - tableView: \(tableView.visibleCells.count) - histories: \(histories.count)")
+        
+        //fix bug crask on iphone 5 ios 10
+        if(tableView.visibleCells.count <= preIndexPath.row){
+            print("return preIndexPath.row: \(preIndexPath.row)")
+           return
+        }
         if let preCell = tableView.cellForRow(at: preIndexPath) {
+            print("111preIndexPath: \(preIndexPath)  preCell: \(preCell)")
             if tableView.visibleCells.contains(preCell){
+                print("222preCell: \(preCell)")
+                
                 let model = histories[preIndex]
                 model.viewed = true
             }
         }
-        
-    }*/
+    }
+ */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let model = histories[indexPath.row]
@@ -527,28 +536,20 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
         let isKing = isBiggest(packageid: model.packetid)
         let isExpired = isPackageExpeire(wagertime: model.wagertime)
         
-        print("table 111 count \(model.packetid)")
-        
         if userno != model.userno {
             if let cell =  tableView.dequeueReusableCell(withIdentifier: "PackageHistoryLeftViewCell", for: indexPath) as? PackageHistoryLeftViewCell {
                 cell.selectionStyle = .none
                 cell.updateViews(model: model, isOpen:isOpen, isKing: isKing, isBoomed: isBoom, expired: isExpired)
-                print("L table222 count \(model.packetid)")
                 return cell
             }
-            
-            
         } else {
             if let cell =  tableView.dequeueReusableCell(withIdentifier: "PackageHistoryRightViewCell", for: indexPath) as? PackageHistoryRightViewCell {
                 cell.selectionStyle = .none
                 cell.updateViews(model: model, isOpen: isOpen, isKing: isKing, isBoomed:isBoom, expired: isExpired)
-                print("R table333 count \(model.packetid)")
                 return cell
             }
-            
         }
         
-        print("table444 count \(model.packetid)")
         return UITableViewCell()
     }
     

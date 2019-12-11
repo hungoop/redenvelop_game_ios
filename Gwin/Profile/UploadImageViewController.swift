@@ -10,6 +10,26 @@ import UIKit
 
 class UploadImageViewController: BaseViewController {
     
+    private func setMarginStackView(sView:UIView, top:CGFloat, left:CGFloat, bottom:CGFloat, right:CGFloat) {
+        if #available(iOS 11.0, *) {
+            sView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: top,
+                                                                     leading: left,
+                                                                     bottom: bottom,
+                                                                     trailing: right)
+        } else {
+            
+            sView.layoutMargins = UIEdgeInsets(top: top,
+                                               left: left,
+                                               bottom: bottom,
+                                               right: right);
+        }
+        
+        if (sView is UIStackView){
+            (sView as! UIStackView).isLayoutMarginsRelativeArrangement = true
+        }
+        
+    }
+    
     enum Constants {
         static let imageSize: CGFloat = 500
     }
@@ -34,7 +54,8 @@ class UploadImageViewController: BaseViewController {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
-        view.distribution =  UIStackView.Distribution.equalSpacing//.fill
+        //view.distribution =  UIStackView.Distribution.//.fill
+        view.distribution =  UIStackView.Distribution.equalSpacing
         return view
     }
     
@@ -63,7 +84,7 @@ class UploadImageViewController: BaseViewController {
         
         //avatarDefHolder.addSubview(containerStackView)
         avatarDefHolder.translatesAutoresizingMaskIntoConstraints = false
-        avatarDefHolder.axis = .horizontal
+        //avatarDefHolder.axis = .horizontal
         initAvatarDef()
     }
     
@@ -72,14 +93,16 @@ class UploadImageViewController: BaseViewController {
         let stackView1 = getStackView()
         avatarDefHolder.addSubview(stackView1)
 
-        let itemHeight = view.frame.width / 6
+        //let itemHeight = view.frame.width / 6
         
         NSLayoutConstraint.activate([
-            stackView1.topAnchor.constraint(equalTo: avatarDefHolder.topAnchor, constant: 0),
-            stackView1.leftAnchor.constraint(equalTo: avatarDefHolder.leftAnchor, constant: 20),
-            stackView1.rightAnchor.constraint(equalTo: avatarDefHolder.rightAnchor, constant: -20),
-            stackView1.heightAnchor.constraint(equalToConstant: itemHeight)
+            stackView1.topAnchor.constraint(equalTo: avatarDefHolder.topAnchor),
+            stackView1.leftAnchor.constraint(equalTo: avatarDefHolder.leftAnchor),
+            stackView1.rightAnchor.constraint(equalTo: avatarDefHolder.rightAnchor),
+            stackView1.heightAnchor.constraint(equalToConstant: CONST_GUI.heightAvatarDef())
         ])
+        
+        setMarginStackView(sView: stackView1, top: CONST_GUI.marginLRAvatarDef(), left: CONST_GUI.marginLRAvatarDef(), bottom: CONST_GUI.marginTopBottonLobby(), right: CONST_GUI.marginLRAvatarDef())
         
         for i in 1...5 {
             let nameImg:String = "avatar_def_\(i)"
@@ -88,8 +111,8 @@ class UploadImageViewController: BaseViewController {
             image.contentMode = .scaleAspectFit
             
             NSLayoutConstraint.activate([
-                image.widthAnchor.constraint(equalToConstant: itemHeight - 20)
-                //image.heightAnchor.constraint(equalToConstant: itemHeight - 20)
+                image.widthAnchor.constraint(equalToConstant: CONST_GUI.heightAvatarDef() - 20),
+                //image.heightAnchor.constraint(equalTo: image.widthAnchor)
             ])
             
             let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.singleTapping(recognizer:)))
@@ -107,11 +130,13 @@ class UploadImageViewController: BaseViewController {
         avatarDefHolder.addSubview(stackView2)
         
         NSLayoutConstraint.activate([
-            stackView2.leftAnchor.constraint(equalTo: avatarDefHolder.leftAnchor, constant: 20),
-            stackView2.rightAnchor.constraint(equalTo: avatarDefHolder.rightAnchor, constant: -20),
-            stackView2.topAnchor.constraint(equalTo: stackView1.bottomAnchor, constant: 0),
-            stackView2.heightAnchor.constraint(equalToConstant: itemHeight - 10),
+            stackView2.leftAnchor.constraint(equalTo: avatarDefHolder.leftAnchor),
+            stackView2.rightAnchor.constraint(equalTo: avatarDefHolder.rightAnchor),
+            stackView2.topAnchor.constraint(equalTo: stackView1.bottomAnchor),
+            stackView2.heightAnchor.constraint(equalToConstant: CONST_GUI.heightAvatarDef()),
         ])
+        
+        setMarginStackView(sView: stackView2, top: CONST_GUI.marginTopBottonLobby(), left: CONST_GUI.marginLRAvatarDef(), bottom: CONST_GUI.marginLRAvatarDef(), right: CONST_GUI.marginLRAvatarDef())
         
         for i in 6...10 {
             let nameImg:String = "avatar_def_\(i)"
@@ -120,7 +145,7 @@ class UploadImageViewController: BaseViewController {
             image.contentMode = .scaleAspectFit
             
             NSLayoutConstraint.activate([
-                image.widthAnchor.constraint(equalToConstant: itemHeight - 20)
+                image.widthAnchor.constraint(equalToConstant: CONST_GUI.heightAvatarDef() - 20)
                 //image.heightAnchor.constraint(equalToConstant: itemHeight - 20)
             ])
             
@@ -133,7 +158,9 @@ class UploadImageViewController: BaseViewController {
             stackView2.addArrangedSubview(image)
         }
         
-        contraintAvatartDefHolder.constant = view.frame.width / 3
+        contraintAvatartDefHolder.constant = CONST_GUI.heightAvatarDef() * 2
+        
+        print("----- \(CONST_GUI.heightAvatarDef()) -----")
         
     }
     
@@ -145,11 +172,16 @@ class UploadImageViewController: BaseViewController {
     }
     
     func setupViews (){
+        setTitle(title: "个人资料图片")
+        
         cameraButton.imageView?.contentMode = .scaleAspectFit
         galaryButton.imageView?.contentMode = .scaleAspectFit
-        backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
+        
+        //backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
+        
         confirmButton.rounded()
         exitButton.rounded()
+        exitButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
     }
     
     func updateViews(){
@@ -179,7 +211,8 @@ class UploadImageViewController: BaseViewController {
     }
     
     override func backPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        super.backPressed(sender)
     }
     
     @IBAction func cameraPressed(_ sender: Any) {

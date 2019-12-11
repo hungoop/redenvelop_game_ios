@@ -293,7 +293,10 @@ class ProfileViewController: BaseViewController {
         vc.didUploadImage = { [weak self] image in
             self?.avatarImageView.image = image
         }
-        present(vc, animated: true, completion: nil)
+        
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        //present(vc, animated: true, completion: nil)
     }
     
     @objc private func refreshData(_ sender: Any) {

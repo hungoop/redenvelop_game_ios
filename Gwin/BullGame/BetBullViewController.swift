@@ -38,6 +38,10 @@ class BetBullViewController: BaseViewController {
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var inputLabel: UILabel!
+    
+    @IBOutlet weak var headerTopContraint: NSLayoutConstraint!
+    
+    
     var room: RoomModel
     var bullround: BullRoundModel
     var wagerOdds: [BullWagerOddModel] = []
@@ -64,11 +68,20 @@ class BetBullViewController: BaseViewController {
         super.viewDidLoad()
         
         setTitle(title: "牛牛红包下注 ")
+        updateContraint()
         setupViews()
         loadWaggerOddNames()
         fetchwagerodds()
         didSelectTab(at: 1)
         // Do any additional setup after loading the view.
+    }
+    
+    func updateContraint() {
+        if #available(iOS 11, *) {
+            //let guide = view.safeAreaLayoutGuide
+        } else {
+            headerTopContraint.constant = CONST_GUI.HEADER_STANDARD_SPACING
+        }
     }
     
     func setupViews() {

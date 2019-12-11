@@ -30,9 +30,9 @@ class BullDetailViewController: BaseViewController {
     
     @IBOutlet weak var countdountGrabLabel: UILabel!
     //@IBOutlet weak var rollMsgMarqueeView: UIWebView!
+    //@IBOutlet weak var rollMsgMarqueeView: WKWebView!
     
-    @IBOutlet weak var rollMsgMarqueeView: WKWebView!
-    
+    @IBOutlet weak var rollMsgMarqueeView:UIView!
     
     @IBOutlet weak var countdownRoundLabel: UILabel!
     
@@ -57,6 +57,12 @@ class BullDetailViewController: BaseViewController {
     
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
     
+    private lazy var scrollMessageLabel: ScrollLabel = {
+        let title = ScrollLabel().forAutolayout()
+        title.updateContent(message: "--test--")
+        return title
+    }()
+    
     private lazy var profileButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
         button.imageEdgeInsets  = UIEdgeInsets(top: 5, left: 50, bottom: 20, right: 10)
@@ -71,6 +77,7 @@ class BullDetailViewController: BaseViewController {
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 10.0)
         return button
     }()
+    
     
     private lazy var reportBetButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0,y: 0,width: 35,height: 35))
@@ -134,12 +141,14 @@ class BullDetailViewController: BaseViewController {
         super.viewDidLoad()
         print("viewDidLoad : \(userno) - \(room)")
         setTitle(title: "牛牛红包")
+        
         profileButton.frame = CGRect(x: 0, y: 0, width: 90, height: 56)
         reportBetButton.frame = CGRect(x: 0, y: 0, width: 35, height: 56)
         
         let rightItem1 = UIBarButtonItem(customView: reportBetButton)
         let rightItem2 = UIBarButtonItem(customView: profileButton)
         self.navigationItem.rightBarButtonItems = [rightItem1, rightItem2]
+        
         
         setupViews()
         fetchOpenPackages()
@@ -178,6 +187,7 @@ class BullDetailViewController: BaseViewController {
     }
     
     func setupViews() {
+        settupRollMess()
         setupBullHistory()
         setupTableView()
         setupBottomView()
@@ -301,6 +311,17 @@ class BullDetailViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    func settupRollMess()  {
+        rollMsgMarqueeView.addSubview(scrollMessageLabel)
+        
+        NSLayoutConstraint.activate([
+            scrollMessageLabel.topAnchor.constraint(equalTo: rollMsgMarqueeView.topAnchor),
+            scrollMessageLabel.bottomAnchor.constraint(equalTo: rollMsgMarqueeView.bottomAnchor),
+            scrollMessageLabel.leadingAnchor.constraint(equalTo: rollMsgMarqueeView.leadingAnchor, constant: 5),
+            scrollMessageLabel.trailingAnchor.constraint(equalTo: plusButton.leadingAnchor, constant: -5),
+            ])
     }
     
     func setupBullHistory() {
@@ -476,11 +497,10 @@ class BullDetailViewController: BaseViewController {
     
     func getBullRollMessage() {
         guard let user = RedEnvelopComponent.shared.user else { return }
-        rollMsgMarqueeView.scrollView.bounces = false
-        rollMsgMarqueeView.scrollView.isScrollEnabled = false
+        
         BullAPIClient.getbullRollMessage(ticket: user.ticket) {[weak self] (rollmsg) in
-            let marquee = "<html><body><font size=\"\(CONST_GUI.fontSizeRollMessage())\" face=\"sans-serif\"> <marquee>\(rollmsg ?? "")</marquee></font></body></html>"
-            self?.rollMsgMarqueeView.loadHTMLString(marquee, baseURL: nil)
+            guard let this = self else { return  }
+            this.scrollMessageLabel.updateContent(message: rollmsg)
         }
     }
     
@@ -614,7 +634,10 @@ class BullDetailViewController: BaseViewController {
         guard let `round` = round else {return}
         let vc = BankerViewController(roomid: room.roomId, roundid: round.roundid)
         
-        present(vc, animated: true, completion: nil)
+        
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        //present(vc, animated: true, completion: nil)
     }
     
     @IBAction func plusPressed(_ sender: Any) {
@@ -671,6 +694,7 @@ class BullDetailViewController: BaseViewController {
         }
         
     }
+ 
 }
 
 extension BullDetailViewController{

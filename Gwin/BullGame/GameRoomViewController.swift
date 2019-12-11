@@ -191,29 +191,5 @@ extension GameRoomViewController {
         }
     }
     
-    /*
-    func doLogin(room: RoomModel) {
-        guard let user = RedEnvelopComponent.shared.user else { return }
-        guard let userno = RedEnvelopComponent.shared.userno else { return }
-        if processing == true {
-            return
-        }
-        
-        processing = true
-        showLoadingView()
-        
-        RedEnvelopAPIClient.roomLogin(ticket: user.ticket, roomId: room.roomId, roomPwd: room.roomPwd) { [weak self](success, message) in
-            self?.hideLoadingView()
-            self?.processing = false
-            if success {
-                let vc = RoomDetailViewController(userno: userno , room: room)
-                vc.hidesBottomBarWhenPushed = true
-                self?.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                if let errorMsg = message {
-                    self?.showAlertMessage(message: errorMsg)
-                }
-            }
-        }
-    }*/
+    
 }

@@ -56,6 +56,9 @@ class BetCasinoViewController: BaseViewController {
     
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var headerTopContraint: NSLayoutConstraint!
+    
+    
     var currentTab: CurrentTab = .left
     
     private var  room: RoomModel
@@ -90,9 +93,18 @@ class BetCasinoViewController: BaseViewController {
         }
         // Do any additional setup after loading the view.
         
+        updateContraint()
         setupViews()
         loadWaggerOddNames()
         fetchwagerodds()
+    }
+    
+    func updateContraint() {
+        if #available(iOS 11, *) {
+            //let guide = view.safeAreaLayoutGuide
+        } else {
+            headerTopContraint.constant = CONST_GUI.HEADER_STANDARD_SPACING
+        }
     }
     
     func setupViews() {

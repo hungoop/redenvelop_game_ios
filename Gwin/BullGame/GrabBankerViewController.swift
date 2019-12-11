@@ -19,6 +19,9 @@ class GrabBankerViewController: BaseViewController {
     @IBOutlet weak var bankqtyTextfield: UITextField!
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var headerTopContraint: NSLayoutConstraint!
+    
+    
     private var settings:[BankSettingModel] = []
     var indexSelected: Int = Int.max
     var settingSelected: BankSettingModel?
@@ -37,8 +40,17 @@ class GrabBankerViewController: BaseViewController {
         super.viewDidLoad()
         setTitle(title: "闲家抢庄页面")
         // Do any additional setup after loading the view.
+        updateContraint()
         setupViews()
         fetchBankSetting()
+    }
+    
+    func updateContraint() {
+        if #available(iOS 11, *) {
+            //let guide = view.safeAreaLayoutGuide
+        } else {
+            headerTopContraint.constant = CONST_GUI.HEADER_STANDARD_SPACING
+        }
     }
     
     func setupViews() {

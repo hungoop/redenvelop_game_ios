@@ -29,7 +29,7 @@ class BankerViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setTitle(title: "已抢局数")
         setupViews()
         fetchBanker()
     }
@@ -41,7 +41,7 @@ class BankerViewController: BaseViewController {
         tableView.delegate = self
         
         //
-        backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
+        //backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
     }
     
     func fetchBanker() {
@@ -55,19 +55,11 @@ class BankerViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
-    override func backPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
+    //override func backPressed(_ sender: UIButton) {
+        //dismiss(animated: true, completion: nil)
+       // self.navigationController?.popViewController(animated: true)
+    //}
 }
 
 extension BankerViewController: UITableViewDelegate, UITableViewDataSource {
