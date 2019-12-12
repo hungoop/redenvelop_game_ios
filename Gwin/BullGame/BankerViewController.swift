@@ -14,7 +14,6 @@ class BankerViewController: BaseViewController {
     private var roundid: Int64?
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var backButton: UIButton!
     
     private var datas:[BankGetModel] = []
     init(roomid: Int, roundid: Int64) {
@@ -34,14 +33,10 @@ class BankerViewController: BaseViewController {
         fetchBanker()
     }
     
-    
     func setupViews() {
         tableView.register(UINib(nibName: "BankerViewCell", bundle: nil), forCellReuseIdentifier: "BankerViewCell")
         tableView.delegate = self
         tableView.delegate = self
-        
-        //
-        //backButton.addTarget(self, action: #selector(backPressed(_:)), for: .touchUpInside)
     }
     
     func fetchBanker() {
@@ -55,11 +50,6 @@ class BankerViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
-    
-    //override func backPressed(_ sender: UIButton) {
-        //dismiss(animated: true, completion: nil)
-       // self.navigationController?.popViewController(animated: true)
-    //}
 }
 
 extension BankerViewController: UITableViewDelegate, UITableViewDataSource {

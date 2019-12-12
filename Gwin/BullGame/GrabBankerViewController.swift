@@ -39,7 +39,7 @@ class GrabBankerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle(title: "闲家抢庄页面")
-        // Do any additional setup after loading the view.
+        
         updateContraint()
         setupViews()
         fetchBankSetting()

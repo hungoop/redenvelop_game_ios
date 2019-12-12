@@ -51,7 +51,7 @@ class RedEnvelopComponent: RedEnvelopDependency  {
     
     var user: User?
     var systemtime: Date?
-    var systemTimeInterval: TimeInterval
+    //var systemTimeInterval: TimeInterval
     
     var userno: String?
     var rollMsg: String?
@@ -61,7 +61,7 @@ class RedEnvelopComponent: RedEnvelopDependency  {
     
     init(user: User? = nil) {
         self.user = user
-        self.systemTimeInterval = Date().timeIntervalSinceNow
+        //self.systemTimeInterval = Date().timeIntervalSinceNow
     }
     
     func clearData() {
@@ -69,16 +69,15 @@ class RedEnvelopComponent: RedEnvelopDependency  {
         userno = nil
         rollMsg = nil
     }
-    
+    /*
     func doTick(){
-        
         systemTimeInterval = systemtime?.timeIntervalSinceNow ?? Date().timeIntervalSinceNow
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(increaseSystemTime), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: CONST_GUI.STEEP_INTERVAL_STICK, target: self, selector: #selector(increaseSystemTime), userInfo: nil, repeats: true)
     }
     
     @objc func increaseSystemTime() {
-        systemTimeInterval = systemTimeInterval + 1
+        systemTimeInterval = systemTimeInterval + CONST_GUI.STEEP_INTERVAL_STICK
         print("increaseSystemTime \(systemTimeInterval)")
-    }
+    }*/
 }
 

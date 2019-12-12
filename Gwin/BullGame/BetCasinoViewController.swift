@@ -91,7 +91,6 @@ class BetCasinoViewController: BaseViewController {
         }else if wagertypeno == Wagertypeno.other.rawValue {
             setTitle(title: "大小单双合下注 ")
         }
-        // Do any additional setup after loading the view.
         
         updateContraint()
         setupViews()

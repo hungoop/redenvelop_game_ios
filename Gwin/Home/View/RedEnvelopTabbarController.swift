@@ -18,7 +18,6 @@ class RedEnvelopTabbarController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     
-    
     func initViewConstroller() {
         
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E0470CC23A0FD2D00384D3A /* CONST_URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0470CB23A0FD2D00384D3A /* CONST_URL.swift */; };
 		0E0653EF239A32E5009A091D /* GrabBullPackageViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0653EE239A32E5009A091D /* GrabBullPackageViewController~ipad.xib */; };
 		0E0653F1239A35F2009A091D /* GrabEnvelopViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0653F0239A35F2009A091D /* GrabEnvelopViewController~ipad.xib */; };
 		0E51D7472399598800D053A6 /* CONST_GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E51D7462399598800D053A6 /* CONST_GUI.swift */; };
@@ -132,7 +133,6 @@
 		D1EA0F06231827090096B7D1 /* BetBullViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1EA0F04231827090096B7D1 /* BetBullViewController.xib */; };
 		D1EA0F092318373F0096B7D1 /* WagerOddViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA0F072318373F0096B7D1 /* WagerOddViewCell.swift */; };
 		D1EA0F0A2318373F0096B7D1 /* WagerOddViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1EA0F082318373F0096B7D1 /* WagerOddViewCell.xib */; };
-		D1EA0F0C231838620096B7D1 /* WagerOddUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA0F0B231838620096B7D1 /* WagerOddUtils.swift */; };
 		D1EA0F7423190AB90096B7D1 /* WagerOdds.json in Resources */ = {isa = PBXBuildFile; fileRef = D1EA0F0D23183AE40096B7D1 /* WagerOdds.json */; };
 		D1EA0F7723190D860096B7D1 /* BetCasinoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA0F7523190D860096B7D1 /* BetCasinoViewController.swift */; };
 		D1EA0F7823190D860096B7D1 /* BetCasinoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1EA0F7623190D860096B7D1 /* BetCasinoViewController.xib */; };
@@ -142,6 +142,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0470CB23A0FD2D00384D3A /* CONST_URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONST_URL.swift; sourceTree = "<group>"; };
 		0E0653EE239A32E5009A091D /* GrabBullPackageViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "GrabBullPackageViewController~ipad.xib"; sourceTree = "<group>"; };
 		0E0653F0239A35F2009A091D /* GrabEnvelopViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "GrabEnvelopViewController~ipad.xib"; sourceTree = "<group>"; };
 		0E51D7462399598800D053A6 /* CONST_GUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONST_GUI.swift; sourceTree = "<group>"; };
@@ -270,7 +271,6 @@
 		D1EA0F04231827090096B7D1 /* BetBullViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BetBullViewController.xib; sourceTree = "<group>"; };
 		D1EA0F072318373F0096B7D1 /* WagerOddViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WagerOddViewCell.swift; sourceTree = "<group>"; };
 		D1EA0F082318373F0096B7D1 /* WagerOddViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WagerOddViewCell.xib; sourceTree = "<group>"; };
-		D1EA0F0B231838620096B7D1 /* WagerOddUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WagerOddUtils.swift; sourceTree = "<group>"; };
 		D1EA0F0D23183AE40096B7D1 /* WagerOdds.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WagerOdds.json; sourceTree = "<group>"; };
 		D1EA0F7523190D860096B7D1 /* BetCasinoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetCasinoViewController.swift; sourceTree = "<group>"; };
 		D1EA0F7623190D860096B7D1 /* BetCasinoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BetCasinoViewController.xib; sourceTree = "<group>"; };
@@ -412,6 +412,7 @@
 				D175C4F0230C36B3001B8DC6 /* KeyboardLayoutConstraint.swift */,
 				D170F384231440B700468D64 /* ScrollLabel.swift */,
 				0E51D7462399598800D053A6 /* CONST_GUI.swift */,
+				0E0470CB23A0FD2D00384D3A /* CONST_URL.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -692,7 +693,6 @@
 				D1EA0F04231827090096B7D1 /* BetBullViewController.xib */,
 				D1EA0F072318373F0096B7D1 /* WagerOddViewCell.swift */,
 				D1EA0F082318373F0096B7D1 /* WagerOddViewCell.xib */,
-				D1EA0F0B231838620096B7D1 /* WagerOddUtils.swift */,
 				D1EA0F0D23183AE40096B7D1 /* WagerOdds.json */,
 				D1EA0F7523190D860096B7D1 /* BetCasinoViewController.swift */,
 				D1EA0F7623190D860096B7D1 /* BetCasinoViewController.xib */,
@@ -937,7 +937,6 @@
 				D1E00D75230FDEEC00554CA4 /* BullRoundModel.swift in Sources */,
 				D175C4FC230CFB7F001B8DC6 /* HomeRouter.swift in Sources */,
 				D1E00CFD230E931D00554CA4 /* RedEnvelopAPIRouter.swift in Sources */,
-				D1EA0F0C231838620096B7D1 /* WagerOddUtils.swift in Sources */,
 				D1D06F22231D247500BBEDAE /* BankerViewCell.swift in Sources */,
 				D1E00DB32312D26400554CA4 /* UITextFieldPadding.swift in Sources */,
 				D1E00D8823102A6700554CA4 /* LaunchViewController.swift in Sources */,
@@ -952,6 +951,7 @@
 				D175C4B9230BCD97001B8DC6 /* Component.swift in Sources */,
 				D1E00D912310EBC100554CA4 /* RoomDetailViewController.swift in Sources */,
 				D1E00DAA23116F4700554CA4 /* GrabEnvelopViewController.swift in Sources */,
+				0E0470CC23A0FD2D00384D3A /* CONST_URL.swift in Sources */,
 				D194BD95231BC18700AB59C3 /* UploadImageViewController.swift in Sources */,
 				D175C4F8230CF823001B8DC6 /* NoticeAPIClient.swift in Sources */,
 				D1E00DB72312DC8600554CA4 /* GrabUserViewCell.swift in Sources */,

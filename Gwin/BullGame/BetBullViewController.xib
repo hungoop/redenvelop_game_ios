@@ -222,28 +222,18 @@
                                 <constraint firstItem="VSl-CF-mvk" firstAttribute="centerX" secondItem="etG-C8-zoy" secondAttribute="centerX" id="Xrf-sY-31E"/>
                                 <constraint firstItem="etG-C8-zoy" firstAttribute="top" secondItem="oKR-mq-Ofg" secondAttribute="bottom" constant="20" id="b8l-N2-PNe"/>
                                 <constraint firstItem="0lX-cv-nuO" firstAttribute="top" secondItem="rn9-TB-OTD" secondAttribute="bottom" constant="15" id="fHk-US-Izc"/>
-                                <constraint firstItem="i9x-qM-umL" firstAttribute="top" secondItem="1RU-Mz-2rK" secondAttribute="bottom" constant="10" id="gI0-vc-Kz3"/>
                                 <constraint firstItem="VSl-CF-mvk" firstAttribute="width" secondItem="etG-C8-zoy" secondAttribute="width" id="hHc-yu-pxT"/>
                                 <constraint firstItem="6ax-KQ-07j" firstAttribute="leading" secondItem="erD-b9-y4H" secondAttribute="leading" constant="16" id="hZg-6Z-Nb2"/>
                                 <constraint firstItem="6ax-KQ-07j" firstAttribute="top" secondItem="ycL-Qc-KxZ" secondAttribute="bottom" constant="30" id="iyf-L7-WhV"/>
                                 <constraint firstItem="1RU-Mz-2rK" firstAttribute="top" secondItem="oKR-mq-Ofg" secondAttribute="bottom" constant="20" id="j1w-gh-3Oi"/>
-                                <constraint firstAttribute="bottom" secondItem="6ax-KQ-07j" secondAttribute="bottom" constant="50" id="kPV-qU-TuO"/>
                                 <constraint firstAttribute="trailing" secondItem="oKR-mq-Ofg" secondAttribute="trailing" constant="16" id="kbp-3o-Ln6"/>
                                 <constraint firstAttribute="trailing" secondItem="6ax-KQ-07j" secondAttribute="trailing" constant="16" id="mg3-yF-wFa"/>
                                 <constraint firstItem="VSl-CF-mvk" firstAttribute="top" secondItem="etG-C8-zoy" secondAttribute="bottom" constant="10" id="mrF-wf-90Z"/>
-                                <constraint firstItem="i9x-qM-umL" firstAttribute="centerY" secondItem="VSl-CF-mvk" secondAttribute="centerY" id="pIV-2E-LQB"/>
                                 <constraint firstItem="1RU-Mz-2rK" firstAttribute="leading" secondItem="erD-b9-y4H" secondAttribute="leading" constant="16" id="rhg-cp-dHP"/>
                                 <constraint firstAttribute="trailing" secondItem="ycL-Qc-KxZ" secondAttribute="trailing" id="sHB-0z-4Dj"/>
                                 <constraint firstAttribute="trailing" secondItem="gnQ-Wi-bAb" secondAttribute="trailing" id="uk8-Bx-DwR"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6ax-KQ-07j" secondAttribute="bottom" constant="40" id="w5b-qA-F6m"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="gI0-vc-Kz3"/>
-                                    <exclude reference="pIV-2E-LQB"/>
-                                    <exclude reference="kPV-qU-TuO"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>

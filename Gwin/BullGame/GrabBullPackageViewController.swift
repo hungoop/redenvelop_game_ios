@@ -64,15 +64,6 @@ class GrabBullPackageViewController: BaseViewController {
     func fetchPackageStatus() {
         guard let user = RedEnvelopComponent.shared.user else { return }
         
-        /*
-         static let  NO_VALUE: Int  = 0
-         static let  GRAB: Int  = 1
-         static let  NO_BET: Int  = 2
-         static let  PLAYER_GRABED: Int  = 21
-         static let  BANKER_GRABED: Int  = 22
-         static let  RESULT: Int  = 3
-         */
-        
         BullAPIClient.packetstatus(ticket: user.ticket, roomid: bull.roomid , roundid: bull.getRoundId()) {[weak self](status, error) in
             guard let this = self else {return}
             if let `status` = status{

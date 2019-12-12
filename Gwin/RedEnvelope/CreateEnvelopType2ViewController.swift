@@ -38,11 +38,10 @@ class CreateEnvelopType2ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         setTitle(title: "福利红包")
         setupViews()
     }
-    
     
     func setupViews() {
         ammountTextfield.rounded()
@@ -57,15 +56,7 @@ class CreateEnvelopType2ViewController: BaseViewController {
         stakeLabel.text = "\(room.stake1)-\(room.stake2)元"
         createButton.rounded()
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
     @IBAction func createPressed(_ sender: Any) {
         
         guard let amountText = ammountTextfield.text, let amount = Int(amountText) else {

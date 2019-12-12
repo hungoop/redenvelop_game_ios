@@ -68,12 +68,12 @@ class BetBullViewController: BaseViewController {
         super.viewDidLoad()
         
         setTitle(title: "牛牛红包下注 ")
+        
         updateContraint()
         setupViews()
         loadWaggerOddNames()
         fetchwagerodds()
         didSelectTab(at: 1)
-        // Do any additional setup after loading the view.
     }
     
     func updateContraint() {

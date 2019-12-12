@@ -124,7 +124,8 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
     init(userno: String, room: RoomModel) {
         self.userno = userno
         self.room = room
-        self.socket  = WebSocket(url: URL(string: "ws://103.40.178.46:5013//GameConnect.ashx?userno=\(userno)")!, protocols: [])
+        //self.socket  = WebSocket(url: URL(string: "ws://103.40.178.46:5013//GameConnect.ashx?userno=\(userno)")!, protocols: [])
+        self.socket  = WebSocket(url: URL(string: "\(CONST_URL.URL_WS_SERVER)\(userno)")!, protocols: [])
         
         super.init(nibName: nil, bundle: nil)
     }

@@ -29,8 +29,6 @@ class BullDetailViewController: BaseViewController {
     @IBOutlet weak var countdountBetLabel: UILabel!
     
     @IBOutlet weak var countdountGrabLabel: UILabel!
-    //@IBOutlet weak var rollMsgMarqueeView: UIWebView!
-    //@IBOutlet weak var rollMsgMarqueeView: WKWebView!
     
     @IBOutlet weak var rollMsgMarqueeView:UIView!
     
@@ -126,20 +124,17 @@ class BullDetailViewController: BaseViewController {
     private var currentViewController: BaseViewController?
     
     init(userno: String, room: RoomModel) {
-        print("init: \(userno) - \(room)")
         self.room = room
         self.userno = userno
         super.init(nibName: "BullDetailViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        print("init: error======")
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad : \(userno) - \(room)")
         setTitle(title: "牛牛红包")
         
         profileButton.frame = CGRect(x: 0, y: 0, width: 90, height: 56)
@@ -149,12 +144,15 @@ class BullDetailViewController: BaseViewController {
         let rightItem2 = UIBarButtonItem(customView: profileButton)
         self.navigationItem.rightBarButtonItems = [rightItem1, rightItem2]
         
-        
         setupViews()
+        
         fetchOpenPackages()
         fetchBullRound()
+        
         getBullRollMessage()
-        fetchSystemTime()
+        
+        //fetchSystemTime()
+        
         fetchwagerodds()
         fetchUserInfo()
     }
@@ -276,7 +274,6 @@ class BullDetailViewController: BaseViewController {
             ])
     }
     
-    
     func bindRoundDataViews(round: BullRoundModel) {
         //
         bankerCountLabel.text = "庄家点数走势图 第\(round.nextroundid)期"
@@ -341,7 +338,7 @@ class BullDetailViewController: BaseViewController {
                 ])
         }
     }
-    
+    /*
     func fetchSystemTime() {
         guard let user = RedEnvelopComponent.shared.user else { return }
         
@@ -353,7 +350,7 @@ class BullDetailViewController: BaseViewController {
                 //        self.tickTimer()
             }
         }
-    }
+    }*/
     
     func fetchBullRound(){
         guard let user = RedEnvelopComponent.shared.user else { return }
@@ -703,6 +700,7 @@ extension BullDetailViewController{
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateBullSubView), userInfo: nil, repeats: true)
     }
     
+    /*
     fileprivate func tickTimer() {
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(doTick), userInfo: nil, repeats: true)
     }
@@ -716,7 +714,7 @@ extension BullDetailViewController{
         //      print("do tick \(systemDate.toString()) -> \(new - old)")
         //      print("do tick local \(Date().toString())")
         
-    }
+    }*/
     
     @objc func updateBullSubView() {
         coundownBet = coundownBet - 1
@@ -836,36 +834,6 @@ extension BullDetailViewController {
         return false
     }
     
-    private func isBoomed(packageid: Int64) -> Bool {
-        for obj in openPackages {
-            if packageid == obj.value(forKey: "packageid") as? Int64 {
-                return obj.value(forKey: "isBoom") as? Bool ?? false
-            }
-        }
-        return false
-    }
-    
-    private func isBiggest(packageid: Int64) -> Bool {
-        for obj in openPackages {
-            if packageid == obj.value(forKey: "packageid") as? Int64 {
-                return obj.value(forKey: "isbiggest") as? Bool ?? false
-            }
-        }
-        return false
-    }
-    
-    func isPackageExpeire(wagertime: String) -> Bool{
-        
-        //    let packageDate = wagertime.toDate()
-        //    if let `systemtime` = systemTime {
-        //      let timeinterval = systemtime - packageDate.timeIntervalSinceNow
-        //      let mins = timeinterval / (60)
-        //
-        //      return mins > Double(RedEnvelopComponent.limitTime)
-        //    }
-        return false
-    }
-    
     
 }
 
@@ -932,7 +900,7 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cellForRowAt 1 count \(datas.count)")
+        //print("cellForRowAt 1 count \(datas.count)")
         let bull = datas[indexPath.row]
         let isGrab = bull.isGrabed(openPackages)
         
@@ -942,7 +910,7 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        print("cellForRowAt 2 count \(datas.count)")
+        //print("cellForRowAt 2 count \(datas.count)")
         return UITableViewCell()
     }
     
@@ -996,15 +964,6 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func fetchPackageStatus(bull: BullModel) {
         guard let user = RedEnvelopComponent.shared.user else { return }
-        
-        /*
-         static let  NO_VALUE: Int  = 0
-         static let  GRAB: Int  = 1
-         static let  NO_BET: Int  = 2
-         static let  PLAYER_GRABED: Int  = 21
-         static let  BANKER_GRABED: Int  = 22
-         static let  RESULT: Int  = 3
-         */
         
         BullAPIClient.packetstatus(ticket: user.ticket, roomid: bull.roomid , roundid: bull.getRoundId()) {[weak self](status, error) in
             guard let this = self else {return}

@@ -15,17 +15,6 @@ protocol BulllPackageInfoDelegate: AnyObject {
 
 class BulllPackageInfoViewController: BaseViewController {
     
-    /*
-    private var openPackages: [NSManagedObject] = []
-    
-    fileprivate func fetchOpenPackages() {
-        if let userno = RedEnvelopComponent.shared.userno {
-            openPackages = LocalDataManager.shared.fetchPackages(userno: userno, game: RoomType.bull)
-        }
-    }
-    */
-    /////////////////////////////////////////////////////
-    
     @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var profileButton: UIButton!
