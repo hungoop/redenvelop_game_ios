@@ -1,0 +1,45 @@
+[
+    {
+        "icon": "game_0",
+        "name":"我的",
+        "key":"4",
+        "action": "envelop"
+    },
+    {
+      "icon": "game_1",
+      "name":"充值",
+      "key":"deposits",
+      "action": "user"
+    },
+    {
+      "icon": "game_2",
+      "name":"提现",
+      "key":"withdrawals",
+      "action": "user"
+    },
+    {
+      "icon": "game_3",
+      "name":"规则",
+      "key":"common_problem",
+      "action": "user"
+    },
+    {
+      "icon": "game_4",
+      "name":"客服",
+      "key":"customer_service",
+      "action": "user"
+    },
+    {
+      "icon": "game_5",
+      "name":"红包牛牛",
+      "key":"2",
+      "action": "envelop"
+    },
+    {
+      "icon": "game_6",
+      "name":"红包炸弹",
+      "key":"1",
+      "action": "envelop"
+    }
+    
+]
