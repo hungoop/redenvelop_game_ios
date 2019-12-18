@@ -399,14 +399,12 @@ class BullDetailViewController: BaseViewController {
                     if(crawlerRound.status != RoundStatus.NO_VALUE.rawValue){
                         this.addNewBull(round: crawlerRound)
                         
-                        if let index = this.getBullModel(roundid: crawlerRound.roundid) {
-                            if crawlerRound.status != RoundStatus.RESULT.rawValue {
-                                //bull.fetchResultWagerInfo()
-                                
-                                let bull = this.datas[index]
-                                bull.fetchWagerInfo()
-                            }
-                        }
+                        //if let index = this.getBullModel(roundid: crawlerRound.roundid) {
+                        //    if crawlerRound.status == RoundStatus.BETING.rawValue {
+                                //let bull = this.datas[index]
+                                //bull.wagerInfoTimer(limit: this.coundownBet)
+                        //    }
+                        //}
                     }
                 } else {
                     //print("Old Round \(crawlerRound.roundid)")
@@ -523,18 +521,19 @@ class BullDetailViewController: BaseViewController {
     
     @objc func fetchUserInfo(showLoading: Bool = false) {
         guard let user = RedEnvelopComponent.shared.user else { return }
-        
-        //if showLoading {
+        if showLoading {
             //showLoadingView()
-        //}
+        }
         
         UserAPIClient.userInfo(ticket: user.ticket) { [weak self] (userInfo, errorMessage) in
             //this.hideLoadingView()
-            guard let this = self else { return }
             
             if let `userInfo` = userInfo {
                 print("userInfo \(userInfo)")
-                this.profileButton.setTitle("\(userInfo.allowcreditquota)", for: .normal)
+                
+                self!.profileButton.setTitle("\(userInfo.allowcreditquota)", for: .normal)
+            } else {
+                
             }
             
         }
@@ -546,12 +545,11 @@ class BullDetailViewController: BaseViewController {
         
         let onlyself = 1
         BullAPIClient.info(ticket: user.ticket, roomid: room.roomId, roundid: r.roundid, onlyself: onlyself) { [weak self](package, model, error) in
-            guard let this = self else { return }
             guard let model = model else { return }
             
             if let index = self?.getBullModel(roundid: r.roundid) {
-                this.datas[index].bullInfo = model
-                this.reloadCell(at: index)
+                self?.datas[index].bullInfo = model
+                self?.reloadCell(at: index)
             }
         }
         
@@ -863,7 +861,7 @@ extension BullDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cellForRowAt 1 count \(datas.count)")
+        //print("cellForRowAt 1 count \(datas.count)")
         
         let bull = datas[indexPath.row]
         let isGrab = bull.isGrabed(openPackages)

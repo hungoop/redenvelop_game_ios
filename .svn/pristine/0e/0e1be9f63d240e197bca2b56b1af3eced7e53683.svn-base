@@ -315,19 +315,17 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
     
     @objc func fetchUserInfo(showLoading: Bool = false) {
         guard let user = RedEnvelopComponent.shared.user else { return }
-        //if showLoading {
+        if showLoading {
             //showLoadingView()
-        //}
+        }
         
         UserAPIClient.userInfo(ticket: user.ticket) { [weak self] (userInfo, errorMessage) in
             //this.hideLoadingView()
             
-            guard let this = self else { return }
-            
             if let `userInfo` = userInfo {
                 print("userInfo \(userInfo)")
                 
-                this.profileButton.setTitle("\(userInfo.allowcreditquota)", for: .normal)
+                self!.profileButton.setTitle("\(userInfo.allowcreditquota)", for: .normal)
             } else {
                 
             }
