@@ -136,7 +136,11 @@ class BaseViewController: UIViewController {
     }
     
     @objc func backPressed(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        let vc:UIViewController! = self.navigationController?.popViewController(animated: true) ?? nil
+        
+        if vc is BaseViewController {
+            (vc as! BaseViewController).forceDestroy()
+        }
     }
     
     @objc func profilePressed(_ sender: UIButton) {
@@ -174,5 +178,24 @@ class BaseViewController: UIViewController {
         
         super.present(viewControllerToPresent, animated: false, completion: nil)
     }
+    
+    
+    func getBullVCExisted(userno:String, room: RoomModel) -> BullDetailViewController {
+        if let viewControllers = navigationController?.viewControllers {
+            for viewController in viewControllers {
+                // some process
+                if viewController is BullDetailViewController {
+                    return viewController as! BullDetailViewController
+                }
+            }
+        }
+        return BullDetailViewController(userno: userno , room: room)
+    }
+    
+    func forceDestroy() {
+        //override
+        print("---BaseViewController  --No handle--- forceDetroy------")
+    }
+    
 }
 

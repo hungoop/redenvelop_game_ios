@@ -37,7 +37,7 @@ class GameRoomViewController: BaseViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewDidAppear(animated) 
     }
     
     func setupViews() {
@@ -164,28 +164,23 @@ extension GameRoomViewController {
         showLoadingView()
         
         RedEnvelopAPIClient.roomLogin(ticket: user.ticket, roomId: room.roomId, roomPwd: room.roomPwd) { [weak self](success, message) in
-            self?.processing = false
-            self?.hideLoadingView()
+            
+            guard let `this` = self else { return }
+            this.processing = false
+            this.hideLoadingView()
             
             print("login room success: \(success) - message: \(message ?? "NO MESS")")
-            /*
-            if success {
-                let vc = BullDetailViewController(userno: userno , room: room)
-               // vc.transitioningDelegate = (self as! UIViewControllerTransitioningDelegate)
-                vc.hidesBottomBarWhenPushed = true
-                print("roomLogin 1111")
-                self?.navigationController?.pushViewController(vc, animated: true)
-                print("roomLogin 2222")
-            }*/
             
             if success {
                 //let vc = RoomDetailViewController(userno: userno , room: room)
-                let vc = BullDetailViewController(userno: userno , room: room)
+                //let vc = BullDetailViewController(userno: userno , room: room)
+                
+                let vc = this.getBullVCExisted(userno: userno , room: room)
                 vc.hidesBottomBarWhenPushed = true
-                self?.navigationController?.pushViewController(vc, animated: true)
+                this.navigationController?.pushViewController(vc, animated: true)
             } else {
                 if let errorMsg = message {
-                    self?.showAlertMessage(message: errorMsg)
+                    this.showAlertMessage(message: errorMsg)
                 }
             }
         }

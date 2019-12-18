@@ -172,6 +172,11 @@ class RoomDetailViewController: BaseViewController, UpdateAfterBet {
     deinit {
         socket.disconnect(forceTimeout: 0)
         socket.delegate = nil
+        print("------RoomDetailViewController ----- deinit------")
+    }
+    
+    override func forceDestroy () {
+        print("------RoomDetailViewController ----- forceDetroy------")
     }
     
     func setupNavigatorViews() {
@@ -503,7 +508,7 @@ extension RoomDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("table count \(histories.count)")
+        print("histories count \(histories.count)")
         return histories.count
     }
     

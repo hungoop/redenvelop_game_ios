@@ -18,11 +18,11 @@ public enum Packetstatus{
     static let  RESULT: Int  = 3
 }
 
-public enum BullRoundStatus: Int {
-    case addNew = 2
-    case betStart = 1
-    case betResult = 3
-    case betClose = 0
+public enum RoundStatus: Int {
+    case BETING = 1
+    case GRAB = 2
+    case RESULT = 3
+    case NO_VALUE = 0
 }
 
 protocol BullModelDelegate: AnyObject {
@@ -41,16 +41,17 @@ class BullModel {
     
     var openResult: Int
     var isOpen: Bool
-    var expire: Bool
+    //var expire: Bool
     var roomid: Int
-    var canbet: Bool
-    private var wagerTimer: Timer?
+    //var canbet: Bool
+    //private var wagerTimer: Timer?
+    //var limitCoundown: Int = 0
     //  private var resultWagerTimer: Timer?
     var delegate: BullModelDelegate?
     
-    init(canbet: Bool = false, expire: Bool = false, round: BullRoundModel, historyPackage: BullPackageHistoryModel?, roomid: Int, delegate: BullModelDelegate? = nil){
-        self.canbet = canbet
-        self.expire = expire
+    init(round: BullRoundModel, historyPackage: BullPackageHistoryModel?, roomid: Int, delegate: BullModelDelegate? = nil){
+        //self.canbet = canbet
+        //self.expire = expire
         self.round = round
         self.historyPackage = historyPackage
         self.roomid = roomid
@@ -61,45 +62,43 @@ class BullModel {
     }
     
     deinit {
-        cancelWagerTimer()
-    }
-    func updateRoundStatus(status: BullRoundStatus) {
-        if status == .betClose {
-            cancelWagerTimer()
-            //      expire = true
-        }else if status == .addNew && round.status != BullRoundStatus.addNew.rawValue{
-            fetchResultWagerInfo()
-        }
-        
-        round.status = status.rawValue
+        //cancelWagerTimer()
     }
     
-    func wagerInfoTimer() {
-        if wagerTimer == nil{
-            
-            wagerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fetchWagerInfo(_:)), userInfo: ["idno": getLastIdno(), "status": 1], repeats: true)
-        }
+    func updateRoundStatus(status: Int) {
+        round.status = status
     }
+    
+    /*
+    func wagerInfoTimer(limit: Int) {
+        if wagerTimer == nil{
+            limitCoundown = limit // no use
+            
+            wagerTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(fetchWagerInfo(_:)), userInfo: ["idno": getLastIdno(), "status": 1], repeats: true)
+            
+            print("wagerInfoTimer \(round.roundid)")
+        }
+    }*/
     
     func resultWagerInfoTimer(cancelCurrent: Bool = false) {
-        //    if resultWagerTimer == nil{
-        //      resultWagerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fetchResultWagerInfo(_:)), userInfo: ["idno": 0, "status": 3], repeats: true)
-        //    }
         fetchResultWagerInfo()
     }
     
+    /*
     func cancelWagerTimer(){
         wagerTimer?.invalidate()
         wagerTimer = nil
-        //    resultWagerTimer?.invalidate()
-        //    resultWagerTimer = nil
-    }
+        
+        print("cancelWagerTimer \(round.roundid)")
+    }*/
     
     @objc func fetchWagerInfo(_ timer: Timer? = nil) {
         guard let user = RedEnvelopComponent.shared.user else { return }
         
         BullAPIClient.wagerinfo(ticket: user.ticket, roomid: roomid, roundid: round.roundid, idno: getLastIdno()) { [weak self](infos, error) in
             guard let this = self else {return}
+            print("fetchWagerInfo \(this.round.roundid) idno \(this.getLastIdno()) count \(infos.count) - stake \(infos.map{$0.stake})")
+            
             if infos.count == 0 { return }
             
             if this.addNewWager(wagers: infos) {
@@ -113,7 +112,8 @@ class BullModel {
         
         BullAPIClient.wagerinfo(ticket: user.ticket, roomid: roomid, roundid: round.roundid, idno: 0) { [weak self](infos, error) in
             guard let this = self else {return}
-            print("result result 3 ---1 \(infos.map{$0.winning})")
+            print("fetchResultWagerInfo result \(infos.map{$0.winning})")
+            
             let winingWagers = infos.filter{$0.winning != 0}
             
             if winingWagers.count == 0 { return }
@@ -186,45 +186,12 @@ class BullModel {
     }
     
     func isOnleyself() -> Bool {
-        //    if !expire {
-        //      return round.status == BullRoundStatus.betClose.rawValue
-        //    }
-        //
-        //    return false
-        
         if(openResult == Packetstatus.GRAB){
             return true
         } else {
             return false
         }
-        
-        /*
-        if !expire {
-            return true
-        } else if (isOpen) {
-            return false
-        }
-        return !expire*/
     }
-    
-    /*
-     private boolean getOnlySelf(){
-     Log.d(TAG, " isOpen: " + envelopInfo.isOpen() + "  " + envelopInfo.getOpenResult().name() + " " + envelopInfo.isExpire());
-     
-     //envelopInfo.makeExpire();
-     //Log.d(TAG, "isExpire: " + envelopInfo.isExpire());
-     
-     if(!envelopInfo.isExpire()){
-     return  true;
-     } else if(envelopInfo.isOpen()){
-     return false;
-     } else if(envelopInfo.getOpenResult() == EnvelopInfo.OPEN.GRAB ||
-     envelopInfo.getOpenResult() == EnvelopInfo.OPEN.PLAYER_GRABED){
-     return  true;
-     } else {
-     return false;
-     }
-     }*/
     
     func getRoundId() -> Int64 {
         if let package = historyPackage {
@@ -232,13 +199,13 @@ class BullModel {
         }
         return round.roundid
     }
+    
     func getUserno() -> String?{
         if let package = historyPackage {
             return package.userno
         }
         return nil
     }
-    
     
     func myBanker() -> Bool {
         return round.myBanker()

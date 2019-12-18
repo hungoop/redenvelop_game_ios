@@ -101,7 +101,6 @@ class PackageHistoryLeftViewCell: UITableViewCell {
         bottomStackHeightConstraint.constant = 0
     }
     
-    
     func updateBullViews(bull: BullModel, isOpen: Bool = false, isKing: Bool = false, isBoomed: Bool = false, expired: Bool = false){
         amountLabel.text = "牛牛红包"
         evelopNameLabel.text = "领取红包"
@@ -211,7 +210,8 @@ class PackageHistoryLeftViewCell: UITableViewCell {
         topStackHeightConstraint.constant = CGFloat(height1)
         bottomStackHeightConstraint.constant = CGFloat(height2)
         
-        if bull.canbet || bull.round.status == BullRoundStatus.betClose.rawValue {
+        if bull.round.status == RoundStatus.NO_VALUE.rawValue ||
+            bull.round.status == RoundStatus.BETING.rawValue {
             middleHeightConstraint.constant = 0
             bullInfoView.isHidden = true
             //top.constant = 0

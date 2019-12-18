@@ -86,6 +86,7 @@ class GrabBullPackageViewController: BaseViewController {
                     this.grabButton.isHidden = true
                 }
                 
+                print("fetchPackageStatus \(status)")
                 self!.bull.openResult = status
             }
             
