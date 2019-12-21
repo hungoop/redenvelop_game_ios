@@ -92,8 +92,9 @@ class GrabUserViewCell: UITableViewCell {
         
         //
         statusStackView.removeAllArrangedSubviews()
+        
         if let status = model.status, let statusValue = Int(status) {
-            let digits = statusValue.getDigits()
+            var digits = statusValue.getDigits()
             
             for i in 0 ..< digits.count {
                 let statusValue = digits[i]

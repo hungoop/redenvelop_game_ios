@@ -201,7 +201,9 @@ class PackageHistoryLeftViewCell: UITableViewCell {
             NSLayoutConstraint.activate([
                 label.heightAnchor.constraint(equalToConstant: 18),
                 label.centerXAnchor.constraint(equalTo: resultWagerInfoStackView.centerXAnchor),
-                label.topAnchor.constraint(equalTo: resultWagerInfoStackView.topAnchor, constant: CGFloat(20 * bull.betWagerInfo.count))
+                label.topAnchor.constraint(equalTo: resultWagerInfoStackView.bottomAnchor, constant: -20),
+                
+                //label.topAnchor.constraint(equalTo: resultWagerInfoStackView.topAnchor, constant: CGFloat(20 * bull.betWagerInfo.count))
                 ])
             
             height2 += 20

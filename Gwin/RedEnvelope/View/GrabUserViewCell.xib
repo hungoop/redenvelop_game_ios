@@ -44,7 +44,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grabuser_status_4" translatesAutoresizingMaskIntoConstraints="NO" id="1sB-UR-ZxI">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grabuser_status_99" translatesAutoresizingMaskIntoConstraints="NO" id="1sB-UR-ZxI">
                         <rect key="frame" x="260" y="66.5" width="50" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="MZ2-gP-8eQ"/>
@@ -97,6 +97,6 @@
     </objects>
     <resources>
         <image name="default_avatar" width="91.5" height="91.5"/>
-        <image name="grabuser_status_4" width="86" height="20"/>
+        <image name="grabuser_status_99" width="86" height="20"/>
     </resources>
 </document>

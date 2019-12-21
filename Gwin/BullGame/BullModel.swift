@@ -186,11 +186,18 @@ class BullModel {
     }
     
     func isOnleyself() -> Bool {
+        if(openResult == Packetstatus.RESULT || openResult == Packetstatus.BANKER_GRABED){
+            return false
+        } else {
+            return true
+        }
+        
+        /*
         if(openResult == Packetstatus.GRAB){
             return true
         } else {
             return false
-        }
+        }*/
     }
     
     func getRoundId() -> Int64 {

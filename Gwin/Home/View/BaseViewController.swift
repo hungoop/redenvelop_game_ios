@@ -175,7 +175,6 @@ class BaseViewController: UIViewController {
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         view.window!.layer.add(transition, forKey: kCATransition)
         
-        
         super.present(viewControllerToPresent, animated: false, completion: nil)
     }
     
